@@ -26,9 +26,9 @@ public class MyWorld extends World
      */
     private void prepare()
     {
-        GreenfootImage goalimage = new GreenfootImage("goal.jpg");
+        GreenfootImage goalimage = new GreenfootImage("goal.png");
         goalimage.scale(100,100);
-        GreenfootImage cursorimage = new GreenfootImage("cursor.jpg");
+        GreenfootImage cursorimage = new GreenfootImage("cursor.png");
         cursorimage.scale(50,50);
         cursor cursor = new cursor();
         addObject(cursor,139,388);
@@ -36,5 +36,15 @@ public class MyWorld extends World
         goal goal = new goal();
         addObject(goal,390,391);
         goal.setImage(goalimage);
+        boll boll = new boll();
+        addObject(boll,536,571);
+        block block = new block();
+        addObject(block,407,289);
+        block block2 = new block();
+        addObject(block2,520,382);
+        block block3 = new block();
+        addObject(block3,259,397);
+        block block4 = new block();
+        addObject(block4,398,474);
     }
 }

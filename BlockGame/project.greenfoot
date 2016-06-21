@@ -1,8 +1,8 @@
 #Greenfoot properties
-#Tue Jun 21 16:52:39 JST 2016
+#Tue Jun 21 17:21:25 JST 2016
 readme.name=@README
 class.wall.superclass=greenfoot.Actor
-class.cursor.image=cursor.jpg
+class.cursor.image=cursor.png
 class.cursor.superclass=greenfoot.Actor
 class.block.superclass=greenfoot.Actor
 target1.type=ClassTarget
@@ -29,7 +29,8 @@ mainWindow.y=40
 mainWindow.height=600
 mainWindow.x=40
 class.goal.superclass=greenfoot.Actor
-class.boll.image=ball.jpg
+class.block.image=block.png
+class.boll.image=ball.png
 editor.fx.0.y=0
 editor.fx.0.x=0
 readme.width=47
@@ -39,4 +40,4 @@ version=2.8.0
 package.numDependencies=0
 project.charset=UTF-8
 readme.height=58
-class.goal.image=goal.jpg
+class.goal.image=goal.png
