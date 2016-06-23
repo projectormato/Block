@@ -24,7 +24,10 @@ public class BaseWorld extends World implements EventHandler {
     @Override
     final public void act() {
         MouseInfo mouse = Greenfoot.getMouseInfo();
-        BaseActor frontActor = (BaseActor) mouse.getActor();
+        BaseActor frontActor = null;
+        if (mouse != null) {
+            frontActor = (BaseActor) mouse.getActor();
+        }
 
         if (frontActor != null) {
             dispatchEventHandler((EventHandler) frontActor, mouse, true);
