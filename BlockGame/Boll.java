@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class boll here.
+ * Write a description of class Boll here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class boll extends Actor
+public class Boll extends Actor
 {
     /**
-     * Act - do whatever the boll wants to do. This method is called whenever
+     * Act - do whatever the Boll wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 

@@ -30,21 +30,21 @@ public class MyWorld extends World
         goalimage.scale(100,100);
         GreenfootImage cursorimage = new GreenfootImage("cursor.png");
         cursorimage.scale(50,50);
-        cursor cursor = new cursor();
+        Cursor cursor = new Cursor();
         addObject(cursor,139,388);
         cursor.setImage(cursorimage);
-        goal goal = new goal();
+        Goal goal = new Goal();
         addObject(goal,390,391);
         goal.setImage(goalimage);
-        boll boll = new boll();
+        Boll boll = new Boll();
         addObject(boll,536,571);
-        block block = new block();
+        Block block = new Block();
         addObject(block,407,289);
-        block block2 = new block();
+        Block block2 = new Block();
         addObject(block2,520,382);
-        block block3 = new block();
+        Block block3 = new Block();
         addObject(block3,259,397);
-        block block4 = new block();
+        Block block4 = new Block();
         addObject(block4,398,474);
     }
 }

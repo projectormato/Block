@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class cursor here.
+ * Write a description of class Cursor here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class cursor extends Actor
+public class Cursor extends Actor
 {
     /**
-     * Act - do whatever the cursor wants to do. This method is called whenever
+     * Act - do whatever the Cursor wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
@@ -24,7 +24,7 @@ public class cursor extends Actor
     }else if(Greenfoot.isKeyDown("right")){
         setLocation(getX() +1, getY());
     }
-    if(isTouching(goal.class)){
+    if(isTouching(Goal.class)){
           System.out.println("touch!");
           setLocation(getX() +100, getY() -100);
         }
