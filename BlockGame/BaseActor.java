@@ -23,39 +23,39 @@ public class BaseActor extends Actor implements EventHandler {
     }
 
     @Override
-    public void onMouseIn() {
+    public void onMouseIn(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseOut() {
+    public void onMouseOut(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseMoved() {
+    public void onMouseMoved(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseDown() {
+    public void onMouseDown(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseHolding() {
+    public void onMouseHolding(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseUp() {
+    public void onMouseUp(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseClicked() {
+    public void onMouseClicked(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseDragging() {
+    public void onMouseDragging(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseDragged() {
+    public void onMouseDragged(MouseInfo mouse) {
     }
 
     @Override

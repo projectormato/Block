@@ -1,5 +1,6 @@
 
 import greenfoot.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -24,48 +25,66 @@ public class BaseWorld extends World implements EventHandler {
      */
     @Override
     final public void act() {
-        // FIXME: nullを返すのを考慮したロジックにする
+        List<EventHandler> handlers = new ArrayList<>();
         MouseInfo mouse = Greenfoot.getMouseInfo();
         BaseActor frontActor = null;
+
+        // 最前面のオブジェクトは真っ先に処理
         if (mouse != null) {
             frontActor = (BaseActor) mouse.getActor();
         }
-
         if (frontActor != null) {
-            dispatchEventHandler((EventHandler) frontActor, mouse, true);
+            handlers.add(frontActor);
         }
+
+        // それ以外のオブジェクトは適当な順番で処理
         if (mouse != null) {
             List actors = getObjectsAt(mouse.getX(), mouse.getY(), BaseActor.class);
             if (actors != null) {
-                for (Object backActor : actors) {
-                    if (frontActor == backActor) {
-                        continue;
-                    }
-                    dispatchEventHandler((EventHandler) backActor, mouse, false);
-                }
+                actors.remove(frontActor);
+                handlers.addAll(handlers);
             }
         }
-        dispatchEventHandler((EventHandler) this, mouse, frontActor == null);
+
+        // 一番最後にWorldにメッセージを送る
+        handlers.add(this);
+
+        // メッセージ送信
+        for (EventHandler handler : handlers) {
+            assert handler != null;
+            // if(handler == null)continue;
+            dispatchEventHandler(handler, mouse, handler == frontActor);
+        }
     }
 
+    /**
+     * 指定した一つのハンドラに対して、イベントの処理を委託する。
+     *
+     * @param handler
+     * @param mouse
+     * @param isFront
+     */
     private void dispatchEventHandler(EventHandler handler, MouseInfo mouse, boolean isFront) {
         assert handler != null;
-        // assert mouse != null;
 
-        if (handler instanceof BaseActor) {
-            // objに重なっているか？
-            handler.onMouseIn();
-            handler.onMouseOut();
+        if (mouse != null) {
+            if (handler instanceof BaseActor) {
+                // objに重なっているか？
+                handler.onMouseIn(mouse);
+                handler.onMouseOut(mouse);
+            }
+
+            // 重なっているかにかかわらず
+            handler.onMouseDown(mouse);
+            handler.onMouseUp(mouse);
+            handler.onMouseClicked(mouse);
+
+            handler.onMouseMoved(mouse);
+            handler.onMouseDragged(mouse);
+            handler.onMouseDragging(mouse);
         }
 
-        // 重なっているかにかかわらず
-        handler.onMouseDown();
-        handler.onMouseUp();
-        handler.onMouseClicked();
-
-        handler.onMouseMoved();
-        handler.onMouseDragged();
-        handler.onMouseDragging();
+        // TODO: key周りのイベントを呼び出す
     }
 
     @Override
@@ -83,39 +102,39 @@ public class BaseWorld extends World implements EventHandler {
     }
 
     @Override
-    public void onMouseIn() {
+    public void onMouseIn(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseOut() {
+    public void onMouseOut(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseMoved() {
+    public void onMouseMoved(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseDown() {
+    public void onMouseDown(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseHolding() {
+    public void onMouseHolding(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseUp() {
+    public void onMouseUp(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseClicked() {
+    public void onMouseClicked(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseDragging() {
+    public void onMouseDragging(MouseInfo mouse) {
     }
 
     @Override
-    public void onMouseDragged() {
+    public void onMouseDragged(MouseInfo mouse) {
     }
 
     @Override

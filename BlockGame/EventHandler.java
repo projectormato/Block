@@ -1,17 +1,19 @@
 
+import greenfoot.*;
+
 interface EventHandler{
-	void onMouseIn();
-	void onMouseOut();
-	void onMouseMoved();
-
-	void onMouseDown();
-    void onMouseHolding();
-	void onMouseUp();
-	void onMouseClicked();
-	void onMouseDragging();
-	void onMouseDragged();
-
-	void onKeyDown();
+    void onMouseIn(MouseInfo mouse);
+    void onMouseOut(MouseInfo mouse);
+    void onMouseMoved(MouseInfo mouse);
+    
+    void onMouseDown(MouseInfo mouse);
+    void onMouseHolding(MouseInfo mouse);
+    void onMouseUp(MouseInfo mouse);
+    void onMouseClicked(MouseInfo mouse);
+    void onMouseDragging(MouseInfo mouse);
+    void onMouseDragged(MouseInfo mouse);
+    
+    void onKeyDown();
     void onKeyHolding();
-	void onKeyUp();
+    void onKeyUp();
 }
