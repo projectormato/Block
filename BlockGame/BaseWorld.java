@@ -1,5 +1,6 @@
 
 import greenfoot.*;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -23,6 +24,7 @@ public class BaseWorld extends World implements EventHandler {
      */
     @Override
     final public void act() {
+        // FIXME: nullを返すのを考慮したロジックにする
         MouseInfo mouse = Greenfoot.getMouseInfo();
         BaseActor frontActor = null;
         if (mouse != null) {
@@ -32,18 +34,23 @@ public class BaseWorld extends World implements EventHandler {
         if (frontActor != null) {
             dispatchEventHandler((EventHandler) frontActor, mouse, true);
         }
-        for (Actor backActor : getObjectsAt(mouse.getX(), mouse.getY(), BaseActor.class)) {
-            if (frontActor == backActor) {
-                continue;
+        if (mouse != null) {
+            List actors = getObjectsAt(mouse.getX(), mouse.getY(), BaseActor.class);
+            if (actors != null) {
+                for (Object backActor : actors) {
+                    if (frontActor == backActor) {
+                        continue;
+                    }
+                    dispatchEventHandler((EventHandler) backActor, mouse, false);
+                }
             }
-            dispatchEventHandler((EventHandler) backActor, mouse, false);
         }
         dispatchEventHandler((EventHandler) this, mouse, frontActor == null);
     }
 
     private void dispatchEventHandler(EventHandler handler, MouseInfo mouse, boolean isFront) {
         assert handler != null;
-        assert mouse != null;
+        // assert mouse != null;
 
         if (handler instanceof BaseActor) {
             // objに重なっているか？
