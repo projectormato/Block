@@ -1,7 +1,10 @@
 
 import greenfoot.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -13,6 +16,9 @@ public class BaseWorld extends World implements EventHandler {
     final static String LOG_FILE = "../blockGame.log";
 
     protected Logger logger;
+
+    private List<String> listenKeys;
+    private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
 
     public BaseWorld() {
         // Create a new world with 1200x800 cells with a cell size of 1x1 pixels.
@@ -138,15 +144,39 @@ public class BaseWorld extends World implements EventHandler {
     }
 
     @Override
-    public void onKeyDown() {
+    public void onKeyDown(String key) {
     }
 
     @Override
-    public void onKeyHolding() {
+    public void onKeyHolding(String key) {
     }
 
     @Override
-    public void onKeyUp() {
+    public void onKeyUp(String key) {
     }
 
+    @Override
+    public void setListenKeys(List<String> keys) {
+        Set<String> keySet = lastKeyStatusMap.keySet();
+        for (String key : keys) {
+            if (!keySet.contains(key)) {
+                lastKeyStatusMap.put(key, false);
+            }
+        }
+    }
+
+    @Override
+    public List<String> getListenKeys() {
+        return listenKeys;
+    }
+
+    @Override
+    public void setLastKeyStatus(String key, boolean isKeyDown) {
+        lastKeyStatusMap.put(key, isKeyDown);
+    }
+
+    @Override
+    public boolean getLastKeyStatus(String key) {
+        return lastKeyStatusMap.get(key);
+    }
 }

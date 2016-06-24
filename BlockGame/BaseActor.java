@@ -1,5 +1,9 @@
 
 import greenfoot.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -8,6 +12,8 @@ import java.util.logging.Logger;
 public class BaseActor extends Actor implements EventHandler {
 
     protected Logger logger;
+    private List<String> listenKeys;
+    private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
 
     /**
      * 何もしない。このメソッドはオーバーライドできません。BaseWorldクラスから呼び出されるイベントハンドラ内で必要な動作を実装してください。
@@ -59,15 +65,39 @@ public class BaseActor extends Actor implements EventHandler {
     }
 
     @Override
-    public void onKeyDown() {
+    public void onKeyDown(String key) {
     }
 
     @Override
-    public void onKeyHolding() {
+    public void onKeyHolding(String key) {
     }
 
     @Override
-    public void onKeyUp() {
+    public void onKeyUp(String key) {
     }
 
+    @Override
+    public void setListenKeys(List<String> keys) {
+        Set<String> keySet = lastKeyStatusMap.keySet();
+        for (String key : keys) {
+            if (!keySet.contains(key)) {
+                lastKeyStatusMap.put(key, false);
+            }
+        }
+    }
+
+    @Override
+    public List<String> getListenKeys() {
+        return listenKeys;
+    }
+
+    @Override
+    public void setLastKeyStatus(String key, boolean isKeyDown) {
+        lastKeyStatusMap.put(key, isKeyDown);
+    }
+
+    @Override
+    public boolean getLastKeyStatus(String key) {
+        return lastKeyStatusMap.get(key);
+    }
 }

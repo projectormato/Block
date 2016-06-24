@@ -1,5 +1,6 @@
 
 import greenfoot.*;
+import java.util.List;
 
 interface EventHandler{
     void onMouseIn(MouseInfo mouse);
@@ -13,7 +14,12 @@ interface EventHandler{
     void onMouseDragging(MouseInfo mouse);
     void onMouseDragged(MouseInfo mouse);
     
-    void onKeyDown();
-    void onKeyHolding();
-    void onKeyUp();
+    void onKeyDown(String key);
+    void onKeyHolding(String key);
+    void onKeyUp(String key);
+
+    void setListenKeys(List<String> keys);
+    List<String> getListenKeys();
+    void setLastKeyStatus(String key, boolean isKeyDown);
+    boolean getLastKeyStatus(String key);
 }
