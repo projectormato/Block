@@ -79,12 +79,7 @@ public class BaseActor extends Actor implements EventHandler {
 
     @Override
     public void setListenKeys(List<String> keys) {
-        Set<String> keySet = lastKeyStatusMap.keySet();
-        for (String key : keys) {
-            if (!keySet.contains(key)) {
-                lastKeyStatusMap.put(key, false);
-            }
-        }
+        this.listenKeys = keys;
     }
 
     @Override
@@ -99,6 +94,10 @@ public class BaseActor extends Actor implements EventHandler {
 
     @Override
     public boolean getLastKeyStatus(String key) {
-        return lastKeyStatusMap.get(key);
+        try {
+            return lastKeyStatusMap.get(key);
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 }
