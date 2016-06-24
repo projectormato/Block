@@ -31,36 +31,37 @@ public class BaseWorld extends World implements EventHandler {
      */
     @Override
     final public void act() {
-        List<EventHandler> handlers = new ArrayList<>();
         MouseInfo mouse = Greenfoot.getMouseInfo();
-        BaseActor frontActor = null;
 
-        // 最前面のオブジェクトは真っ先に処理
+        // マウスイベントを送信
         if (mouse != null) {
+            List<EventHandler> handlers = new ArrayList<>();
+            BaseActor frontActor;
+
+            // 最前面のオブジェクトは真っ先に処理
             frontActor = (BaseActor) mouse.getActor();
-        }
-        if (frontActor != null) {
-            handlers.add(frontActor);
-        }
+            if (frontActor != null) {
+                handlers.add(frontActor);
+            }
 
-        // それ以外のオブジェクトは適当な順番で処理
-        if (mouse != null) {
+            // それ以外のオブジェクトは適当な順番で処理
             List actors = getObjectsAt(mouse.getX(), mouse.getY(), BaseActor.class);
             if (actors != null) {
                 actors.remove(frontActor);
                 handlers.addAll(handlers);
             }
+
+            // 一番最後にWorldにメッセージを送る
+            handlers.add(this);
+
+            // メッセージ送信
+            for (EventHandler handler : handlers) {
+                assert handler != null;
+                dispatchMouseEventHandler(handler, mouse, handler == frontActor);
+            }
         }
 
-        // 一番最後にWorldにメッセージを送る
-        handlers.add(this);
-
-        // メッセージ送信
-        for (EventHandler handler : handlers) {
-            assert handler != null;
-            dispatchMouseEventHandler(handler, mouse, handler == frontActor);
-        }
-
+        // キーイベントを送信
         for (Object handler : getObjects(null)) {
             dispatchKeyEventHandler((EventHandler) handler);
         }
@@ -99,7 +100,6 @@ public class BaseWorld extends World implements EventHandler {
         for (String key : handler.getListenKeys()) {
             boolean status = Greenfoot.isKeyDown(key);
             boolean lastStatus = handler.getLastKeyStatus(key);
-            System.out.println("key: " + key + "\t status: " + status + "\t lastStatus: " + lastStatus);
 
             if (lastStatus == status) {
                 handler.onKeyHolding(key);
