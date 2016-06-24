@@ -17,7 +17,7 @@ public class BaseWorld extends World implements EventHandler {
 
     protected Logger logger;
 
-    private List<String> listenKeys;
+    private List<String> listenKeys = new ArrayList<>();
     private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
 
     public BaseWorld() {

@@ -1,5 +1,6 @@
 
 import greenfoot.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 public class BaseActor extends Actor implements EventHandler {
 
     protected Logger logger;
-    private List<String> listenKeys;
+    private List<String> listenKeys = new ArrayList<>();
     private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
 
     /**
