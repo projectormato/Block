@@ -1,4 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Write a description of class Cursor here.
@@ -8,8 +10,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Cursor extends BaseActor
 {
+    public Cursor(){
+        List<String> keys = new ArrayList<>();
+        keys.add("up");
+        keys.add("down");
+        keys.add("left");
+        keys.add("right");
+
+        setListenKeys(keys);
+    }
+
     @Override
-    public void onKeyHolding()
+    public void onKeyHolding(String key)
     {
         // Add your action code here.
         if(Greenfoot.isKeyDown("up")){
