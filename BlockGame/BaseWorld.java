@@ -58,9 +58,13 @@ public class BaseWorld extends World implements EventHandler {
         // メッセージ送信
         for (EventHandler handler : handlers) {
             assert handler != null;
-            // if(handler == null)continue;
-            dispatchEventHandler(handler, mouse, handler == frontActor);
+            dispatchMouseEventHandler(handler, mouse, handler == frontActor);
         }
+
+        for (Object handler : getObjects(null)) {
+            dispatchKeyEventHandler((EventHandler) handler);
+        }
+        dispatchKeyEventHandler(this);
     }
 
     /**
@@ -70,7 +74,7 @@ public class BaseWorld extends World implements EventHandler {
      * @param mouse
      * @param isFront
      */
-    private void dispatchEventHandler(EventHandler handler, MouseInfo mouse, boolean isFront) {
+    private void dispatchMouseEventHandler(EventHandler handler, MouseInfo mouse, boolean isFront) {
         assert handler != null;
 
         if (mouse != null) {
@@ -89,8 +93,26 @@ public class BaseWorld extends World implements EventHandler {
             handler.onMouseDragged(mouse);
             handler.onMouseDragging(mouse);
         }
+    }
 
-        // TODO: key周りのイベントを呼び出す
+    private void dispatchKeyEventHandler(EventHandler handler) {
+        for (String key : handler.getListenKeys()) {
+            boolean status = Greenfoot.isKeyDown(key);
+            boolean lastStatus = handler.getLastKeyStatus(key);
+            System.out.println("key: " + key + "\t status: " + status + "\t lastStatus: " + lastStatus);
+
+            if (lastStatus == status) {
+                handler.onKeyHolding(key);
+            } else if (lastStatus == false) {
+                // false -> true
+                handler.onKeyDown(key);
+            } else {
+                // true -> false
+                handler.onKeyUp(key);
+            }
+
+            handler.setLastKeyStatus(key, status);
+        }
     }
 
     @Override
