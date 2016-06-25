@@ -25,6 +25,7 @@ interface EventHandler{
 
     final static int MOUSE_HOVERED = 1;
     final static int MOUSE_PRESSED = 2;
+    final static int MOUSE_DRAGGED = 4;
     void setLastMouseStatus(int type, boolean flag);
     boolean getLastMouseStatus(int type);
 }

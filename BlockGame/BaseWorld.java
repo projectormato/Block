@@ -111,7 +111,7 @@ public class BaseWorld extends World implements EventHandler {
                 isPressing = false;
             }
 
-            // onMouseDown, onMouseHolding, onMouseUp
+            // onMouseDown, onMouseHolding, onMouseUp, onMouseClicked
             if (isPressing && !isPressed) {
                 System.out.println(handler + ": mouse down");
                 handler.onMouseDown(mouse);
@@ -121,10 +121,34 @@ public class BaseWorld extends World implements EventHandler {
             } else if (!isPressing && isPressed) {
                 System.out.println(handler + ": mouse up");
                 handler.onMouseUp(mouse);
+
+                if(Greenfoot.mouseClicked(handler) && !Greenfoot.mouseDragEnded(handler)){
+                    System.out.println(handler + ": mouse clicked");
+                    handler.onMouseClicked(mouse);
+                }
             }
             handler.setLastMouseStatus(EventHandler.MOUSE_PRESSED, isPressing);
 
-            // TODO: onMouseClicked, onMouseDragging, onMouseDragged
+            boolean isDragged = handler.getLastMouseStatus(EventHandler.MOUSE_DRAGGED);
+            boolean isDragging = isDragged;
+            if (Greenfoot.mouseDragged(handler)) {
+                isDragging = true;
+            } else if (Greenfoot.mouseDragEnded(handler)) {
+                isDragging = false;
+            }
+
+            // onMouseDragging, onMouseDragged
+            if (isDragging && !isDragged) {
+                System.out.println(handler + ": mouse drag started");
+            } else if (isDragging && isDragged) {
+                System.out.println(handler + ": mouse dragging");
+                handler.onMouseDragging(mouse);
+            } else if (!isDragging && isDragged) {
+                System.out.println(handler + ": mouse drag ended");
+                handler.onMouseDragged(mouse);
+            }
+            handler.setLastMouseStatus(EventHandler.MOUSE_DRAGGED, isDragging);
+
         }
     }
 
