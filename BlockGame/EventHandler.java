@@ -22,4 +22,9 @@ interface EventHandler{
     List<String> getListenKeys();
     void setLastKeyStatus(String key, boolean isKeyDown);
     boolean getLastKeyStatus(String key);
+
+    final static int MOUSE_HOVERED = 1;
+    final static int MOUSE_PRESSED = 2;
+    void setLastMouseStatus(int type, boolean flag);
+    boolean getLastMouseStatus(int type);
 }

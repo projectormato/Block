@@ -14,6 +14,7 @@ public class BaseActor extends Actor implements EventHandler {
     protected Logger logger;
     private List<String> listenKeys = new ArrayList<>();
     private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
+    private int mouseStatus;
 
     /**
      * 何もしない。このメソッドはオーバーライドできません。BaseWorldクラスから呼び出されるイベントハンドラ内で必要な動作を実装してください。
@@ -98,5 +99,27 @@ public class BaseActor extends Actor implements EventHandler {
         } catch (NullPointerException e) {
             return false;
         }
+    }
+
+    @Override
+    public void setLastMouseStatus(int type, boolean flag) {
+        assert type != 0;
+
+        int mask = Integer.MAX_VALUE & type;
+        if (flag) {
+            // set flag
+            mouseStatus = mouseStatus | mask;
+        } else {
+            // unset flag
+            mouseStatus = mouseStatus & (~mask);
+        }
+    }
+
+    @Override
+    public boolean getLastMouseStatus(int type) {
+        assert type != 0;
+
+        int mask = Integer.MAX_VALUE & type;
+        return (mouseStatus & mask) != 0;
     }
 }

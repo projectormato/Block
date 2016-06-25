@@ -18,6 +18,7 @@ public class BaseWorld extends World implements EventHandler {
 
     private List<String> listenKeys = new ArrayList<>();
     private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
+    private int mouseStatus;
 
     public BaseWorld() {
         // Create a new world with 1200x800 cells with a cell size of 1x1 pixels.
@@ -33,32 +34,32 @@ public class BaseWorld extends World implements EventHandler {
         MouseInfo mouse = Greenfoot.getMouseInfo();
 
         // マウスイベントを送信
-        if (mouse != null) {
-            List<EventHandler> handlers = new ArrayList<>();
-            BaseActor frontActor;
+        List<EventHandler> handlers = new ArrayList<>();
+        BaseActor frontActor = null;
 
-            // 最前面のオブジェクトは真っ先に処理
+        // 最前面のオブジェクトは真っ先に処理
+        if (mouse != null) {
             frontActor = (BaseActor) mouse.getActor();
             if (frontActor != null) {
                 handlers.add(frontActor);
             }
 
-            // それ以外のオブジェクトは適当な順番で処理
-            List actors = getObjectsAt(mouse.getX(), mouse.getY(), BaseActor.class);
-            if (actors != null) {
-                actors.remove(frontActor);
-                handlers.addAll(handlers);
-            }
-
-            // 一番最後にWorldにメッセージを送る
-            handlers.add(this);
-
-            // メッセージ送信
-            for (EventHandler handler : handlers) {
-                assert handler != null;
-                dispatchMouseEventHandler(handler, mouse, handler == frontActor);
-            }
         }
+
+        // それ以外のオブジェクトは適当な順番で処理
+        List actors = getObjects(BaseActor.class);
+        if (actors != null) {
+            if (frontActor != null) {
+                actors.remove(frontActor);
+            }
+            handlers.addAll(actors);
+        }
+
+        // 一番最後にWorldにメッセージを送る
+        handlers.add(this);
+
+        // マウスイベントを送信
+        dispatchMouseEventHandler(handlers, mouse);
 
         // キーイベントを送信
         for (Object handler : getObjects(null)) {
@@ -67,31 +68,63 @@ public class BaseWorld extends World implements EventHandler {
         dispatchKeyEventHandler(this);
     }
 
-    /**
-     * 指定した一つのハンドラに対して、イベントの処理を委託する。
-     *
-     * @param handler
-     * @param mouse
-     * @param isFront
-     */
-    private void dispatchMouseEventHandler(EventHandler handler, MouseInfo mouse, boolean isFront) {
-        assert handler != null;
-
+    private void dispatchMouseEventHandler(List<EventHandler> handlers, MouseInfo mouse) {
+        List objs = null;
         if (mouse != null) {
-            if (handler instanceof BaseActor) {
-                // objに重なっているか？
-                handler.onMouseIn(mouse);
-                handler.onMouseOut(mouse);
+            objs = getObjectsAt(mouse.getX(), mouse.getY(), null);
+        }
+
+        for (EventHandler handler : handlers) {
+            boolean isHovered = handler.getLastMouseStatus(EventHandler.MOUSE_HOVERED);
+            boolean isHovering = false;
+
+            if (handler instanceof Actor) {
+                if (objs != null) {
+                    isHovering = objs.contains(handler);
+                }
+            } else if (handler instanceof World) {
+                isHovering = mouse != null;
+            } else {
+                throw new AssertionError();
             }
 
-            // 重なっているかにかかわらず
-            handler.onMouseDown(mouse);
-            handler.onMouseUp(mouse);
-            handler.onMouseClicked(mouse);
+            // onMouseIn, onMouseOut
+            if (isHovering && !isHovered) {
+                System.out.println(handler + ": mouse in");
+                handler.onMouseIn(mouse);
+            } else if (!isHovering && isHovered) {
+                System.out.println(handler + ": mouse out");
+                handler.onMouseOut(mouse);
+            }
+            handler.setLastMouseStatus(EventHandler.MOUSE_HOVERED, isHovering);
 
-            handler.onMouseMoved(mouse);
-            handler.onMouseDragged(mouse);
-            handler.onMouseDragging(mouse);
+            // onMouseMoved
+            if (mouse != null) {
+                handler.onMouseMoved(mouse);
+            }
+
+            boolean isPressed = handler.getLastMouseStatus(EventHandler.MOUSE_PRESSED);
+            boolean isPressing = isPressed;
+            if (Greenfoot.mousePressed(handler)) {
+                isPressing = true;
+            } else if (Greenfoot.mouseClicked(handler)) {
+                isPressing = false;
+            }
+
+            // onMouseDown, onMouseHolding, onMouseUp
+            if (isPressing && !isPressed) {
+                System.out.println(handler + ": mouse down");
+                handler.onMouseDown(mouse);
+            } else if (isPressing && isPressed) {
+                System.out.println(handler + ": mouse holding");
+                handler.onMouseHolding(mouse);
+            } else if (!isPressing && isPressed) {
+                System.out.println(handler + ": mouse up");
+                handler.onMouseUp(mouse);
+            }
+            handler.setLastMouseStatus(EventHandler.MOUSE_PRESSED, isPressing);
+
+            // TODO: onMouseClicked, onMouseDragging, onMouseDragged
         }
     }
 
@@ -198,5 +231,27 @@ public class BaseWorld extends World implements EventHandler {
         } catch (NullPointerException e) {
             return false;
         }
+    }
+
+    @Override
+    public void setLastMouseStatus(int type, boolean flag) {
+        assert type != 0;
+
+        int mask = Integer.MAX_VALUE & type;
+        if (flag) {
+            // set flag
+            mouseStatus = mouseStatus | mask;
+        } else {
+            // unset flag
+            mouseStatus = mouseStatus & (~mask);
+        }
+    }
+
+    @Override
+    public boolean getLastMouseStatus(int type) {
+        assert type != 0;
+
+        int mask = Integer.MAX_VALUE & type;
+        return (mouseStatus & mask) != 0;
     }
 }
