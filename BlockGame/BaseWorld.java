@@ -107,7 +107,7 @@ public class BaseWorld extends World implements EventHandler {
             boolean isPressing = isPressed;
             if (Greenfoot.mousePressed(handler)) {
                 isPressing = true;
-            } else if (Greenfoot.mouseClicked(handler)) {
+            } else if (Greenfoot.mouseClicked(handler) || Greenfoot.mouseDragEnded(handler)) {
                 isPressing = false;
             }
 
