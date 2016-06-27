@@ -12,12 +12,14 @@ import java.util.List;
 public class Cursor extends BaseActor {
 
     Goal goal;
+    Ball ball;
 
     public Cursor() {
     }
 
-    public Cursor(Goal goal) {
+    public Cursor(Goal goal, Ball ball) {
         this.goal = goal;
+        this.ball = ball;
 
         List<String> keys = new ArrayList<>();
         keys.add("up");

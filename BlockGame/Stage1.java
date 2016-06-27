@@ -31,7 +31,13 @@ public class Stage1 extends PlayWorld {
             }
         }
 
-        Cursor cursor = new Cursor(goal);
+        Ball ball = new Ball();
+        GreenfootImage ballImage = new GreenfootImage("ball.png");
+        ballImage.scale(40, 40);
+        ball.setImage(ballImage);
+        addObject(ball, 0, 0);
+
+        Cursor cursor = new Cursor(goal, ball);
         GreenfootImage cursorImage = new GreenfootImage("cursor.png");
         cursorImage.scale(50, 50);
         cursorImage.rotate(90);
