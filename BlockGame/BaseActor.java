@@ -36,6 +36,10 @@ public class BaseActor extends Actor implements EventHandler {
     }
 
     @Override
+    public void tick() {
+    }
+
+    @Override
     public void onMouseIn(MouseInfo mouse) {
         if (listener != null) {
             listener.onMouseIn();

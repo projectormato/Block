@@ -66,6 +66,12 @@ public class BaseWorld extends World implements EventHandler {
             dispatchKeyEventHandler((EventHandler) handler);
         }
         dispatchKeyEventHandler(this);
+
+        // actorとworldへtickイベントを送信
+        for(Object handler:getObjects(BaseActor.class)){
+            ((BaseActor)handler).tick();
+        }
+        tick();
     }
 
     private void dispatchMouseEventHandler(List<EventHandler> handlers, MouseInfo mouse) {
@@ -188,6 +194,10 @@ public class BaseWorld extends World implements EventHandler {
     @Override
     public void addListner(EventListener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void tick() {
     }
 
     @Override

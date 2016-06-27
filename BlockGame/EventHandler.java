@@ -5,6 +5,8 @@ import java.util.List;
 interface EventHandler{
     void addListner(EventListener listener);
 
+    void tick();
+
     void onMouseIn(MouseInfo mouse);
     void onMouseOut(MouseInfo mouse);
     void onMouseMoved(MouseInfo mouse);
