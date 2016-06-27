@@ -33,16 +33,32 @@ public class StartWorld extends BaseWorld {
      */
     private void prepare() {
         addButton("ロゴの画像", 0, 200, 400, 300, 40, Color.WHITE, Color.GRAY, Color.GRAY);
-        addButton("Game Start", 0, 400, 200, 50, 20, Color.BLACK);
-        addButton("Select Stage", 0, 470, 200, 50, 20, Color.BLACK);
-        addButton("Settings", 0, 540, 200, 50, 20, Color.BLACK);
+        Button startButton = addButton("Game Start", 0, 400, 200, 50, 20, Color.BLACK);
+        Button stageButton = addButton("Select Stage", 0, 470, 200, 50, 20, Color.BLACK);
+        Button settingsButton = addButton("Settings", 0, 540, 200, 50, 20, Color.BLACK);
+
+        startButton.addListner(new EventListener() {
+            @Override
+            public void onMouseClicked() {
+                System.out.println("Game Start");
+                Greenfoot.setWorld(new PlayWorld());
+            }
+        });
+
+        stageButton.addListner(new EventListener() {
+            @Override
+            public void onMouseClicked() {
+                System.out.println("Select Stage");
+                Greenfoot.setWorld(new PlayWorld());
+            }
+        });
     }
 
-    private void addButton(String str, int x, int y, int width, int height, int fontSize, Color fontColor) {
-        addButton(str, x, y, width, height, fontSize, fontColor, Color.GREEN, Color.YELLOW);
+    private Button addButton(String str, int x, int y, int width, int height, int fontSize, Color fontColor) {
+        return addButton(str, x, y, width, height, fontSize, fontColor, Color.GREEN, Color.YELLOW);
     }
 
-    private void addButton(String str, int x, int y, int width, int height, int fontSize, Color fontColor, Color bgColor1, Color bgColor2) {
+    private Button addButton(String str, int x, int y, int width, int height, int fontSize, Color fontColor, Color bgColor1, Color bgColor2) {
         GreenfootImage[] buttonImages = new GreenfootImage[2];
 
         GreenfootImage buttonString = new GreenfootImage(str, fontSize, fontColor, new Color(0, 0, 0, 0));
@@ -59,5 +75,6 @@ public class StartWorld extends BaseWorld {
 
         Button button = new Button(buttonImages[0], buttonImages[1]);
         addObject(button, getWidth() / 2, y);
+        return button;
     }
 }
