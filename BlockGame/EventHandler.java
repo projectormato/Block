@@ -3,6 +3,8 @@ import greenfoot.*;
 import java.util.List;
 
 interface EventHandler{
+    void addListner(EventListener listener);
+
     void onMouseIn(MouseInfo mouse);
     void onMouseOut(MouseInfo mouse);
     void onMouseMoved(MouseInfo mouse);
