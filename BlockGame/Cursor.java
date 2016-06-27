@@ -18,7 +18,6 @@ public class Cursor extends BaseActor {
 
     public Cursor(Goal goal) {
         this.goal = goal;
-        turn(90);
 
         List<String> keys = new ArrayList<>();
         keys.add("up");
