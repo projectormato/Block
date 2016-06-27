@@ -34,7 +34,7 @@ public class MyWorld extends BaseWorld
         Goal goal = new Goal();
         addObject(goal,390,391);
         goal.setImage(goalimage);
-        Boll boll = new Boll();
+        Ball boll = new Ball();
         addObject(boll,536,571);
         Block block = new Block();
         addObject(block,407,289);
