@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class Stage1 extends PlayWorld {
 
+    private Goal goal;
+    private ArrayList<Block> blocks;
+    private Ball ball;
+    private Cursor cursor;
+
     public Stage1() {
         prepare();
     }
@@ -11,10 +16,10 @@ public class Stage1 extends PlayWorld {
     private void prepare() {
         setBackground("background1.jpg");
 
-        Goal goal = new Goal();
+        goal = new Goal();
         addObject(goal, getWidth() / 2, getHeight() / 2);
 
-        ArrayList<Block> blocks = new ArrayList<>();
+        blocks = new ArrayList<>();
         GreenfootImage blockImage = new GreenfootImage("block.png");
         blockImage.scale(20, 20);
         int radius = goal.getImage().getWidth();
@@ -31,13 +36,13 @@ public class Stage1 extends PlayWorld {
             }
         }
 
-        Ball ball = new Ball();
+        ball = new Ball();
         GreenfootImage ballImage = new GreenfootImage("ball.png");
         ballImage.scale(40, 40);
         ball.setImage(ballImage);
-        addObject(ball, 0, 0);
+        addObject(ball, 10, 10);
 
-        Cursor cursor = new Cursor(goal, ball);
+        cursor = new Cursor(goal, ball);
         GreenfootImage cursorImage = new GreenfootImage("cursor.png");
         cursorImage.scale(50, 50);
         cursorImage.rotate(90);
