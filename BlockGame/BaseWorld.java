@@ -68,8 +68,8 @@ public class BaseWorld extends World implements EventHandler {
         dispatchKeyEventHandler(this);
 
         // actorとworldへtickイベントを送信
-        for(Object handler:getObjects(BaseActor.class)){
-            ((BaseActor)handler).tick();
+        for (Object handler : getObjects(BaseActor.class)) {
+            ((BaseActor) handler).tick();
         }
         tick();
     }
