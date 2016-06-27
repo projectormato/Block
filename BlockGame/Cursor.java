@@ -8,9 +8,17 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Cursor extends BaseActor
-{
-    public Cursor(){
+public class Cursor extends BaseActor {
+
+    Goal goal;
+
+    public Cursor() {
+    }
+
+    public Cursor(Goal goal) {
+        this.goal = goal;
+        turn(90);
+
         List<String> keys = new ArrayList<>();
         keys.add("up");
         keys.add("down");
@@ -38,4 +46,10 @@ public class Cursor extends BaseActor
             setLocation(getX() +100, getY() -100);
         }
     }    
+
+    @Override
+    public void onMouseMoved(MouseInfo mouse) {
+        setLocation(mouse.getX(), mouse.getY());
+        turnTowards(goal.getX(), goal.getY());
+    }
 }

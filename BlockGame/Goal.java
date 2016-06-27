@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -6,6 +7,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Goal extends BaseActor
-{
+public class Goal extends BaseActor {
+
+    public Goal() {
+        GreenfootImage goalImage = new GreenfootImage("goal.png");
+        goalImage.scale(100, 100);
+        setImage(goalImage);
+    }
 }

@@ -41,7 +41,7 @@ public class StartWorld extends BaseWorld {
             @Override
             public void onMouseClicked() {
                 System.out.println("Game Start");
-                Greenfoot.setWorld(new PlayWorld());
+                Greenfoot.setWorld(new Stage1());
             }
         });
 
