@@ -7,4 +7,10 @@ public class PlayWorld extends BaseWorld {
 
     private void prepare() {
     }
+
+    public void win() {
+    }
+
+    public void lose() {
+    }
 }

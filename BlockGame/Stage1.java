@@ -43,7 +43,7 @@ public class Stage1 extends PlayWorld {
         ball.setImage(ballImage);
         addObject(ball, 10, 10);
 
-        cursor = new Cursor(goal, ball);
+        cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]));
         GreenfootImage cursorImage = new GreenfootImage("cursor.png");
         cursorImage.scale(50, 50);
         cursorImage.rotate(90);
@@ -58,11 +58,16 @@ public class Stage1 extends PlayWorld {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (ball.isAtEdge()) {
-            System.out.println("--- GAME OVER ---");
-            Greenfoot.stop();
-        }
+    public void win() {
+        super.win();
+        System.out.println("--- STAGE COMPLETE ---");
+        Greenfoot.stop();
+    }
+
+    @Override
+    public void lose() {
+        super.lose();
+        System.out.println("--- GAME OVER ---");
+        Greenfoot.stop();
     }
 }

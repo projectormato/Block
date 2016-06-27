@@ -13,13 +13,15 @@ public class Cursor extends BaseActor {
 
     Goal goal;
     Ball ball;
+    Block[] blocks;
 
     public Cursor() {
     }
 
-    public Cursor(Goal goal, Ball ball) {
+    public Cursor(Goal goal, Ball ball, Block[] blocks) {
         this.goal = goal;
         this.ball = ball;
+        this.blocks = blocks;
 
         List<String> keys = new ArrayList<>();
         keys.add("up");

@@ -168,4 +168,18 @@ public class BaseActor extends Actor implements EventHandler {
         int mask = Integer.MAX_VALUE & type;
         return (mouseStatus & mask) != 0;
     }
+
+    /**
+     * 隣接するオブジェクトを返す。存在しない場合は、空のListを返す。
+     *
+     * @param cls
+     * @return
+     */
+    protected List getIntersectingObjects(java.lang.Class cls) {
+        List objs = super.getIntersectingObjects(cls);
+        if (objs == null) {
+            return new ArrayList();
+        }
+        return objs;
+    }
 }
