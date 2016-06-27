@@ -1,4 +1,5 @@
 
+import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import java.util.ArrayList;
 
@@ -54,5 +55,14 @@ public class Stage1 extends PlayWorld {
         int dx = actor1.getX() - x;
         int dy = actor1.getY() - y;
         return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (ball.isAtEdge()) {
+            System.out.println("--- GAME OVER ---");
+            Greenfoot.stop();
+        }
     }
 }
