@@ -122,7 +122,7 @@ public class BaseWorld extends World implements EventHandler {
                 System.out.println(handler + ": mouse up");
                 handler.onMouseUp(mouse);
 
-                if(Greenfoot.mouseClicked(handler) && !Greenfoot.mouseDragEnded(handler)){
+                if (Greenfoot.mouseClicked(handler) && !Greenfoot.mouseDragEnded(handler)) {
                     System.out.println(handler + ": mouse clicked");
                     handler.onMouseClicked(mouse);
                 }
