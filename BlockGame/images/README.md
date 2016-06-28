@@ -3,7 +3,6 @@
 background1.jpg
 ball.png
 ball2.png
-benus.png
 block.png
 cursor.png
 earth.png
@@ -15,6 +14,7 @@ energywall-y.png
 gameover.png
 goal.png
 hp.png
+jupiter.png
 spaceshatlle-ex.png
 ufoShip.png
 
