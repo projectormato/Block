@@ -26,8 +26,8 @@ public class Ball extends BaseActor {
 
         if (getIntersectingObjects(Block.class).size() > 0) {
             // TODO: blockにダメージを与える
-            turn(180);
             removeTouching(Block.class);
+            turn(180);
             return;
         }
 
