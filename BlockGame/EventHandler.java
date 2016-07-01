@@ -6,6 +6,7 @@ interface EventHandler{
     void addListner(EventListener listener);
 
     void tick();
+    void onDied();
 
     void onMouseIn(MouseInfo mouse);
     void onMouseOut(MouseInfo mouse);

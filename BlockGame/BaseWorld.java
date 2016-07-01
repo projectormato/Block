@@ -208,6 +208,10 @@ public class BaseWorld extends World implements EventHandler {
     }
 
     @Override
+    public void onDied() {
+    }
+
+    @Override
     public void onMouseIn(MouseInfo mouse) {
         if (listener != null) {
             listener.onMouseIn();
