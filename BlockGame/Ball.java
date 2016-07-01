@@ -15,6 +15,7 @@ public class Ball extends BaseActor {
 
     @Override
     public void tick() {
+        List objs;
         super.tick();
         move(speed);
 
@@ -24,9 +25,10 @@ public class Ball extends BaseActor {
             return;
         }
 
-        if (getIntersectingObjects(Block.class).size() > 0) {
+        objs = getIntersectingObjects(Block.class);
+        if (objs.size() > 0) {
             // TODO: blockにダメージを与える
-            removeTouching(Block.class);
+            Damage.faights(this, objs.toArray());
             turn(180);
             return;
         }
