@@ -72,6 +72,12 @@ public class BaseWorld extends World implements EventHandler {
             ((BaseActor) handler).tick();
         }
         tick();
+        
+        for (Object handler : getObjects(BaseActor.class)) {
+            if (((BaseActor) handler).getActorStatus() == ActorStatus.REMOVED) {
+                removeObject((BaseActor) handler);
+            }
+        }
     }
 
     private void dispatchMouseEventHandler(List<EventHandler> handlers, MouseInfo mouse) {

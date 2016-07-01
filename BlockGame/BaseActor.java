@@ -48,6 +48,10 @@ public class BaseActor extends Actor implements EventHandler {
 
     @Override
     public void tick() {
+        if (actorStatus == ActorStatus.DIED) {
+            // 死んだら即座に削除
+            actorStatus = ActorStatus.REMOVED;
+        }
     }
 
     @Override
