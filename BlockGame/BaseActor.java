@@ -11,11 +11,22 @@ import java.util.logging.Logger;
  */
 public class BaseActor extends Actor implements EventHandler {
 
+    final private static int ATTACK_ABILITY = 100;
+    final private static int DEFENSIVE_ABILITY = 0;
+
     protected Logger logger;
     private List<String> listenKeys = new ArrayList<>();
     private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
     private int mouseStatus;
     private EventListener listener;
+    private int maxHp;
+    private int hp;
+    private ActorStatus actorStatus = ActorStatus.ALIVE;
+
+    public BaseActor() {
+        maxHp = 100;
+        hp = maxHp;
+    }
 
     /**
      * 何もしない。このメソッドはオーバーライドできません。BaseWorldクラスから呼び出されるイベントハンドラ内で必要な動作を実装してください。
@@ -181,5 +192,56 @@ public class BaseActor extends Actor implements EventHandler {
             return new ArrayList();
         }
         return objs;
+    }
+
+    final public int getMaxHp() {
+        return maxHp;
+    }
+
+    final public int getHp() {
+        return hp;
+    }
+
+    public ActorStatus getActorStatus() {
+        return actorStatus;
+    }
+
+    /**
+     * 攻撃能力を返す
+     *
+     * @param defender 攻撃対象
+     * @return 攻撃能力
+     */
+    public int getAttackAbility(BaseActor defender) {
+        return ATTACK_ABILITY;
+    }
+
+    /**
+     * 防御能力を返す。この値が大きいほど、攻撃のダメージが軽減される。防御力が上回る場合はノーダメージとする。HPが回復することは無い。
+     *
+     * @param attacker
+     * @return 防御能力
+     */
+    public int getDefensiveAbility(BaseActor attacker) {
+        return DEFENSIVE_ABILITY;
+    }
+
+    /**
+     * 対戦を実行する
+     *
+     * @param damage
+     */
+    public void fight(Damage damage) {
+        if (damage.getAttacker() == this) {
+            hp -= damage.getAttackerDamage();
+        } else if (damage.getDefender() == this) {
+            hp -= damage.getDefenderDamage();
+        }
+        hp = Math.max(0, hp);
+
+        // ステータスを更新
+        if (hp == 0) {
+            actorStatus = ActorStatus.DIED;
+        }
     }
 }
