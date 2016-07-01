@@ -210,6 +210,15 @@ public class BaseActor extends Actor implements EventHandler {
         return actorStatus;
     }
 
+    public boolean isFightable() {
+        switch (actorStatus) {
+            case DIED:
+            case REMOVED:
+                return false;
+        }
+        return true;
+    }
+
     /**
      * 攻撃能力を返す
      *
@@ -231,11 +240,15 @@ public class BaseActor extends Actor implements EventHandler {
     }
 
     /**
-     * 対戦を実行する
+     * 対戦を実行する。対戦不能なら何もしない。
      *
      * @param damage
      */
     public void fight(Damage damage) {
+        if (!isFightable()) {
+            return;
+        }
+
         if (damage.getAttacker() == this) {
             hp -= damage.getAttackerDamage();
         } else if (damage.getDefender() == this) {
