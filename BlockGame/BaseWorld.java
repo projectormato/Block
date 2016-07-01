@@ -73,6 +73,7 @@ public class BaseWorld extends World implements EventHandler {
         }
         tick();
         
+        // 削除すべきオブジェクトを消す
         for (Object handler : getObjects(BaseActor.class)) {
             if (((BaseActor) handler).getActorStatus() == ActorStatus.REMOVED) {
                 removeObject((BaseActor) handler);
