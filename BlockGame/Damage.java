@@ -29,6 +29,34 @@ final public class Damage {
     }
 
     /**
+     * 一つのattackerから、それぞれのdefenderへ攻撃するDamageオブジェクトを作成して返す。
+     *
+     * @param attacker
+     * @param defenders
+     * @return
+     */
+    public static Damage[] createDamages(BaseActor attacker, Object[] defenders) {
+        Damage[] arr = new Damage[defenders.length];
+        for (int i = 0; i < defenders.length; i++) {
+            arr[i] = new Damage(attacker, (BaseActor) defenders[i]);
+        }
+        return arr;
+    }
+
+    /**
+     * 複数のActorに対して一斉攻撃する。
+     *
+     * @param attacker
+     * @param defenders
+     */
+    public static void faights(BaseActor attacker, Object[] defenders) {
+        for (Damage damage : createDamages(attacker, defenders)) {
+            damage.getAttacker().fight(damage);
+            damage.getDefender().fight(damage);
+        }
+    }
+
+    /**
      * 攻撃が成立するかを返す
      *
      * @return
