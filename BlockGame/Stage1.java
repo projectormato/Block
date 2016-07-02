@@ -33,7 +33,7 @@ public class Stage1 extends PlayWorld {
         ball.setImage(ballImage);
         addObject(ball, 10, 10);
 
-        barrier = new CursorBarrier();
+        barrier = new CursorBarrier(ball);
         GreenfootImage barrierImage = new GreenfootImage("energywall-r.png");
         barrierImage.rotate(90);
         barrierImage.scale(100, 100);

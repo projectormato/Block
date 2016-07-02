@@ -19,14 +19,6 @@ public class Cursor extends BaseActor {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (isTouching(ball.getClass())) {
-            ball.setRotation(getRotation());
-        }
-    }
-
-    @Override
     public void onMouseMoved(MouseInfo mouse) {
         setLocation(mouse.getX(), mouse.getY());
         turnTowards(goal.getX(), goal.getY());
