@@ -10,6 +10,8 @@ public class Stage1 extends PlayWorld {
     private Ball ball;
     private Cursor cursor;
 
+    private ArrayList<Double> radianOffsets;
+
     public Stage1() {
         prepare();
     }
@@ -21,21 +23,8 @@ public class Stage1 extends PlayWorld {
         addObject(goal, getWidth() / 2, getHeight() / 2);
 
         blocks = new ArrayList<>();
-        GreenfootImage blockImage = new GreenfootImage("block.png");
-        blockImage.scale(20, 20);
-        int radius = goal.getImage().getWidth();
-        int depth = 100;
-        for (int x = 0; x < getWidth(); x += blockImage.getWidth()) {
-            for (int y = 0; y < getHeight(); y += blockImage.getHeight()) {
-                double d = getDistance(goal, x, y);
-                if (radius < d && d < radius + depth) {
-                    Block block = new Block();
-                    block.setImage(blockImage);
-                    blocks.add(block);
-                    addObject(block, x, y);
-                }
-            }
-        }
+        radianOffsets = new ArrayList<>();
+        relayout();
 
         ball = new Ball();
         GreenfootImage ballImage = new GreenfootImage("ball.png");
@@ -51,10 +40,54 @@ public class Stage1 extends PlayWorld {
         addObject(cursor, 0, 0);
     }
 
-    private double getDistance(BaseActor actor1, int x, int y) {
-        int dx = actor1.getX() - x;
-        int dy = actor1.getY() - y;
-        return Math.sqrt(dx * dx + dy * dy);
+    /**
+     * Blockが時計回りにGoalを公転するアニメーション行う。BlockはGoalに近いほど早く公転する。
+     */
+    private void relayout() {
+        GreenfootImage blockImage = new GreenfootImage("block.png");
+        blockImage.scale(20, 20);
+
+        int minRadius = goal.getImage().getWidth();
+        int maxRadius = minRadius + 200;
+        int dRadius = (int) (20 * 1.44);
+        int i = 0;
+        int j = 0;
+        for (int radius = minRadius; radius < maxRadius; radius += dRadius) {
+            double dRadian = (2 * Math.PI) / (2 * radius * Math.PI / blockImage.getWidth());
+            double radianOffset = 0;
+            try {
+                radianOffset = radianOffsets.get(j);
+            } catch (IndexOutOfBoundsException e) {
+                // 初回呼び出し時は、offsetの初期値をセット。
+                radianOffsets.add(0.0);
+            }
+            for (double radian = 0; radian < 2 * Math.PI; radian += dRadian) {
+                int x = goal.getX() + (int) (Math.cos(radian + radianOffset) * radius);
+                int y = goal.getY() + (int) (Math.sin(radian + radianOffset) * radius);
+
+                Block block;
+                try {
+                    block = blocks.get(i);
+                    block.setLocation(x, y);
+                } catch (IndexOutOfBoundsException e) {
+                    // 初回呼び出し時は、Blockを新規作成する。
+                    block = new Block();
+                    block.setImage(blockImage);
+                    blocks.add(block);
+                    addObject(block, x, y);
+                }
+                i++;
+            }
+
+            // offsetを更新
+            radianOffsets.set(j, radianOffset + Math.toRadians(10000.0 / (radius * radius)));
+            j++;
+        }
+    }
+
+    @Override
+    public void tick() {
+        relayout();
     }
 
     @Override
