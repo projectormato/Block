@@ -8,6 +8,7 @@ public class Stage1 extends PlayWorld {
     private Goal goal;
     private ArrayList<Block> blocks;
     private Ball ball;
+    private CursorBarrier barrier;
     private Cursor cursor;
 
     private ArrayList<Double> radianOffsets;
@@ -32,7 +33,14 @@ public class Stage1 extends PlayWorld {
         ball.setImage(ballImage);
         addObject(ball, 10, 10);
 
-        cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]));
+        barrier = new CursorBarrier();
+        GreenfootImage barrierImage = new GreenfootImage("energywall-r.png");
+        barrierImage.rotate(90);
+        barrierImage.scale(100, 100);
+        barrier.setImage(barrierImage);
+        addObject(barrier, 0, 0);
+
+        cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]), barrier);
         GreenfootImage cursorImage = new GreenfootImage("cursor.png");
         cursorImage.scale(50, 50);
         cursorImage.rotate(90);
