@@ -16,6 +16,9 @@ public class BaseActor extends Actor implements EventHandler {
     final private static int ATTACK_ABILITY = 100;
     final private static int DEFENSIVE_ABILITY = 0;
 
+    // シルエットの画像をキャッシュする
+    static GreenfootImage imageCache, silhouetteCache;
+
     protected Logger logger;
     private List<String> listenKeys = new ArrayList<>();
     private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
@@ -26,7 +29,6 @@ public class BaseActor extends Actor implements EventHandler {
     private ActorStatus actorStatus = ActorStatus.ALIVE;
     // 衝突判定用のシルエット画像
     private GreenfootImage silhouette;
-
 
     public BaseActor() {
         maxHp = 100;
@@ -338,19 +340,29 @@ public class BaseActor extends Actor implements EventHandler {
     public void setImage(GreenfootImage img) {
         super.setImage(img);
 
-        // シルエットを作成する
-        silhouette = new GreenfootImage(img);
-        BufferedImage awtimg = silhouette.getAwtImage();
-        Raster raster = awtimg.getAlphaRaster();
+        if (imageCache == img) {
+            // キャッシュを利用
+            silhouette = silhouetteCache;
+            return;
+        } else {
+            // シルエットを作成する
+            silhouette = new GreenfootImage(img);
+            BufferedImage awtimg = silhouette.getAwtImage();
+            Raster raster = awtimg.getAlphaRaster();
 
-        for (int x = 0; x < img.getWidth(); x++) {
-            for (int y = 0; y < img.getHeight(); y++) {
-                int[] arr = new int[1];
-                if (raster.getPixel(x, y, arr)[0] != 0) {
-                    // 不透明な部分は黒で塗り潰す
-                    awtimg.setRGB(x, y, 0xFF000000);
+            for (int x = 0; x < img.getWidth(); x++) {
+                for (int y = 0; y < img.getHeight(); y++) {
+                    int[] arr = new int[1];
+                    if (raster.getPixel(x, y, arr)[0] != 0) {
+                        // 不透明な部分は黒で塗り潰す
+                        awtimg.setRGB(x, y, 0xFF000000);
+                    }
                 }
             }
+
+            // キャッシュを更新
+            imageCache = img;
+            silhouetteCache = silhouette;
         }
     }
 
