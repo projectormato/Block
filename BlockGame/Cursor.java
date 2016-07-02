@@ -3,10 +3,10 @@ import greenfoot.*;
 
 public class Cursor extends BaseActor {
 
-    Goal goal;
-    Ball ball;
-    Block[] blocks;
-    CursorBarrier barrier;
+    private Goal goal;
+    private Ball ball;
+    private Block[] blocks;
+    private CursorBarrier barrier;
 
     public Cursor() {
     }
