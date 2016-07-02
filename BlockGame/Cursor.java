@@ -1,14 +1,6 @@
 
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.ArrayList;
-import java.util.List;
+import greenfoot.*;
 
-/**
- * Write a description of class Cursor here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class Cursor extends BaseActor {
 
     Goal goal;
