@@ -1,5 +1,7 @@
 
 import greenfoot.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +24,9 @@ public class BaseActor extends Actor implements EventHandler {
     private int maxHp;
     private int hp;
     private ActorStatus actorStatus = ActorStatus.ALIVE;
+    // 衝突判定用のシルエット画像
+    private GreenfootImage silhouette;
+
 
     public BaseActor() {
         maxHp = 100;
@@ -202,6 +207,68 @@ public class BaseActor extends Actor implements EventHandler {
         return objs;
     }
 
+    @Override
+    protected boolean intersects(Actor other) {
+        if (!super.intersects(other)) {
+            return false;
+        }
+
+        // 角度調整済みのシルエット
+        BufferedImage img, otherImg;
+        // thisを基準としたときのotherのoffset
+        int offsetX, offsetY;
+        // (thisの左上の位置を基点座標とした)thisとotherが重なっている範囲 
+        /*
+         *  +----------------+               +----------------+
+         *  |(0,0)    this   |               |        other   |
+         *  |    +-----------+--+       +----+----------------+----+
+         *  |    |(x1,x2)    |  |       |    |(x1,x2)         |    |
+         *  |    |    (x2,y2)|  |       |    |         (x2,y2)|    |
+         *  +----+-----------+  |       |    +----------------+    |
+         *       |     other    |       |          this            |
+         *       +--------------+       |--------------------------+
+         */
+        int x1, y1; // upper-left
+        int x2, y2; // lowwer-right
+
+        // シルエットを準備
+        {
+            GreenfootImage gimg = new GreenfootImage(silhouette);
+            gimg.rotate(getRotation());
+            img = gimg.getAwtImage();
+
+            GreenfootImage otherGImg = new GreenfootImage(((BaseActor) other).getSilhouette());
+            otherGImg.rotate(other.getRotation());
+            otherImg = otherGImg.getAwtImage();
+        }
+
+        offsetX = (other.getX() - otherImg.getWidth() / 2) - (getX() - img.getWidth() / 2);
+        offsetY = (other.getY() - otherImg.getWidth() / 2) - (getY() - img.getWidth() / 2);
+
+        x1 = Math.max(0, offsetX);
+        y1 = Math.max(0, offsetY);
+        x2 = Math.min(img.getWidth(), offsetX + otherImg.getWidth());
+        y2 = Math.min(img.getHeight(), offsetY + otherImg.getHeight());
+
+        System.out.println(String.format(
+                "min: (x, y): (%d, %d)\n"
+                + "max: (x, y): (%d, %d)\n",
+                x1, y1,
+                x2, y2
+        ));
+
+        for (int y = y1; y < y2; y++) {
+            for (int x = x1; x < x2; x++) {
+                // 不透明な部分が重なっていたら、隣接していると判定
+                if (otherImg.getRGB(x - offsetX, y - offsetY) != 0
+                        && img.getRGB(x, y) != 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     final public int getMaxHp() {
         return maxHp;
     }
@@ -265,5 +332,29 @@ public class BaseActor extends Actor implements EventHandler {
             actorStatus = ActorStatus.DIED;
             onDied();
         }
+    }
+
+    @Override
+    public void setImage(GreenfootImage img) {
+        super.setImage(img);
+
+        // シルエットを作成する
+        silhouette = new GreenfootImage(img);
+        BufferedImage awtimg = silhouette.getAwtImage();
+        Raster raster = awtimg.getAlphaRaster();
+
+        for (int x = 0; x < img.getWidth(); x++) {
+            for (int y = 0; y < img.getHeight(); y++) {
+                int[] arr = new int[1];
+                if (raster.getPixel(x, y, arr)[0] != 0) {
+                    // 不透明な部分は黒で塗り潰す
+                    awtimg.setRGB(x, y, 0xFF000000);
+                }
+            }
+        }
+    }
+
+    protected GreenfootImage getSilhouette() {
+        return silhouette;
     }
 }
