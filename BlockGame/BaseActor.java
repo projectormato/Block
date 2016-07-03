@@ -68,84 +68,84 @@ public class BaseActor extends Actor implements EventHandler {
     @Override
     public void onMouseIn(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseIn();
+            listener.onMouseIn(mouse);
         }
     }
 
     @Override
     public void onMouseOut(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseOut();
+            listener.onMouseOut(mouse);
         }
     }
 
     @Override
     public void onMouseMoved(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseMoved();
+            listener.onMouseMoved(mouse);
         }
     }
 
     @Override
     public void onMouseDown(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseDown();
+            listener.onMouseDown(mouse);
         }
     }
 
     @Override
     public void onMouseHolding(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseHolding();
+            listener.onMouseHolding(mouse);
         }
     }
 
     @Override
     public void onMouseUp(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseUp();
+            listener.onMouseUp(mouse);
         }
     }
 
     @Override
     public void onMouseClicked(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseClicked();
+            listener.onMouseClicked(mouse);
         }
     }
 
     @Override
     public void onMouseDragging(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseDragging();
+            listener.onMouseDragging(mouse);
         }
     }
 
     @Override
     public void onMouseDragged(MouseInfo mouse) {
         if (listener != null) {
-            listener.onMouseDragged();
+            listener.onMouseDragged(mouse);
         }
     }
 
     @Override
     public void onKeyDown(String key) {
         if (listener != null) {
-            listener.onKeyDown();
+            listener.onKeyDown(key);
         }
     }
 
     @Override
     public void onKeyHolding(String key) {
         if (listener != null) {
-            listener.onKeyHolding();
+            listener.onKeyHolding(key);
         }
     }
 
     @Override
     public void onKeyUp(String key) {
         if (listener != null) {
-            listener.onKeyUp();
+            listener.onKeyUp(key);
         }
     }
 

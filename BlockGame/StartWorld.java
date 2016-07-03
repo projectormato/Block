@@ -45,7 +45,7 @@ public class StartWorld extends BaseWorld {
 
         startButton.addListner(new EventListener() {
             @Override
-            public void onMouseClicked() {
+            public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Game Start");
                 Greenfoot.setWorld(new Stage1());
             }
@@ -53,7 +53,7 @@ public class StartWorld extends BaseWorld {
 
         stageButton.addListner(new EventListener() {
             @Override
-            public void onMouseClicked() {
+            public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Select Stage");
                 Greenfoot.setWorld(new PlayWorld());
             }
