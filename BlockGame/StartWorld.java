@@ -32,7 +32,13 @@ public class StartWorld extends BaseWorld {
      * initial objects and add them to the world.
      */
     private void prepare() {
-        addButton("ロゴの画像", 0, 200, 400, 300, 40, Color.WHITE, Color.GRAY, Color.GRAY);
+        // 背景とロゴを描画
+        GreenfootImage rogo = new GreenfootImage("title.png");
+        getBackground().setColor(Color.BLACK);
+        getBackground().fill();
+        getBackground().drawImage(rogo, getWidth()/2-rogo.getWidth()/2, 50);
+        
+        // ボタンを追加
         Button startButton = addButton("Game Start", 0, 400, 200, 50, 20, Color.BLACK);
         Button stageButton = addButton("Select Stage", 0, 470, 200, 50, 20, Color.BLACK);
         Button settingsButton = addButton("Settings", 0, 540, 200, 50, 20, Color.BLACK);
