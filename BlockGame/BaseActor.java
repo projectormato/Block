@@ -276,6 +276,10 @@ public class BaseActor extends Actor implements EventHandler {
         return actorStatus;
     }
 
+    public void setActorStatus(ActorStatus actorStatus) {
+        this.actorStatus = actorStatus;
+    }
+
     public boolean isFightable() {
         switch (actorStatus) {
             case DIED:

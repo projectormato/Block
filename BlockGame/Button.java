@@ -15,12 +15,20 @@ public class Button extends BaseActor {
 
     @Override
     public void onMouseDown(MouseInfo mouse) {
+        if (getActorStatus() != ActorStatus.ALIVE) {
+            return;
+        }
+
         super.onMouseDown(mouse);
         setImage(pressingImg);
     }
 
     @Override
     public void onMouseUp(MouseInfo mouse) {
+        if (getActorStatus() != ActorStatus.ALIVE) {
+            return;
+        }
+
         super.onMouseUp(mouse);
         setImage(normalImg);
     }

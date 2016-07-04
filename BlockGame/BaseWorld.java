@@ -23,6 +23,7 @@ public class BaseWorld extends World implements EventHandler {
     public BaseWorld() {
         // Create a new world with 1200x800 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1);
+        setPaintOrder(MessageBox.class, BaseActor.class);
     }
 
     /**
@@ -72,7 +73,7 @@ public class BaseWorld extends World implements EventHandler {
             ((BaseActor) handler).tick();
         }
         tick();
-        
+
         // 削除すべきオブジェクトを消す
         for (Object handler : getObjects(BaseActor.class)) {
             if (((BaseActor) handler).getActorStatus() == ActorStatus.REMOVED) {
@@ -192,6 +193,11 @@ public class BaseWorld extends World implements EventHandler {
 
         ((BaseActor) actor).setLogger(logger);
         super.addObject(actor, x, y);
+    }
+
+    public void addDisabledObject(Actor actor, int x, int y) {
+        ((BaseActor) actor).setActorStatus(ActorStatus.DISABLED);
+        addObject(actor, x, y);
     }
 
     public void setLogger(Logger logger) {

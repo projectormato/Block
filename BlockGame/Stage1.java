@@ -22,7 +22,7 @@ public class Stage1 extends PlayWorld {
         setBackground("background1.jpg");
 
         goal = new Goal();
-        addObject(goal, getWidth() / 2, getHeight() / 2);
+        addDisabledObject(goal, getWidth() / 2, getHeight() / 2);
 
         blocks = new ArrayList<>();
         radianOffsets = new ArrayList<>();
@@ -32,21 +32,21 @@ public class Stage1 extends PlayWorld {
         GreenfootImage ballImage = new GreenfootImage("ball.png");
         ballImage.scale(40, 40);
         ball.setImage(ballImage);
-        addObject(ball, 10, 10);
+        addDisabledObject(ball, 10, 10);
 
         barrier = new CursorBarrier(ball);
         GreenfootImage barrierImage = new GreenfootImage("energywall-r.png");
         barrierImage.rotate(90);
         barrierImage.scale(100, 100);
         barrier.setImage(barrierImage);
-        addObject(barrier, 0, 0);
+        addDisabledObject(barrier, 0, 0);
 
         cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]), barrier);
         GreenfootImage cursorImage = new GreenfootImage("cursor.png");
         cursorImage.scale(50, 50);
         cursorImage.rotate(90);
         cursor.setImage(cursorImage);
-        addObject(cursor, 0, 0);
+        addDisabledObject(cursor, 0, 0);
     }
 
     /**
@@ -80,10 +80,11 @@ public class Stage1 extends PlayWorld {
                     block.setLocation(x, y);
                 } catch (IndexOutOfBoundsException e) {
                     // 初回呼び出し時は、Blockを新規作成する。
+                    // この時は、メッセージが表示されるはずなので、disabledにしておく。
                     block = new Block();
                     block.setImage(blockImage);
                     blocks.add(block);
-                    addObject(block, x, y);
+                    addDisabledObject(block, x, y);
                 }
                 i++;
             }

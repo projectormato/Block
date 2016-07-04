@@ -15,6 +15,10 @@ public class Ball extends BaseActor {
 
     @Override
     public void tick() {
+        if (getActorStatus() != ActorStatus.ALIVE) {
+            return;
+        }
+
         List objs;
         super.tick();
         move(speed);
