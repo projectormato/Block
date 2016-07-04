@@ -2,17 +2,22 @@
 import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MessageBox extends BaseActor {
 
+    final static int DEFAULT_FONT_SIZE = 20;
+
     String msg;
     GreenfootImage msgboxImg;
+    Color fontColor = Color.WHITE;
+    Color backgroundColor = new Color(0x228b22);
+    Font font = new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE);
 
     public MessageBox(String msgConfigName) {
         String fileName = String.format("messages/%s.txt", msgConfigName);
@@ -32,10 +37,13 @@ public class MessageBox extends BaseActor {
         if (msgboxImg == null) {
             msgboxImg = new GreenfootImage(getWorld().getWidth(), getWorld().getHeight());
             msgboxImg = new GreenfootImage(100, 100);
-            msgboxImg.setColor(Color.BLACK);
+            msgboxImg.setColor(backgroundColor);
             msgboxImg.fill();
-            msgboxImg.setColor(Color.WHITE);
-            drawStringInRect(msg, msgboxImg.getAwtImage(), 0, 0,
+
+            Graphics graphics = msgboxImg.getAwtImage().getGraphics();
+            graphics.setFont(font);
+            graphics.setColor(fontColor);
+            drawStringInRect(msg, graphics, 0, 0,
                     msgboxImg.getWidth(), msgboxImg.getHeight());
         }
         setImage(msgboxImg);
@@ -45,17 +53,16 @@ public class MessageBox extends BaseActor {
      * 画像の指定した領域に文字列を描画する。
      *
      * @param str
-     * @param img
+     * @param graphics
      * @param x
      * @param y
      * @param width
      * @param height
      */
-    public void drawStringInRect(String str, BufferedImage img,
+    public void drawStringInRect(String str, Graphics graphics,
             int x, int y, int width, int height) {
         String targetStr = str;
-        Graphics graphics = img.getGraphics();
-        FontMetrics fontmetrics = img.getGraphics().getFontMetrics();
+        FontMetrics fontmetrics = graphics.getFontMetrics();
 
         while (true) {
             // 横幅に収まるような最大文字列長を探る
@@ -80,8 +87,8 @@ public class MessageBox extends BaseActor {
             }
 
             // 画像に描画して、次の行の描画領域を設定
-            System.out.println("draw: "+targetStr.substring(0, i));
-            img.getGraphics().drawString(targetStr.substring(0, i), x, y+(int)strHeight);
+            System.out.println("draw: " + targetStr.substring(0, i));
+            graphics.drawString(targetStr.substring(0, i), x, y + (int) strHeight);
             y += strHeight;
             height -= strHeight;
             targetStr = targetStr.substring(i);
