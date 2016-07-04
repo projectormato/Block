@@ -252,13 +252,6 @@ public class BaseActor extends Actor implements EventHandler {
         x2 = Math.min(img.getWidth(), offsetX + otherImg.getWidth());
         y2 = Math.min(img.getHeight(), offsetY + otherImg.getHeight());
 
-        System.out.println(String.format(
-                "min: (x, y): (%d, %d)\n"
-                + "max: (x, y): (%d, %d)\n",
-                x1, y1,
-                x2, y2
-        ));
-
         for (int y = y1; y < y2; y++) {
             for (int x = x1; x < x2; x++) {
                 // 不透明な部分が重なっていたら、隣接していると判定
