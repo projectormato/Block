@@ -21,7 +21,7 @@ public class PlayWorld extends BaseWorld {
         msgbox.addListner(new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
-                worldStatus = PlayWorldStatus.WAITING;
+                setWorldStatus(PlayWorldStatus.WAITING);
                 removeObject(msgbox);
             }
         });
@@ -32,7 +32,7 @@ public class PlayWorld extends BaseWorld {
     }
 
     public void win() {
-        worldStatus = PlayWorldStatus.STAGE_END_MSG;
+        setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
 
         MessageBox msgbox = new MessageBox(stageName + "-win", getWidth(), getHeight() / 2);
         msgbox.addListner(new EventListener() {
@@ -46,7 +46,7 @@ public class PlayWorld extends BaseWorld {
     }
 
     public void lose() {
-        worldStatus = PlayWorldStatus.STAGE_END_MSG;
+        setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
 
         MessageBox msgbox = new MessageBox(stageName + "-lose", getWidth(), getHeight() / 2);
         msgbox.addListner(new EventListener() {
@@ -57,5 +57,17 @@ public class PlayWorld extends BaseWorld {
             }
         });
         addObject(msgbox, getWidth(), getHeight() / 2);
+    }
+
+    public PlayWorldStatus getWorldStatus() {
+        return worldStatus;
+    }
+
+    public void setWorldStatus(PlayWorldStatus worldStatus) {
+        this.worldStatus = worldStatus;
+        onChangeStatus();
+    }
+
+    public void onChangeStatus() {
     }
 }
