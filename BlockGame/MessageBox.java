@@ -15,11 +15,15 @@ public class MessageBox extends BaseActor {
 
     String msg;
     GreenfootImage msgboxImg;
-    Color fontColor = Color.WHITE;
-    Color backgroundColor = new Color(0x228b22);
-    Font font = new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE);
+    Color fontColor;
+    Color backgroundColor;
+    Font font;
 
-    public MessageBox(String msgConfigName) {
+    public MessageBox(String msgConfigName, Color fontColor, Color backgroundColor, Font font) {
+        this.fontColor = fontColor;
+        this.backgroundColor = backgroundColor;
+        this.font = font;
+
         String fileName = String.format("messages/%s.txt", msgConfigName);
         try {
             msg = new String(
@@ -29,8 +33,14 @@ public class MessageBox extends BaseActor {
             System.out.println(String.format("cannot access \"%s\".", fileName));
             Greenfoot.stop();
         }
-
     }
+
+    public MessageBox(String msgConfigName) {
+        this(msgConfigName,
+                Color.WHITE, new Color(0x228b22),
+                new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE));
+    }
+
 
     @Override
     public void tick() {
