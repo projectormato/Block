@@ -19,11 +19,12 @@ public class MessageBox extends BaseActor {
     Color backgroundColor;
     Font font;
 
-    public MessageBox(String msgConfigName, Color fontColor, Color backgroundColor, Font font) {
+    public MessageBox(String msgConfigName, int width, int height, Color fontColor, Color backgroundColor, Font font) {
         this.fontColor = fontColor;
         this.backgroundColor = backgroundColor;
         this.font = font;
 
+        // メッセージをファイルから読み込み
         String fileName = String.format("messages/%s.txt", msgConfigName);
         try {
             msg = new String(
@@ -33,29 +34,31 @@ public class MessageBox extends BaseActor {
             System.out.println(String.format("cannot access \"%s\".", fileName));
             Greenfoot.stop();
         }
+
+        // 背景を描画
+        msgboxImg = new GreenfootImage(width, height);
+        msgboxImg.setColor(backgroundColor);
+        msgboxImg.fill();
+
+        // メッセージを描画
+        Graphics graphics = msgboxImg.getAwtImage().getGraphics();
+        graphics.setFont(font);
+        graphics.setColor(fontColor);
+        drawStringInRect(msg, graphics, 0, 0,
+                msgboxImg.getWidth(), msgboxImg.getHeight());
+
+        setImage(msgboxImg);
     }
 
-    public MessageBox(String msgConfigName) {
+    public MessageBox(String msgConfigName, int width, int height) {
         this(msgConfigName,
+                width, height,
                 Color.WHITE, new Color(0x228b22),
                 new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE));
     }
 
-
     @Override
     public void tick() {
-        if (msgboxImg == null) {
-            msgboxImg = new GreenfootImage(getWorld().getWidth(), getWorld().getHeight());
-            msgboxImg = new GreenfootImage(100, 100);
-            msgboxImg.setColor(backgroundColor);
-            msgboxImg.fill();
-
-            Graphics graphics = msgboxImg.getAwtImage().getGraphics();
-            graphics.setFont(font);
-            graphics.setColor(fontColor);
-            drawStringInRect(msg, graphics, 0, 0,
-                    msgboxImg.getWidth(), msgboxImg.getHeight());
-        }
         setImage(msgboxImg);
     }
 
