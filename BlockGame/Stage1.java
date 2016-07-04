@@ -14,6 +14,7 @@ public class Stage1 extends PlayWorld {
     private ArrayList<Double> radianOffsets;
 
     public Stage1() {
+        super("Stage1");
         prepare();
     }
 
