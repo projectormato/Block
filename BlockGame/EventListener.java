@@ -3,7 +3,10 @@ import greenfoot.MouseInfo;
 
 public class EventListener{
     public void tick(){}
+    public void onAlived(){}
+    public void onDisabled(){}
     public void onDied(){}
+    public void onRemoved(){}
 
     public void onMouseIn(MouseInfo mouse){}
     public void onMouseOut(MouseInfo mouse){}

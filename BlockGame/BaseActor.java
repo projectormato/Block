@@ -58,10 +58,35 @@ public class BaseActor extends Actor implements EventHandler {
     }
 
     @Override
+    public void onAlived() {
+        if (listener != null) {
+            listener.onAlived();
+        }
+    }
+
+    @Override
+    public void onDisabled() {
+        if (listener != null) {
+            listener.onDisabled();
+        }
+    }
+
+    @Override
     public void onDied() {
+        if (listener != null) {
+            listener.onDied();
+        }
+
         if (actorStatus == ActorStatus.DIED) {
             // 死んだら即座に削除
             actorStatus = ActorStatus.REMOVED;
+        }
+    }
+
+    @Override
+    public void onRemoved() {
+        if (listener != null) {
+            listener.onRemoved();
         }
     }
 
@@ -278,6 +303,20 @@ public class BaseActor extends Actor implements EventHandler {
 
     public void setActorStatus(ActorStatus actorStatus) {
         this.actorStatus = actorStatus;
+        switch (actorStatus) {
+            case ALIVE:
+                onAlived();
+                break;
+            case DISABLED:
+                onDisabled();
+                break;
+            case DIED:
+                onDied();
+                break;
+            case REMOVED:
+                onRemoved();
+                break;
+        }
     }
 
     public boolean isFightable() {

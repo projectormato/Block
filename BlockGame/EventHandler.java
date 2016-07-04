@@ -6,7 +6,10 @@ interface EventHandler{
     void addListner(EventListener listener);
 
     void tick();
+    void onAlived();
+    void onDisabled();
     void onDied();
+    void onRemoved();
 
     void onMouseIn(MouseInfo mouse);
     void onMouseOut(MouseInfo mouse);

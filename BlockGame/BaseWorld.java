@@ -214,7 +214,35 @@ public class BaseWorld extends World implements EventHandler {
     }
 
     @Override
+    public void onAlived() {
+        if (listener != null) {
+            listener.onAlived();
+
+        }
+    }
+
+    @Override
+    public void onDisabled() {
+        if (listener != null) {
+            listener.onDisabled();
+
+        }
+    }
+
+    @Override
     public void onDied() {
+        if (listener != null) {
+            listener.onDied();
+
+        }
+    }
+
+    @Override
+    public void onRemoved() {
+        if (listener != null) {
+            listener.onRemoved();
+
+        }
     }
 
     @Override
