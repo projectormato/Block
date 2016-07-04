@@ -77,10 +77,8 @@ public class BaseActor extends Actor implements EventHandler {
             listener.onDied();
         }
 
-        if (actorStatus == ActorStatus.DIED) {
-            // 死んだら即座に削除
-            actorStatus = ActorStatus.REMOVED;
-        }
+        // 死んだら即座に削除
+        actorStatus = ActorStatus.REMOVED;
     }
 
     @Override
@@ -367,8 +365,7 @@ public class BaseActor extends Actor implements EventHandler {
 
         // ステータスを更新
         if (hp == 0) {
-            actorStatus = ActorStatus.DIED;
-            onDied();
+            setActorStatus(ActorStatus.DIED);
         }
     }
 
