@@ -113,4 +113,18 @@ public class Stage1 extends PlayWorld {
         System.out.println("--- GAME OVER ---");
         Greenfoot.stop();
     }
+
+    @Override
+    public void onChangeStatus() {
+        switch (getWorldStatus()) {
+            case WAITING:
+                setWorldStatus(PlayWorldStatus.PLAYING);
+                break;
+            case PLAYING:
+                for (Object actor : getObjects(BaseActor.class)) {
+                    ((BaseActor) actor).setActorStatus(ActorStatus.ALIVE);
+                }
+                break;
+        }
+    }
 }
