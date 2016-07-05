@@ -24,7 +24,7 @@ public class MyWorld extends BaseWorld
      */
     private void prepare()
     {
-        GreenfootImage goalimage = new GreenfootImage("goal.png");
+        GreenfootImage goalimage = new GreenfootImage("goal/jupiter.png");
         goalimage.scale(100,100);
         GreenfootImage cursorimage = new GreenfootImage("cursor.png");
         cursorimage.scale(50,50);

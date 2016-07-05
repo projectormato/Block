@@ -10,7 +10,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Goal extends BaseActor {
 
     public Goal() {
-        GreenfootImage goalImage = new GreenfootImage("goal.png");
+        GreenfootImage goalImage = new GreenfootImage("goal/jupiter.png");
         goalImage.scale(100, 100);
         setImage(goalImage);
     }

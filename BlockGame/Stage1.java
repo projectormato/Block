@@ -19,7 +19,7 @@ public class Stage1 extends PlayWorld {
     }
 
     private void prepare() {
-        setBackground("background1.jpg");
+        setBackground("bg/space.jpg");
 
         goal = new Goal();
         addDisabledObject(goal, getWidth() / 2, getHeight() / 2);
@@ -29,13 +29,13 @@ public class Stage1 extends PlayWorld {
         relayout();
 
         ball = new Ball();
-        GreenfootImage ballImage = new GreenfootImage("ball.png");
+        GreenfootImage ballImage = new GreenfootImage("ball/r2.png");
         ballImage.scale(40, 40);
         ball.setImage(ballImage);
         addDisabledObject(ball, 10, 10);
 
         barrier = new CursorBarrier(ball);
-        GreenfootImage barrierImage = new GreenfootImage("energywall-r.png");
+        GreenfootImage barrierImage = new GreenfootImage("block/y.png");
         barrierImage.rotate(90);
         barrierImage.scale(100, 100);
         barrier.setImage(barrierImage);
@@ -53,7 +53,7 @@ public class Stage1 extends PlayWorld {
      * Blockが時計回りにGoalを公転するアニメーション行う。BlockはGoalに近いほど早く公転する。
      */
     private void relayout() {
-        GreenfootImage blockImage = new GreenfootImage("block.png");
+        GreenfootImage blockImage = new GreenfootImage("block/b.png");
         blockImage.scale(20, 20);
 
         int minRadius = goal.getImage().getWidth();
