@@ -34,7 +34,7 @@ public class PlayWorld extends BaseWorld {
     public void win() {
         setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
 
-        MessageBox msgbox = new MessageBox(stageName + "-win", getWidth(), getHeight() / 2);
+        MessageBox msgbox = new MessageBox(stageName + "-win", getWidth(), getHeight() / 3);
         msgbox.addListner(new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
@@ -42,13 +42,13 @@ public class PlayWorld extends BaseWorld {
                 Greenfoot.setWorld(new StartWorld());
             }
         });
-        addObject(msgbox, getWidth(), getHeight() / 2);
+        addObject(msgbox, getWidth() / 2, getHeight() / 2);
     }
 
     public void lose() {
         setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
 
-        MessageBox msgbox = new MessageBox(stageName + "-lose", getWidth(), getHeight() / 2);
+        MessageBox msgbox = new MessageBox(stageName + "-lose", getWidth(), getHeight() / 3);
         msgbox.addListner(new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
@@ -56,7 +56,7 @@ public class PlayWorld extends BaseWorld {
                 Greenfoot.setWorld(new StartWorld());
             }
         });
-        addObject(msgbox, getWidth(), getHeight() / 2);
+        addObject(msgbox, getWidth() / 2, getHeight() / 2);
     }
 
     public PlayWorldStatus getWorldStatus() {
