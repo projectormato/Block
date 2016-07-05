@@ -97,21 +97,37 @@ public class Stage1 extends PlayWorld {
 
     @Override
     public void tick() {
-        relayout();
+        switch (getWorldStatus()) {
+            case STAGE_END_MSG:
+                break;
+            default:
+                relayout();
+                break;
+        }
     }
 
     @Override
     public void win() {
         super.win();
         System.out.println("--- STAGE COMPLETE ---");
-        Greenfoot.stop();
+        disableAllActors();
     }
 
     @Override
     public void lose() {
         super.lose();
         System.out.println("--- GAME OVER ---");
-        Greenfoot.stop();
+        disableAllActors();
+    }
+
+    private void disableAllActors() {
+        goal.setActorStatus(ActorStatus.DISABLED);
+        for (BaseActor block : blocks) {
+            block.setActorStatus(ActorStatus.DISABLED);
+        }
+        ball.setActorStatus(ActorStatus.DISABLED);
+        barrier.setActorStatus(ActorStatus.DISABLED);
+        cursor.setActorStatus(ActorStatus.DISABLED);
     }
 
     @Override
