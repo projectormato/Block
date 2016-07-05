@@ -13,6 +13,16 @@ public class Button extends BaseActor {
         setImage(normalImg);
     }
 
+	@Override
+	public void onMouseIn(MouseInfo mouse){
+        if (getActorStatus() != ActorStatus.ALIVE) {
+            return;
+        }
+
+        super.onMouseIn(mouse);
+		(new GreenfootSound("se/button-onMouseIn.mp3")).play();
+	}
+
     @Override
     public void onMouseDown(MouseInfo mouse) {
         if (getActorStatus() != ActorStatus.ALIVE) {
@@ -32,4 +42,14 @@ public class Button extends BaseActor {
         super.onMouseUp(mouse);
         setImage(normalImg);
     }
+
+	@Override
+	public void onMouseClicked(MouseInfo mouse){
+        if (getActorStatus() != ActorStatus.ALIVE) {
+            return;
+        }
+
+		super.onMouseClicked(mouse);
+		(new GreenfootSound("se/button-onMouseClicked.mp3")).play();
+	}
 }

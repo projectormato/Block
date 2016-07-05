@@ -97,6 +97,7 @@ public class Stage1 extends PlayWorld {
 
     @Override
     public void tick() {
+        super.tick();
         switch (getWorldStatus()) {
             case STAGE_END_MSG:
                 break;
@@ -132,6 +133,7 @@ public class Stage1 extends PlayWorld {
 
     @Override
     public void onChangeStatus() {
+        super.onChangeStatus();
         switch (getWorldStatus()) {
             case WAITING:
                 setWorldStatus(PlayWorldStatus.PLAYING);

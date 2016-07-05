@@ -14,4 +14,9 @@ public class Goal extends BaseActor {
         goalImage.scale(100, 100);
         setImage(goalImage);
     }
+
+	@Override
+	public void onDied(){
+		(new GreenfootSound("se/core-destroyed.mp3")).play();
+	}
 }

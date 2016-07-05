@@ -10,6 +10,8 @@ import java.util.logging.Logger;
  */
 public class StartWorld extends BaseWorld {
 
+    private GreenfootSound bgm;
+
     public StartWorld() {
         logger = Logger.getLogger("SampleLogging");
         if (ENABLE_LOGGING) {
@@ -24,6 +26,8 @@ public class StartWorld extends BaseWorld {
             }
         }
 
+        bgm = new GreenfootSound("bgm/title.mp3");
+        bgm.play();
         prepare();
     }
 
@@ -36,8 +40,8 @@ public class StartWorld extends BaseWorld {
         GreenfootImage rogo = new GreenfootImage("rogo/title2.png");
         getBackground().setColor(Color.BLACK);
         getBackground().fill();
-        getBackground().drawImage(rogo, getWidth()/2-rogo.getWidth()/2, 50);
-        
+        getBackground().drawImage(rogo, getWidth() / 2 - rogo.getWidth() / 2, 50);
+
         // ボタンを追加
         Button startButton = addButton("Game Start", 0, 400, 200, 50, 20, Color.BLACK);
         Button stageButton = addButton("Select Stage", 0, 470, 200, 50, 20, Color.BLACK);
@@ -48,6 +52,7 @@ public class StartWorld extends BaseWorld {
             public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Game Start");
                 Greenfoot.setWorld(new Stage1());
+                bgm.stop();
             }
         });
 
@@ -56,6 +61,7 @@ public class StartWorld extends BaseWorld {
             public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Select Stage");
                 Greenfoot.setWorld(new PlayWorld());
+                bgm.stop();
             }
         });
     }

@@ -1,14 +1,16 @@
 
-import greenfoot.Greenfoot;
-import greenfoot.MouseInfo;
+import greenfoot.*;
 
 public class PlayWorld extends BaseWorld {
 
     private PlayWorldStatus worldStatus;
     private String stageName;
+    private GreenfootSound bgm;
 
     public PlayWorld() {
         worldStatus = PlayWorldStatus.WAITING;
+        bgm = new GreenfootSound("bgm/battle.mp3");
+        bgm.play();
         prepare();
     }
 
@@ -69,5 +71,10 @@ public class PlayWorld extends BaseWorld {
     }
 
     public void onChangeStatus() {
+        switch (getWorldStatus()) {
+            case STAGE_END_MSG:
+                bgm.stop();
+                break;
+        }
     }
 }
