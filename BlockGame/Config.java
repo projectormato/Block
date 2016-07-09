@@ -68,6 +68,7 @@ final public class Config {
         String filePaht = CONFIG_FILE_PATH.replaceFirst("^~", System.getProperty("user.home"));
         try (InputStreamReader configFile = new InputStreamReader(new FileInputStream(Paths.get(filePaht).toFile()), StandardCharsets.UTF_8)) {
             prop.load(configFile);
+            isLoaded = true;
         } catch (IOException e) {
             e.printStackTrace(System.out);
             Greenfoot.stop();
@@ -88,11 +89,16 @@ final public class Config {
     }
 
     public static String getProperty(String key) {
-        // プロパティリスト入っているならすぐに結果を返す
+        if (!isLoaded) {
+            throw new IllegalStateException();
+        }
+
         for (String[] tuple : PROPERTIES) {
             String key2 = tuple[0];
             String defaultValue = tuple[1];
-            return prop.getProperty(key, defaultValue);
+            if (key2.equals(key)) {
+                return prop.getProperty(key, defaultValue);
+            }
         }
         throw new IllegalArgumentException();
     }
