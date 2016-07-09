@@ -58,7 +58,7 @@ final public class Config {
      */
     private final static String[][] PROPERTIES = {
         {"enableBGM", "true"},
-        {"enableSooundEffect", "true"},
+        {"enableSoundEffect", "true"},
         {"enableAutoSave", "true"},};
 
     /**
