@@ -1,5 +1,6 @@
 
 import greenfoot.Greenfoot;
+import greenfoot.GreenfootImage;
 import greenfoot.GreenfootSound;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,12 +9,16 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Properties;
 
 /**
  * ゲームの設定を管理する。設定はJSON形式でローカルストレージに保存される。
  */
 final public class Config {
+
+    final static int WORLD_WIDTH = 1200;
+    final static int WORLD_HEIGHT = 800;
 
     /**
      * ステージの遷移先一覧 次に遷移するワールドを取得は以下のように行う Class nextWorld =
@@ -24,6 +29,8 @@ final public class Config {
         {StartWorld.class, "start", Stage1.class},
         {StartWorld.class, "stage-select", StageSelectWorld.class},
         {StartWorld.class, "settings", SettingsWorld.class},
+        {PlayWorld.class, "top", StartWorld.class},
+        {Stage1.class, "replay", Stage1.class},
         {Stage1.class, "next", StartWorld.class},};
     /**
      * ステージの一覧。レベル順に並べること。
@@ -34,9 +41,14 @@ final public class Config {
      * 背景画像の一覧。
      */
     private final static Object[][] IMAGES = {
-        // {World or Actor, file}
-        {StartWorld.class, "bg/background.png"},
-        {Stage1.class, "bg/background.png"},};
+        // {World or Actor, type, file, width, height, rotate}
+        // width, heightが共に0なら、リサイズを行いません
+        {StartWorld.class, "rogo", "rogo/title2.png", 0, 0, 0},
+        {StartWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
+        {Stage1.class, "bg", "bg/space.png", WORLD_WIDTH, WORLD_HEIGHT, 0},
+        {Ball.class, "bg", "ball/r2.png", 40, 40, 0},
+        {CursorBarrier.class, "bg", "block/y.png", 150, 100, 90},
+        {Cursor.class, "bg", "cursor.png", 50, 50, 90},};
     /**
      * サウンドの一覧。
      */
@@ -168,6 +180,41 @@ final public class Config {
         }
 
         prop.setProperty("score/" + playWorld.getSimpleName(), "" + score);
+    }
+
+    public static GreenfootImage getImage(Class clazz, String key) {
+        return getOrigianlImage(clazz, key, true);
+    }
+
+    public static GreenfootImage getImage(Class clazz, String key, int width, int height) {
+        GreenfootImage img = getOrigianlImage(clazz, key, false);
+        img.scale(width, height);
+        return img;
+    }
+
+    private static GreenfootImage getOrigianlImage(Class clazz, String key, boolean isResize) {
+        for (Object[] tuple : IMAGES) {
+            if (tuple.length != 6) {
+                throw new IllegalStateException("IMAGES の要素は、長さ6以外の配列を含めてはいけない" + Arrays.deepToString(tuple));
+            }
+
+            Class clazz2 = (Class) tuple[0];
+            String key2 = (String) tuple[1];
+            String filePath = (String) tuple[2];
+            int width = (int) tuple[3];
+            int height = (int) tuple[4];
+            int rotate = (int) tuple[5];
+
+            if (clazz2.isAssignableFrom(clazz) && key2.equals(key)) {
+                GreenfootImage img = new GreenfootImage(filePath);
+                img.rotate(rotate);
+                if (isResize && width != 0 && height != 0) {
+                    img.scale(width, height);
+                }
+                return img;
+            }
+        }
+        throw new IllegalArgumentException("このクラスに対応する画像がConfigクラスで指定されていない");
     }
 
     public static GreenfootSound getSound(Class playWorld, String key) {

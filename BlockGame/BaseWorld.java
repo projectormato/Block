@@ -22,7 +22,7 @@ public class BaseWorld extends World implements EventHandler {
 
     public BaseWorld() {
         // Create a new world with 1200x800 cells with a cell size of 1x1 pixels.
-        super(1200, 800, 1);
+        super(Config.WORLD_WIDTH , Config.WORLD_HEIGHT, 1);
         setPaintOrder(MessageBox.class, BaseActor.class);
     }
 

@@ -29,22 +29,17 @@ public class Stage1 extends PlayWorld {
         relayout();
 
         ball = new Ball();
-        GreenfootImage ballImage = new GreenfootImage("ball/r2.png");
-        ballImage.scale(40, 40);
+        GreenfootImage ballImage = Config.getImage(ball.getClass(), "bg");
         ball.setImage(ballImage);
         addDisabledObject(ball, 10, 10);
 
         barrier = new CursorBarrier(ball);
-        GreenfootImage barrierImage = new GreenfootImage("block/y.png");
-        barrierImage.rotate(90);
-        barrierImage.scale(100, 100);
+        GreenfootImage barrierImage = Config.getImage(barrier.getClass(), "bg");
         barrier.setImage(barrierImage);
         addDisabledObject(barrier, 0, 0);
 
         cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]), barrier);
-        GreenfootImage cursorImage = new GreenfootImage("cursor.png");
-        cursorImage.scale(50, 50);
-        cursorImage.rotate(90);
+        GreenfootImage cursorImage = Config.getImage(cursor.getClass(), "bg");
         cursor.setImage(cursorImage);
         addDisabledObject(cursor, 0, 0);
     }

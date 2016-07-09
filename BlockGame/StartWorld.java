@@ -41,9 +41,10 @@ public class StartWorld extends BaseWorld {
      */
     private void prepare() {
         // 背景とロゴを描画
-        GreenfootImage rogo = new GreenfootImage("rogo/title2.png");
-        getBackground().setColor(Color.BLACK);
-        getBackground().fill();
+        GreenfootImage rogo = Config.getImage(this.getClass(), "rogo");
+        GreenfootImage bg = Config.getImage(this.getClass(), "bg");
+        bg.scale(getWidth(), getHeight());
+        getBackground().drawImage(bg, 0, 0);
         getBackground().drawImage(rogo, getWidth() / 2 - rogo.getWidth() / 2, 50);
 
         // ボタンを追加
@@ -66,7 +67,7 @@ public class StartWorld extends BaseWorld {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Select Stage");
-                Greenfoot.setWorld(new PlayWorld());
+                Greenfoot.setWorld(new StageSelectWorld());
                 if (bgm != null) {
                     bgm.stop();
                 }
