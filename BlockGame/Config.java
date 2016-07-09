@@ -135,7 +135,7 @@ final public class Config {
      * @param playWorld
      * @return ステージのスコア。もし、まだまだプレイしていないステージなら0を返す。
      */
-    public static int getScore(Class<PlayWorld> playWorld) {
+    public static int getScore(Class playWorld) {
         if (!isLoaded) {
             throw new IllegalStateException();
         }
@@ -149,7 +149,7 @@ final public class Config {
      * @param playWorld
      * @param score 0以上
      */
-    public static void setScore(Class<PlayWorld> playWorld, int score) {
+    public static void setScore(Class playWorld, int score) {
         if (!isLoaded) {
             throw new IllegalStateException();
         }
