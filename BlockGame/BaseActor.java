@@ -259,11 +259,11 @@ public class BaseActor extends Actor implements EventHandler {
         // シルエットを準備
         {
             GreenfootImage gimg = new GreenfootImage(silhouette);
-            gimg.rotate(getRotation());
+            gimg = Utils.rotateImage(gimg, getRotation());
             img = gimg.getAwtImage();
 
             GreenfootImage otherGImg = new GreenfootImage(((BaseActor) other).getSilhouette());
-            otherGImg.rotate(other.getRotation());
+            otherGImg = Utils.rotateImage(otherGImg, other.getRotation());
             otherImg = otherGImg.getAwtImage();
         }
 

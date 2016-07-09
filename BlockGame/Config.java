@@ -41,8 +41,9 @@ final public class Config {
      * 背景画像の一覧。
      */
     private final static Object[][] IMAGES = {
-        // {World or Actor, type, file, width, height, rotate}
+        // {World or Actor, type, file, width, height, rotateImage}
         // width, heightが共に0なら、リサイズを行いません
+        // リサイズしてから回転を行う。
         {StartWorld.class, "rogo", "rogo/title2.png", 0, 0, 0},
         {StartWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
         {Stage1.class, "bg", "bg/space.png", WORLD_WIDTH, WORLD_HEIGHT, 0},
@@ -207,10 +208,10 @@ final public class Config {
 
             if (clazz2.isAssignableFrom(clazz) && key2.equals(key)) {
                 GreenfootImage img = new GreenfootImage(filePath);
-                img.rotate(rotate);
                 if (isResize && width != 0 && height != 0) {
                     img.scale(width, height);
                 }
+                img = Utils.rotateImage(img, rotate);
                 return img;
             }
         }
