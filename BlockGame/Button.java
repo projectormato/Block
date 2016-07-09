@@ -6,22 +6,29 @@ public class Button extends BaseActor {
     GreenfootImage normalImg, pressingImg;
     int bgcolor = 0;
     int color = 0;
+    private GreenfootSound onMouseInSound;
+    private GreenfootSound onMouseClickedSound;
 
     public Button(GreenfootImage normal, GreenfootImage pressing) {
         normalImg = normal;
         pressingImg = pressing;
         setImage(normalImg);
+
+        onMouseInSound = Config.getSound(this.getClass(), "mouseIn");
+        onMouseClickedSound = Config.getSound(this.getClass(), "mouseClicked");
     }
 
-	@Override
-	public void onMouseIn(MouseInfo mouse){
+    @Override
+    public void onMouseIn(MouseInfo mouse) {
         if (getActorStatus() != ActorStatus.ALIVE) {
             return;
         }
 
         super.onMouseIn(mouse);
-		(new GreenfootSound("se/button-onMouseIn.mp3")).play();
-	}
+        if (Config.getBoolean("enableSoundEffect") && onMouseInSound != null) {
+            onMouseInSound.play();
+        }
+    }
 
     @Override
     public void onMouseDown(MouseInfo mouse) {
@@ -43,13 +50,15 @@ public class Button extends BaseActor {
         setImage(normalImg);
     }
 
-	@Override
-	public void onMouseClicked(MouseInfo mouse){
+    @Override
+    public void onMouseClicked(MouseInfo mouse) {
         if (getActorStatus() != ActorStatus.ALIVE) {
             return;
         }
 
-		super.onMouseClicked(mouse);
-		(new GreenfootSound("se/button-onMouseClicked.mp3")).play();
-	}
+        super.onMouseClicked(mouse);
+        if (Config.getBoolean("enableSoundEffect") && onMouseClickedSound != null) {
+            onMouseClickedSound.play();
+        }
+    }
 }

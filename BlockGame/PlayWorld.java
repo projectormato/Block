@@ -9,8 +9,10 @@ public class PlayWorld extends BaseWorld {
 
     public PlayWorld() {
         worldStatus = PlayWorldStatus.WAITING;
-        bgm = new GreenfootSound("bgm/battle.mp3");
-        bgm.play();
+        if (Config.getBoolean("enableBGM")) {
+            bgm = Config.getSound(this.getClass(), "bgm");
+            bgm.play();
+        }
         prepare();
     }
 
@@ -73,7 +75,10 @@ public class PlayWorld extends BaseWorld {
     public void onChangeStatus() {
         switch (getWorldStatus()) {
             case STAGE_END_MSG:
-                bgm.stop();
+                if (bgm != null) {
+                    bgm.stop();
+                    bgm = null;
+                }
                 break;
         }
     }

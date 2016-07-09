@@ -26,8 +26,12 @@ public class StartWorld extends BaseWorld {
             }
         }
 
-        bgm = new GreenfootSound("bgm/title.mp3");
-        bgm.play();
+        Config.load();
+
+        if (Config.getBoolean("enableBGM")) {
+            bgm = Config.getSound(this.getClass(), "bgm");
+            bgm.play();
+        }
         prepare();
     }
 
@@ -52,7 +56,9 @@ public class StartWorld extends BaseWorld {
             public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Game Start");
                 Greenfoot.setWorld(new Stage1());
-                bgm.stop();
+                if (bgm != null) {
+                    bgm.stop();
+                }
             }
         });
 
@@ -61,7 +67,9 @@ public class StartWorld extends BaseWorld {
             public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Select Stage");
                 Greenfoot.setWorld(new PlayWorld());
-                bgm.stop();
+                if (bgm != null) {
+                    bgm.stop();
+                }
             }
         });
     }

@@ -9,14 +9,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Block extends BaseActor {
 
-	@Override
-	public void onDied(){
-		super.onDied();
-		(new GreenfootSound("se/block-broken.mp3")).play();
-	}
+    private GreenfootSound onDiedSound;
 
-	@Override
-	public void fight(Damage damage){
-		super.fight(damage);
-	}
+    public Block() {
+        onDiedSound = Config.getSound(this.getClass(), "broken");
+    }
+
+    @Override
+    public void onDied() {
+        super.onDied();
+        if (Config.getBoolean("enableSoundEffect") && onDiedSound != null) {
+            onDiedSound.play();
+        }
+    }
+
+    @Override
+    public void fight(Damage damage) {
+        super.fight(damage);
+    }
 }
