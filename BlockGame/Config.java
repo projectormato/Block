@@ -9,8 +9,6 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Properties;
-import java.util.HashSet;
-import java.util.Arrays;
 
 /**
  * ゲームの設定を管理する。設定はJSON形式でローカルストレージに保存される。
