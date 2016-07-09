@@ -176,7 +176,7 @@ final public class Config {
             String key2 = (String) tuple[1];
             String soundFilePath = (String) tuple[2];
 
-            if (world.equals(playWorld) && key2.equals(key)) {
+            if (world.isAssignableFrom(playWorld) && key2.equals(key)) {
                 return new GreenfootSound(soundFilePath);
             }
         }
