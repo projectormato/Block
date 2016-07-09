@@ -79,10 +79,10 @@ public class MessageBox extends BaseActor {
 
         while (true) {
             // 横幅に収まるような最大文字列長を探る
-            int i = 1;
+            int i = 1; // 切り取る文字数+1
             double strWidth = 0;
             double strHeight = 0;
-            while (i < targetStr.length()) {
+            while (i <= targetStr.length()) {
                 strWidth = fontmetrics.stringWidth(targetStr.substring(0, i));
                 strHeight = fontmetrics.getLineMetrics(targetStr.substring(0, i), graphics).getHeight();
 
