@@ -58,11 +58,10 @@ final public class Config {
     /**
      * configファイルによって変更可能な値
      */
-    private final static String[] PROPERTIES = {
-        "enableBGM",
-        "enableSooundEffect",
-        "enableAutoSave",};
-    private static HashSet<String> propertySet = new HashSet<>(Arrays.asList(PROPERTIES));
+    private final static String[][] PROPERTIES = {
+        {"enableBGM", "true"},
+        {"enableSooundEffect", "true"},
+        {"enableAutoSave", "true"},};
 
     /**
      * ファイルから設定を読み込む。プログラム起動時に一回だけ実行すればよい。 ファイルが存在しなければ、何もせず、読み込みが完了したとみなす。
@@ -92,8 +91,10 @@ final public class Config {
 
     public static String getProperty(String key) {
         // プロパティリスト入っているならすぐに結果を返す
-        if (propertySet.contains(key)) {
-            return prop.getProperty(key);
+        for (String[] tuple : PROPERTIES) {
+            String key2 = tuple[0];
+            String defaultValue = tuple[1];
+            return prop.getProperty(key, defaultValue);
         }
         throw new IllegalArgumentException();
     }
