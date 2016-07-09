@@ -1,5 +1,6 @@
 
 import greenfoot.Greenfoot;
+import greenfoot.GreenfootSound;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -97,6 +98,10 @@ final public class Config {
         throw new IllegalArgumentException();
     }
 
+    public static boolean getBoolean(String key) {
+        return Boolean.parseBoolean(getProperty(key));
+    }
+
     /**
      * 次に遷移するべきWorldを取得する。
      *
@@ -158,5 +163,22 @@ final public class Config {
         }
 
         prop.setProperty("score/" + playWorld.getSimpleName(), "" + score);
+    }
+
+    public static GreenfootSound getSound(Class playWorld, String key) {
+        for (Object[] tuple : SOUNDS) {
+            if (tuple.length != 3) {
+                throw new IllegalStateException("SOUNDS の要素に、長さ3以外の配列を含めてはいけない: " + tuple);
+            }
+
+            Class<PlayWorld> world = (Class<PlayWorld>) tuple[0];
+            String key2 = (String) tuple[1];
+            String soundFilePath = (String) tuple[2];
+
+            if (world.equals(playWorld) && key2.equals(key)) {
+                return new GreenfootSound(soundFilePath);
+            }
+        }
+        throw new IllegalArgumentException("存在しないパターンです");
     }
 }
