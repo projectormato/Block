@@ -44,8 +44,8 @@ final public class Config {
      */
     private final static Object[][] SOUNDS = {
         // {World or Actor, type, file}
-        {StartWorld.class, "bgm", "bg/title.mp3"},
-        {PlayWorld.class, "bgm", "bg/battle.mp3"},
+        {StartWorld.class, "bgm", "bgm/title.mp3"},
+        {PlayWorld.class, "bgm", "bgm/battle.mp3"},
         {Button.class, "mouseIn", "se/button-onMouseIn.mp3"},
         {Button.class, "mouseClicked", "se/button-onMouseClicked.mp3"},
         {Block.class, "broken", "se/block-broken.mp3"},};
