@@ -1,17 +1,22 @@
 
 public class CursorBarrier extends BaseActor {
 
-    private Ball ball;
     private int k = 5;
 
     public CursorBarrier(Ball ball) {
-        this.ball = ball;
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (isTouching(ball.getClass())) {
+    public int getAttackAbility(BaseActor defender) {
+        return 0;
+    }
+
+    @Override
+    public void fight(Damage damage) {
+        super.fight(damage);
+
+        if (damage.getAttacker() instanceof Ball) {
+            Ball ball = (Ball) damage.getAttacker();
             // ボールを反射させる
             double dx, dy;
             double dangle;          // バリアからみた時のボールの方角
