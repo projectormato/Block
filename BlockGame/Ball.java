@@ -1,8 +1,4 @@
 
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Write a description of class Ball here.
  *
@@ -19,27 +15,33 @@ public class Ball extends BaseActor {
             return;
         }
 
-        List objs;
         super.tick();
         move(speed);
-
-        if (getIntersectingObjects(Goal.class).size() > 0) {
-            System.out.println("--- GOAL ---");
-            ((PlayWorld) getWorld()).win();
-            return;
-        }
-
-        objs = getIntersectingObjects(Block.class);
-        if (objs.size() > 0) {
-            // TODO: blockにダメージを与える
-            Damage.fights(this, objs.toArray());
-            turn(180);
-            return;
-        }
 
         if (isAtEdge()) {
             ((PlayWorld) getWorld()).lose();
             return;
+        }
+    }
+
+    @Override
+    public int getAttackAbility(BaseActor defender) {
+        if (defender instanceof CursorBarrier) {
+            return 0;
+        }
+        return super.getAttackAbility(defender);
+    }
+
+    @Override
+    public void fight(Damage damage) {
+        super.fight(damage);
+
+        BaseActor defender = (BaseActor) damage.getDefender();
+        if (defender instanceof Goal) {
+            System.out.println("--- GOAL ---");
+            ((PlayWorld) getWorld()).win();
+        } else if (defender instanceof Block) {
+            turn(180);
         }
     }
 }
