@@ -53,10 +53,10 @@ final public class Damage {
      */
     public static void fights(BaseActor attacker, Object[] defenders) {
         for (Damage damage : createDamages(attacker, defenders)) {
-            BaseActor defender=damage.getDefender();
+            BaseActor defender = damage.getDefender();
 
             // 対戦可能なパターンで、なおかつオブジェクトが隣接している場合
-            if (damage.isFightable() && attacker.intersects(defender)) {
+            if (damage.isFightable()) {
                 attacker.fight(damage);
                 defender.fight(damage);
             }
@@ -75,7 +75,13 @@ final public class Damage {
         for (Class[] pattern : fightPattern) {
             Class attackerClass = pattern[0], defenderClass = pattern[1];
             if (attackerClass.isInstance(attacker) && defenderClass.isInstance(defender)) {
-                return true;
+                // 攻撃可能なパターンに一致
+                // 互いが隣接していれば攻撃成立
+                // 互いに隣接するオブジェクトが多数存在するステージでの処理負荷軽減のため、ここで隣接するか判定している。
+                if (attacker.intersects(defender)) {
+                    return true;
+                }
+                return false;
             }
         }
         return false;
