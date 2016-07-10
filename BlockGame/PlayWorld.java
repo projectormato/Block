@@ -11,7 +11,7 @@ public class PlayWorld extends BaseWorld {
         worldStatus = PlayWorldStatus.WAITING;
         if (Config.getBoolean("enableBGM")) {
             bgm = Config.getSound(this.getClass(), "bgm");
-            bgm.play();
+            bgm.playLoop();
         }
         prepare();
     }
