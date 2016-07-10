@@ -23,7 +23,7 @@ final public class Damage {
         {Block.class, Cursor.class},
         {Goal.class, Cursor.class},};
 
-    public Damage(BaseActor attacker, BaseActor defender) {
+    private Damage(BaseActor attacker, BaseActor defender) {
         this.attacker = attacker;
         this.defender = defender;
 
@@ -37,7 +37,7 @@ final public class Damage {
      * @param defenders
      * @return
      */
-    public static Damage[] createDamages(BaseActor attacker, Object[] defenders) {
+    private static Damage[] createDamages(BaseActor attacker, Object[] defenders) {
         Damage[] arr = new Damage[defenders.length];
         for (int i = 0; i < defenders.length; i++) {
             arr[i] = new Damage(attacker, (BaseActor) defenders[i]);
