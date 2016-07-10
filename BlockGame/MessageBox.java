@@ -35,19 +35,9 @@ public class MessageBox extends BaseActor {
             Greenfoot.stop();
         }
 
-        // 背景を描画
         msgboxImg = new GreenfootImage(width, height);
-        msgboxImg.setColor(backgroundColor);
-        msgboxImg.fill();
-
-        // メッセージを描画
-        Graphics graphics = msgboxImg.getAwtImage().getGraphics();
-        graphics.setFont(font);
-        graphics.setColor(fontColor);
-        drawStringInRect(msg, graphics, 0, 0,
-                msgboxImg.getWidth(), msgboxImg.getHeight());
-
         setImage(msgboxImg);
+        draw();
     }
 
     public MessageBox(String msgConfigName, int width, int height) {
@@ -57,9 +47,20 @@ public class MessageBox extends BaseActor {
                 new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE));
     }
 
-    @Override
-    public void tick() {
-        setImage(msgboxImg);
+    /**
+     * メッセージボックスを描画する
+     */
+    public void draw() {
+        // 背景を描画
+        msgboxImg.setColor(backgroundColor);
+        msgboxImg.fill();
+
+        // メッセージを描画
+        Graphics graphics = msgboxImg.getAwtImage().getGraphics();
+        graphics.setFont(font);
+        graphics.setColor(fontColor);
+        drawStringInRect(msg, graphics, 0, 0,
+                msgboxImg.getWidth(), msgboxImg.getHeight());
     }
 
     /**
