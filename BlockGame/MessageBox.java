@@ -15,15 +15,11 @@ public class MessageBox extends BaseActor {
 
     String msg;
     GreenfootImage msgboxImg;
-    Color fontColor;
-    Color backgroundColor;
-    Font font;
+    Color fontColor = Color.WHITE;
+    Color backgroundColor = new Color(0x228b22);
+    Font font = new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE);
 
-    public MessageBox(String msgConfigName, int width, int height, Color fontColor, Color backgroundColor, Font font) {
-        this.fontColor = fontColor;
-        this.backgroundColor = backgroundColor;
-        this.font = font;
-
+    public MessageBox(String msgConfigName, int width, int height) {
         // メッセージをファイルから読み込み
         String fileName = String.format("messages/%s.txt", msgConfigName);
         try {
@@ -40,11 +36,13 @@ public class MessageBox extends BaseActor {
         draw();
     }
 
-    public MessageBox(String msgConfigName, int width, int height) {
-        this(msgConfigName,
-                width, height,
-                Color.WHITE, new Color(0x228b22),
-                new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE));
+    public void setColor(Color fontColor, Color backgroundColor) {
+        this.fontColor = fontColor;
+        this.backgroundColor = backgroundColor;
+    }
+
+    public void setFont(Font font) {
+        this.font = font;
     }
 
     /**
