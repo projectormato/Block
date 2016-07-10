@@ -49,7 +49,7 @@ final public class Damage {
      * @param attacker
      * @param defenders
      */
-    public static void faights(BaseActor attacker, Object[] defenders) {
+    public static void fights(BaseActor attacker, Object[] defenders) {
         for (Damage damage : createDamages(attacker, defenders)) {
             damage.getAttacker().fight(damage);
             damage.getDefender().fight(damage);

@@ -32,7 +32,7 @@ public class Ball extends BaseActor {
         objs = getIntersectingObjects(Block.class);
         if (objs.size() > 0) {
             // TODO: blockにダメージを与える
-            Damage.faights(this, objs.toArray());
+            Damage.fights(this, objs.toArray());
             turn(180);
             return;
         }
