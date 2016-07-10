@@ -1,5 +1,7 @@
 
 import greenfoot.*;
+import java.awt.Color;
+import java.awt.Font;
 
 public class PlayWorld extends BaseWorld {
 
@@ -91,7 +93,9 @@ public class PlayWorld extends BaseWorld {
                 }
                 break;
             case WAITING:
-                BaseActor click2startMsgbox = new BlinkMessageBox("click-to-start", getWidth(), getHeight());
+                BlinkMessageBox click2startMsgbox = new BlinkMessageBox("click-to-start", getWidth(), getHeight());
+                click2startMsgbox.setColor(Color.WHITE, new Color(0x55000000, true));
+                click2startMsgbox.setFont(new Font("SansSerif", Font.PLAIN, 30));
                 // クリックしたらゲームスタート
                 click2startMsgbox.addListner(new EventListener() {
                     @Override
