@@ -69,9 +69,12 @@ final public class Damage {
      * @return
      */
     private boolean isFightable() {
-        if (attacker == defender) {
+        if (attacker == defender
+                || attacker.getActorStatus() != ActorStatus.ALIVE
+                || defender.getActorStatus() != ActorStatus.ALIVE) {
             return false;
         }
+
         for (Class[] pattern : fightPattern) {
             Class attackerClass = pattern[0], defenderClass = pattern[1];
             if (attackerClass.isInstance(attacker) && defenderClass.isInstance(defender)) {
