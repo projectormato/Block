@@ -50,6 +50,7 @@ public class MessageBox extends BaseActor {
      */
     public void draw() {
         // 背景を描画
+        msgboxImg.clear();
         msgboxImg.setColor(backgroundColor);
         msgboxImg.fill();
 
