@@ -74,37 +74,43 @@ public class MessageBox extends BaseActor {
      */
     public void drawStringInRect(String str, Graphics graphics,
             int x, int y, int width, int height) {
-        String targetStr = str;
-        FontMetrics fontmetrics = graphics.getFontMetrics();
+        for (String targetStr : str.split("\n")) {
+            FontMetrics fontmetrics = graphics.getFontMetrics();
 
-        while (true) {
-            // 横幅に収まるような最大文字列長を探る
-            int i = 1; // 切り取る文字数+1
-            double strWidth = 0;
-            double strHeight = 0;
-            while (i <= targetStr.length()) {
-                strWidth = fontmetrics.stringWidth(targetStr.substring(0, i));
-                strHeight = fontmetrics.getLineMetrics(targetStr.substring(0, i), graphics).getHeight();
+            // 空行が処理されない問題の回避策です
+            if (targetStr.equals("")) {
+                targetStr = " ";
+            }
 
-                if (strWidth < width && strHeight < height) {
-                    i++;
-                    continue;
+            while (true) {
+                // 横幅に収まるような最大文字列長を探る
+                int i = 1; // 切り取る文字数+1
+                double strWidth = 0;
+                double strHeight = 0;
+                while (i <= targetStr.length()) {
+                    strWidth = fontmetrics.stringWidth(targetStr.substring(0, i));
+                    strHeight = fontmetrics.getLineMetrics(targetStr.substring(0, i), graphics).getHeight();
+
+                    if (strWidth < width && strHeight < height) {
+                        i++;
+                        continue;
+                    }
+                    break;
                 }
-                break;
-            }
-            i--;
+                i--;
 
-            // これ以上文字列を描画できなくなったら終了
-            if (i == 0) {
-                return;
-            }
+                // これ以上文字列を描画できなくなったら終了
+                if (i == 0) {
+                    break;
+                }
 
-            // 画像に描画して、次の行の描画領域を設定
-            System.out.println("draw: " + targetStr.substring(0, i));
-            graphics.drawString(targetStr.substring(0, i), x, y + (int) strHeight);
-            y += strHeight;
-            height -= strHeight;
-            targetStr = targetStr.substring(i);
+                // 画像に描画して、次の行の描画領域を設定
+                System.out.println("draw: " + targetStr.substring(0, i));
+                graphics.drawString(targetStr.substring(0, i), x, y + (int) strHeight);
+                y += strHeight;
+                height -= strHeight;
+                targetStr = targetStr.substring(i);
+            }
         }
     }
 }
