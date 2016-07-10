@@ -16,6 +16,8 @@ final public class Damage {
         {Ball.class, Goal.class},
         {Ball.class, Wall.class},
         {Ball.class, Ball.class},
+        {Ball.class, Cursor.class},
+        {Ball.class, CursorBarrier.class},
         // * -> Cursor
         {Wall.class, Cursor.class},
         {Block.class, Cursor.class},
