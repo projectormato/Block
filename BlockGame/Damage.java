@@ -53,8 +53,10 @@ final public class Damage {
      */
     public static void fights(BaseActor attacker, Object[] defenders) {
         for (Damage damage : createDamages(attacker, defenders)) {
-            damage.getAttacker().fight(damage);
-            damage.getDefender().fight(damage);
+            if (damage.isFightable()) {
+                damage.getAttacker().fight(damage);
+                damage.getDefender().fight(damage);
+            }
         }
     }
 
