@@ -18,6 +18,7 @@ public class MessageBox extends BaseActor {
     Color fontColor = Color.WHITE;
     Color backgroundColor = new Color(0x228b22);
     Font font = new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE);
+    boolean isDrawn2center = true; //　中央に描かれるか
 
     public MessageBox(String msgConfigName, int width, int height) {
         // メッセージをファイルから読み込み
@@ -58,22 +59,69 @@ public class MessageBox extends BaseActor {
         Graphics graphics = msgboxImg.getAwtImage().getGraphics();
         graphics.setFont(font);
         graphics.setColor(fontColor);
-        drawStringInRect(msg, graphics, 0, 0,
-                msgboxImg.getWidth(), msgboxImg.getHeight());
+        if (isDrawn2center) {
+            drawStringToCenter(msg, graphics, 0, 0,
+                    msgboxImg.getWidth(), msgboxImg.getHeight());
+        } else {
+            drawStringInRect(msg, graphics, 0, 0,
+                    msgboxImg.getWidth(), msgboxImg.getHeight());
+        }
     }
 
     /**
      * 画像の指定した領域に文字列を描画する。
      *
-     * @param str
-     * @param graphics
-     * @param x
-     * @param y
-     * @param width
-     * @param height
+     * @param str 描画対象の文字列
+     * @param graphics 描画対象の画像
+     * @param x 描画する範囲の左上のx座標
+     * @param y 描画する範囲の左上のy座標
+     * @param width 描画する領域の幅
+     * @param height 描画する領域の高さ
      */
     public void drawStringInRect(String str, Graphics graphics,
             int x, int y, int width, int height) {
+        drawString(str, graphics, x, y, width, height, false);
+    }
+
+    /**
+     * 画像の指定した領域の中央に文字列を描画する。
+     *
+     * @param str 描画対象の文字列
+     * @param graphics 描画対象の画像
+     * @param x 描画する範囲の左上のx座標
+     * @param y 描画する範囲の左上のy座標
+     * @param width 描画する領域の幅
+     * @param height 描画する領域の高さ
+     */
+    public void drawStringToCenter(String str, Graphics graphics,
+            int x, int y, int width, int height) {
+        // 描画領域を取得する。画像に変更は加えない
+        int[] drawnSpace = drawString(str, graphics, x, y, width, height, true);
+
+        // 中央に描画する
+        drawString(str, graphics,
+                x + width / 2 - drawnSpace[0] / 2,
+                y + height / 2 - drawnSpace[1] / 2,
+                width, height, false);
+    }
+
+    /**
+     * 文字列を描画して、描画した領域の高さと幅を返す。
+     *
+     * @param str 描画対象の文字列
+     * @param graphics 描画対象の画像
+     * @param x 描画する範囲の左上のx座標
+     * @param y 描画する範囲の左上のy座標
+     * @param width 描画する領域の幅
+     * @param height 描画する領域の高さ
+     * @param isDryRun trueならgraphicsに文字列を描画しない
+     * @return {width, height}
+     */
+    private int[] drawString(String str, Graphics graphics,
+            int x, int y, int width, int height, boolean isDryRun) {
+        int drawnWidth = 0;
+        int drawnHeight = 0;
+
         for (String targetStr : str.split("\n")) {
             FontMetrics fontmetrics = graphics.getFontMetrics();
 
@@ -104,13 +152,22 @@ public class MessageBox extends BaseActor {
                     break;
                 }
 
+                // 描画領域のサイズを更新
+                drawnWidth = (int) Math.max(drawnWidth, strWidth);
+                drawnHeight += strHeight;
+
                 // 画像に描画して、次の行の描画領域を設定
-                System.out.println("draw: " + targetStr.substring(0, i));
-                graphics.drawString(targetStr.substring(0, i), x, y + (int) strHeight);
+                if (!isDryRun) {
+                    System.out.println("draw: " + targetStr.substring(0, i));
+                    graphics.drawString(targetStr.substring(0, i), x, y + (int) strHeight);
+                }
                 y += strHeight;
                 height -= strHeight;
                 targetStr = targetStr.substring(i);
             }
         }
+
+        int[] drawnSpace = {drawnWidth, drawnHeight};
+        return drawnSpace;
     }
 }
