@@ -53,9 +53,12 @@ final public class Damage {
      */
     public static void fights(BaseActor attacker, Object[] defenders) {
         for (Damage damage : createDamages(attacker, defenders)) {
-            if (damage.isFightable()) {
-                damage.getAttacker().fight(damage);
-                damage.getDefender().fight(damage);
+            BaseActor defender=damage.getDefender();
+
+            // 対戦可能なパターンで、なおかつオブジェクトが隣接している場合
+            if (damage.isFightable() && attacker.intersects(defender)) {
+                attacker.fight(damage);
+                defender.fight(damage);
             }
         }
     }
