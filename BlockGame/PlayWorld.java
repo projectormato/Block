@@ -92,4 +92,23 @@ public class PlayWorld extends BaseWorld {
                 break;
         }
     }
+
+    @Override
+    public void addDisabledObject(Actor actor, int x, int y) {
+        super.addDisabledObject(actor, x, y);
+
+        // カーソルに、ボールを発射させる機能を追加
+        if (actor instanceof Cursor) {
+            ((Cursor) actor).addListner(new EventListener() {
+                @Override
+                public void onMouseClicked(MouseInfo mouse) {
+                    switch (getWorldStatus()) {
+                        case WAITING:
+                            setWorldStatus(PlayWorldStatus.PLAYING);
+                            break;
+                    }
+                }
+            });
+        }
+    }
 }

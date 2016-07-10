@@ -130,9 +130,6 @@ public class Stage1 extends PlayWorld {
     public void onChangeStatus() {
         super.onChangeStatus();
         switch (getWorldStatus()) {
-            case WAITING:
-                setWorldStatus(PlayWorldStatus.PLAYING);
-                break;
             case PLAYING:
                 for (Object actor : getObjects(BaseActor.class)) {
                     ((BaseActor) actor).setActorStatus(ActorStatus.ALIVE);
