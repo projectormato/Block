@@ -38,29 +38,39 @@ public class PlayWorld extends BaseWorld {
     public void win() {
         setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
 
-        MessageBox msgbox = new MessageBox(stageName + "-win", getWidth(), getHeight() / 3);
-        msgbox.addListner(new EventListener() {
-            @Override
-            public void onMouseClicked(MouseInfo mouse) {
-                // TODO: 遷移先のステージをサブクラスから指定できるようにする
-                Greenfoot.setWorld(new StartWorld());
-            }
-        });
-        addObject(msgbox, getWidth() / 2, getHeight() / 2);
+        if (stageName != null) {
+            MessageBox msgbox = new MessageBox(stageName + "-win", getWidth(), getHeight() / 3);
+            msgbox.addListner(new EventListener() {
+                @Override
+                public void onMouseClicked(MouseInfo mouse) {
+                    // TODO: 遷移先のステージをサブクラスから指定できるようにする
+                    Greenfoot.setWorld(new StartWorld());
+                }
+            });
+            addObject(msgbox, getWidth() / 2, getHeight() / 2);
+        } else {
+            // TODO: 遷移先のステージをサブクラスから指定できるようにする
+            Greenfoot.setWorld(new StartWorld());
+        }
     }
 
     public void lose() {
         setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
 
-        MessageBox msgbox = new MessageBox(stageName + "-lose", getWidth(), getHeight() / 3);
-        msgbox.addListner(new EventListener() {
-            @Override
-            public void onMouseClicked(MouseInfo mouse) {
-                // TODO: 遷移先のステージをサブクラスから指定できるようにする
-                Greenfoot.setWorld(new StartWorld());
-            }
-        });
-        addObject(msgbox, getWidth() / 2, getHeight() / 2);
+        if (stageName != null) {
+            MessageBox msgbox = new MessageBox(stageName + "-lose", getWidth(), getHeight() / 3);
+            msgbox.addListner(new EventListener() {
+                @Override
+                public void onMouseClicked(MouseInfo mouse) {
+                    // TODO: 遷移先のステージをサブクラスから指定できるようにする
+                    Greenfoot.setWorld(new StartWorld());
+                }
+            });
+            addObject(msgbox, getWidth() / 2, getHeight() / 2);
+        } else {
+            // TODO: 遷移先のステージをサブクラスから指定できるようにする
+            Greenfoot.setWorld(new StartWorld());
+        }
     }
 
     public PlayWorldStatus getWorldStatus() {
