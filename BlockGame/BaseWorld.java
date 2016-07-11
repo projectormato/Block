@@ -69,15 +69,7 @@ public class BaseWorld extends World implements EventHandler {
         dispatchKeyEventHandler(this);
 
         // 衝突判定をする。衝突していた者同士には、fightメソッドが実行される。
-        List<BaseActor> aliveActors = new ArrayList<>();
-        for (Object tmpActor : getObjects(null)) {
-            BaseActor actor = (BaseActor) tmpActor;
-            if (actor.getActorStatus() != ActorStatus.ALIVE) {
-                continue;
-            }
-
-            aliveActors.add(actor);
-        }
+        List<BaseActor> aliveActors = getObjects(null, ActorStatus.ALIVE);
         for (BaseActor actor : aliveActors) {
             if (actor instanceof Ball || actor instanceof Cursor) {
                 Damage.fights(actor, aliveActors);
@@ -199,6 +191,28 @@ public class BaseWorld extends World implements EventHandler {
 
             handler.setLastKeyStatus(key, status);
         }
+    }
+
+    /**
+     * 指定したステータスのActorを返す
+     *
+     * @param cls このクラスのインスタンス。nullなら全てのActorが対象になる
+     * @param status Actorの状態
+     * @return 条件を満たしているActorのリスト
+     */
+    public List<BaseActor> getObjects(Class cls, ActorStatus status) {
+        List<BaseActor> actors = new ArrayList<>();
+
+        for (Object tmpActor : getObjects(null)) {
+            BaseActor actor = (BaseActor) tmpActor;
+            if (actor.getActorStatus() != status) {
+                continue;
+            }
+
+            actors.add(actor);
+        }
+
+        return actors;
     }
 
     @Override
