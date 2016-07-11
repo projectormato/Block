@@ -1,4 +1,6 @@
 
+import java.util.List;
+
 final public class Damage {
 
     private BaseActor attacker, defender;
@@ -37,10 +39,10 @@ final public class Damage {
      * @param defenders
      * @return
      */
-    private static Damage[] createDamages(BaseActor attacker, Object[] defenders) {
-        Damage[] arr = new Damage[defenders.length];
-        for (int i = 0; i < defenders.length; i++) {
-            arr[i] = new Damage(attacker, (BaseActor) defenders[i]);
+    private static Damage[] createDamages(BaseActor attacker, List<BaseActor> defenders) {
+        Damage[] arr = new Damage[defenders.size()];
+        for (int i = 0; i < defenders.size(); i++) {
+            arr[i] = new Damage(attacker, defenders.get(i));
         }
         return arr;
     }
@@ -51,7 +53,7 @@ final public class Damage {
      * @param attacker
      * @param defenders
      */
-    public static void fights(BaseActor attacker, Object[] defenders) {
+    public static void fights(BaseActor attacker, List<BaseActor> defenders) {
         for (Damage damage : createDamages(attacker, defenders)) {
             BaseActor defender = damage.getDefender();
 

@@ -69,9 +69,19 @@ public class BaseWorld extends World implements EventHandler {
         dispatchKeyEventHandler(this);
 
         // 衝突判定をする。衝突していた者同士には、fightメソッドが実行される。
-        Object[] allActors = getObjects(null).toArray();
-        for (Object actor : allActors) {
-            Damage.fights((BaseActor) actor, allActors);
+        List<BaseActor> aliveActors = new ArrayList<>();
+        for (Object tmpActor : getObjects(null)) {
+            BaseActor actor = (BaseActor) tmpActor;
+            if (actor.getActorStatus() != ActorStatus.ALIVE) {
+                continue;
+            }
+
+            aliveActors.add(actor);
+        }
+        for (BaseActor actor : aliveActors) {
+            if (actor instanceof Ball || actor instanceof Cursor) {
+                Damage.fights(actor, aliveActors);
+            }
         }
 
         // actorとworldへtickイベントを送信
