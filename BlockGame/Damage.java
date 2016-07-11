@@ -10,20 +10,22 @@ final public class Damage {
      * 攻撃が成立するパターン
      */
     // 表記ルール
-    // {攻撃側, 防御側}
+    // {攻撃側, 防御側, (1)}
     // 攻撃側 -> 防御側
+    //
+    // (1): 攻撃側と防御側のうち、オブジェクト数が少ない方のクラス。判定処理の軽量化のために使用する
     final public Class[][] fightPattern = {
         // Ball -> *
-        {Ball.class, Block.class},
-        {Ball.class, Goal.class},
-        {Ball.class, Wall.class},
-        {Ball.class, Ball.class},
-        {Ball.class, Cursor.class},
-        {Ball.class, CursorBarrier.class},
+        {Ball.class, Block.class, Ball.class},
+        {Ball.class, Goal.class, Ball.class},
+        {Ball.class, Wall.class, Ball.class},
+        {Ball.class, Ball.class, Ball.class},
+        {Ball.class, Cursor.class, Ball.class},
+        {Ball.class, CursorBarrier.class, Ball.class},
         // * -> Cursor
-        {Wall.class, Cursor.class},
-        {Block.class, Cursor.class},
-        {Goal.class, Cursor.class},};
+        {Wall.class, Cursor.class, Cursor.class},
+        {Block.class, Cursor.class, Cursor.class},
+        {Goal.class, Cursor.class, Cursor.class},};
 
     private Damage(BaseActor attacker, BaseActor defender) {
         this.attacker = attacker;
