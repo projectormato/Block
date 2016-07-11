@@ -70,11 +70,7 @@ public class BaseWorld extends World implements EventHandler {
 
         // 衝突判定をする。衝突していた者同士には、fightメソッドが実行される。
         List<BaseActor> aliveActors = getObjects(null, ActorStatus.ALIVE);
-        for (BaseActor actor : aliveActors) {
-            if (actor instanceof Ball || actor instanceof Cursor) {
-                Damage.fights(actor, aliveActors);
-            }
-        }
+        Damage.fightsAll(aliveActors);
 
         // actorとworldへtickイベントを送信
         for (Object handler : getObjects(BaseActor.class)) {
