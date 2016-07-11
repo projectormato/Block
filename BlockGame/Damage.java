@@ -14,7 +14,7 @@ final public class Damage {
     // 攻撃側 -> 防御側
     //
     // (1): 攻撃側と防御側のうち、オブジェクト数が少ない方のクラス。判定処理の軽量化のために使用する
-    final public Class[][] fightPattern = {
+    final static public Class[][] FIGHT_PATTERNS = {
         // Ball -> *
         {Ball.class, Block.class, Ball.class},
         {Ball.class, Goal.class, Ball.class},
@@ -79,7 +79,7 @@ final public class Damage {
             return false;
         }
 
-        for (Class[] pattern : fightPattern) {
+        for (Class[] pattern : FIGHT_PATTERNS) {
             Class attackerClass = pattern[0], defenderClass = pattern[1];
             if (attackerClass.isInstance(attacker) && defenderClass.isInstance(defender)) {
                 // 攻撃可能なパターンに一致
