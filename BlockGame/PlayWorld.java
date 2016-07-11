@@ -8,6 +8,7 @@ public class PlayWorld extends BaseWorld {
     private PlayWorldStatus worldStatus;
     private String stageName;
     private GreenfootSound bgm;
+    private BlinkMessageBox click2startMsgbox;
 
     public PlayWorld() {
         worldStatus = PlayWorldStatus.WAITING;
@@ -32,6 +33,22 @@ public class PlayWorld extends BaseWorld {
             }
         });
         addObject(msgbox, getWidth() / 2, getHeight() / 2);
+
+        click2startMsgbox = new BlinkMessageBox("click-to-start", getWidth(), getHeight());
+        click2startMsgbox.setColor(Color.WHITE, new Color(0x55000000, true));
+        click2startMsgbox.setFont(new Font("SansSerif", Font.PLAIN, 30));
+        click2startMsgbox.createImageCache();
+        // クリックしたらゲームスタート
+        click2startMsgbox.addListner(new EventListener() {
+            @Override
+            public void onMouseClicked(MouseInfo mouse) {
+                switch (getWorldStatus()) {
+                    case WAITING:
+                        setWorldStatus(PlayWorldStatus.PLAYING);
+                        break;
+                }
+            }
+        });
     }
 
     private void prepare() {
@@ -93,22 +110,11 @@ public class PlayWorld extends BaseWorld {
                 }
                 break;
             case WAITING:
-                BlinkMessageBox click2startMsgbox = new BlinkMessageBox("click-to-start", getWidth(), getHeight());
-                click2startMsgbox.setColor(Color.WHITE, new Color(0x55000000, true));
-                click2startMsgbox.setFont(new Font("SansSerif", Font.PLAIN, 30));
-                // クリックしたらゲームスタート
-                click2startMsgbox.addListner(new EventListener() {
-                    @Override
-                    public void onMouseClicked(MouseInfo mouse) {
-                        switch (getWorldStatus()) {
-                            case WAITING:
-                                removeObject(click2startMsgbox);
-                                setWorldStatus(PlayWorldStatus.PLAYING);
-                                break;
-                        }
-                    }
-                });
                 addObject(click2startMsgbox, getWidth() / 2, getHeight() / 2);
+                break;
+            case PLAYING:
+                removeObject(click2startMsgbox);
+                click2startMsgbox = null;
                 break;
         }
     }
