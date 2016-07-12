@@ -56,10 +56,7 @@ public class StartWorld extends BaseWorld {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Game Start");
-                Greenfoot.setWorld(new Stage1());
-                if (bgm != null) {
-                    bgm.stop();
-                }
+                changeWorld("start");
             }
         });
 
@@ -67,12 +64,32 @@ public class StartWorld extends BaseWorld {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
                 System.out.println("Select Stage");
-                Greenfoot.setWorld(new StageSelectWorld());
-                if (bgm != null) {
-                    bgm.stop();
-                }
+                changeWorld("stage-select");
             }
         });
+
+        settingsButton.addListner(new EventListener() {
+            @Override
+            public void onMouseClicked(MouseInfo mouse) {
+                System.out.println("Settings");
+                changeWorld("settings");
+            }
+        });
+    }
+
+    /**
+     * BGMを止めてからWorldを切り替える
+     *
+     * @param key 遷移先
+     */
+    @Override
+    public void changeWorld(String key) {
+        if (bgm != null) {
+            bgm.stop();
+            bgm = null;
+        }
+
+        super.changeWorld(key);
     }
 
     private Button addButton(String str, int x, int y, int width, int height, int fontSize, Color fontColor) {
