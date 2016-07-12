@@ -62,14 +62,13 @@ public class PlayWorld extends BaseWorld {
             msgbox.addListner(new EventListener() {
                 @Override
                 public void onMouseClicked(MouseInfo mouse) {
-                    // TODO: 遷移先のステージをサブクラスから指定できるようにする
-                    Greenfoot.setWorld(new StartWorld());
+                    changeWorld("next");
                 }
             });
             addObject(msgbox, getWidth() / 2, getHeight() / 2);
         } else {
             // TODO: 遷移先のステージをサブクラスから指定できるようにする
-            Greenfoot.setWorld(new StartWorld());
+            changeWorld("next");
         }
     }
 
@@ -81,14 +80,12 @@ public class PlayWorld extends BaseWorld {
             msgbox.addListner(new EventListener() {
                 @Override
                 public void onMouseClicked(MouseInfo mouse) {
-                    // TODO: 遷移先のステージをサブクラスから指定できるようにする
-                    Greenfoot.setWorld(new StartWorld());
+                    changeWorld("replay");
                 }
             });
             addObject(msgbox, getWidth() / 2, getHeight() / 2);
         } else {
-            // TODO: 遷移先のステージをサブクラスから指定できるようにする
-            Greenfoot.setWorld(new StartWorld());
+            changeWorld("title");
         }
     }
 
