@@ -30,9 +30,15 @@ final public class Config {
         {StartWorld.class, "start", Stage1.class},
         {StartWorld.class, "stage-select", StageSelectWorld.class},
         {StartWorld.class, "settings", SettingsWorld.class},
-        {PlayWorld.class, "top", StartWorld.class},
+        {PlayWorld.class, "title", StartWorld.class},
         {Stage1.class, "replay", Stage1.class},
-        {Stage1.class, "next", StartWorld.class},};
+        {Stage1.class, "next", StageGH.class},
+        {StageGH.class, "replay", StageGH.class},
+        {StageGH.class, "next", StageKK.class},
+        {StageKK.class, "replay", StageKK.class},
+        {StageKK.class, "next", StageKK2.class},
+        {StageKK2.class, "replay", StageKK2.class},
+        {StageKK2.class, "next", StartWorld.class},};
     /**
      * ステージの一覧。レベル順に並べること。
      */
