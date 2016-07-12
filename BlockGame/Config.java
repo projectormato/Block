@@ -137,15 +137,15 @@ final public class Config {
 
         for (Object[] tuple : WORLD_TRANSITION_PATTERN) {
             if (tuple.length != 3) {
-                throw new IllegalStateException("worldTransitionPattern の要素に、長さが3以外の配列が入っている: " + tuple);
+                throw new IllegalStateException("worldTransitionPattern の要素に、長さが3以外の配列が入っている: " + Arrays.deepToString(tuple));
             }
 
             Class fromClass = (Class) tuple[0];
             String key2 = (String) tuple[1];
             Class toClass = (Class) tuple[2];
 
-            if (!fromClass.isAssignableFrom(BaseWorld.class) || !toClass.isAssignableFrom(BaseWorld.class)) {
-                throw new IllegalStateException("worldTransitionPattern の要素に、BaseWorld のサブクラス以外を含めてはいけない: " + tuple);
+            if (!BaseWorld.class.isAssignableFrom(fromClass) || !BaseWorld.class.isAssignableFrom(toClass)) {
+                throw new IllegalStateException("worldTransitionPattern の要素に、BaseWorld のサブクラス以外を含めてはいけない: " + Arrays.deepToString(tuple));
             }
 
             if (from.equals(fromClass) && key.equals(key2)) {
