@@ -230,6 +230,21 @@ public class BaseWorld extends World implements EventHandler {
         this.logger = logger;
     }
 
+    /**
+     * Worldを指定した遷移先へ切り替える
+     *
+     * @param key 遷移先
+     */
+    public void changeWorld(String key) {
+        try {
+            World nextWorld = (World) Config.getNextWorld(this.getClass(), key).newInstance();
+            Greenfoot.setWorld(nextWorld);
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace(System.out);
+            Greenfoot.stop();
+        }
+    }
+
     @Override
     public void addListner(EventListener listener) {
         this.listener = listener;
