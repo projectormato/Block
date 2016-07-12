@@ -4,6 +4,7 @@ import greenfoot.GreenfootImage;
 import greenfoot.GreenfootSound;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -81,6 +82,8 @@ final public class Config {
         String filePaht = CONFIG_FILE_PATH.replaceFirst("^~", System.getProperty("user.home"));
         try (InputStreamReader configFile = new InputStreamReader(new FileInputStream(Paths.get(filePaht).toFile()), StandardCharsets.UTF_8)) {
             prop.load(configFile);
+            isLoaded = true;
+        } catch (FileNotFoundException e) {
             isLoaded = true;
         } catch (IOException e) {
             e.printStackTrace(System.out);
