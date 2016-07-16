@@ -31,6 +31,13 @@ final public class Config {
     final static Color BLINK_MSGBOX_BG_COLOR = new Color(0, true);
     final static Font BLINK_MSGBOX_FONT = new Font("SansSerif", Font.PLAIN, 30);
 
+    final static int STAGE_BUTTON_WIDTH = 200;
+    final static int STAGE_BUTTON_HEIGHT = 50;
+    final static int STAGE_BUTTON_MARGIN = 20;
+    final static Color STAGE_BUTTON_BG_COLOR = Color.GREEN;
+    final static Color STAGE_BUTTON_BG_COLOR2 = Color.YELLOW;
+    final static Font STAGE_BUTTON_FONT = new Font("SansSerif", Font.PLAIN, 30);
+
     /**
      * ステージの遷移先一覧 次に遷移するワールドを取得は以下のように行う Class nextWorld =
      * stageTransition.get(beforeWorld).get(nextState);
@@ -66,6 +73,7 @@ final public class Config {
         // リサイズしてから回転を行う。
         {StartWorld.class, "rogo", "rogo/title2.png", 0, 0, 0},
         {StartWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
+        {StageSelectWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
         {Stage1.class, "bg", "bg/space.png", WORLD_WIDTH, WORLD_HEIGHT, 0},
         {Ball.class, "bg", "ball/r2.png", 40, 40, 0},
         {Block.class, "bg", "block/b.png", 20, 20, 0},
