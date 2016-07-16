@@ -134,6 +134,17 @@ public class Stage1 extends PlayWorld {
     }
 
     @Override
+    public boolean preChangeStatus(PlayWorldStatus newStatus) {
+        if (getWorldStatus() == PlayWorldStatus.WAITING && newStatus == PlayWorldStatus.PLAYING) {
+            // カーソルとブロックが衝突している状態なら、プレイを開始しない
+            if (cursor.getIntersectingObjects(Block.class).size() > 0) {
+                return false;
+            }
+        }
+        return super.preChangeStatus(newStatus);
+    }
+
+    @Override
     public void onChangeStatus() {
         super.onChangeStatus();
         switch (getWorldStatus()) {
