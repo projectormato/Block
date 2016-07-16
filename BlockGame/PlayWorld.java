@@ -72,13 +72,16 @@ public class PlayWorld extends BaseWorld {
 
         if (stageName != null) {
             MessageBox msgbox = new MessageBox(stageName + "-win", getWidth(), getHeight() / 3);
-            msgbox.addListner(new EventListener() {
+            EventListener listener = new EventListener() {
                 @Override
                 public void onMouseClicked(MouseInfo mouse) {
                     changeWorld("next");
                 }
-            });
+            };
+            msgbox.addListner(listener);
+            overlay.addListner(listener);
             addObject(msgbox, getWidth() / 2, getHeight() / 2);
+            addObject(overlay, getWidth() / 2, getHeight() / 2);
         } else {
             // TODO: 遷移先のステージをサブクラスから指定できるようにする
             changeWorld("next");
@@ -90,13 +93,16 @@ public class PlayWorld extends BaseWorld {
 
         if (stageName != null) {
             MessageBox msgbox = new MessageBox(stageName + "-lose", getWidth(), getHeight() / 3);
-            msgbox.addListner(new EventListener() {
+            EventListener listener = new EventListener() {
                 @Override
                 public void onMouseClicked(MouseInfo mouse) {
                     changeWorld("replay");
                 }
-            });
+            };
+            msgbox.addListner(listener);
+            overlay.addListner(listener);
             addObject(msgbox, getWidth() / 2, getHeight() / 2);
+            addObject(overlay, getWidth() / 2, getHeight() / 2);
         } else {
             changeWorld("title");
         }
@@ -127,7 +133,7 @@ public class PlayWorld extends BaseWorld {
             case PLAYING:
                 removeObject(overlay);
                 removeObject(click2startMsgbox);
-                overlay = null;
+                // overlayはステージ終了時にも使うので、残しておく
                 click2startMsgbox = null;
                 break;
         }
