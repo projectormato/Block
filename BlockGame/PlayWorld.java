@@ -113,8 +113,20 @@ public class PlayWorld extends BaseWorld {
     }
 
     public void setWorldStatus(PlayWorldStatus worldStatus) {
-        this.worldStatus = worldStatus;
-        onChangeStatus();
+        if (preChangeStatus(worldStatus)) {
+            this.worldStatus = worldStatus;
+            onChangeStatus();
+        }
+    }
+
+    /**
+     * ステータスが切り替わる直前に実行される。ステータスの切り替えを許可するか否かを判定し、返す
+     *
+     * @param newStatus 切替後のステータス
+     * @return ステータスを切り替え可能ならtrue、切り替え不能ならfalse
+     */
+    public boolean preChangeStatus(PlayWorldStatus newStatus) {
+        return true;
     }
 
     /**
