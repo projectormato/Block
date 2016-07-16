@@ -23,10 +23,12 @@ final public class Config {
     final static int WORLD_WIDTH = 1200;
     final static int WORLD_HEIGHT = 800;
 
+    final static Color OVERLAY_COLOR = new Color(0x55000000, true);
+
     final static int BLINK_MSGBOX_WIDTH = 30 * 11;
     final static int BLINK_MSGBOX_HEIGHT = 50;
     final static Color BLINK_MSGBOX_FONT_COLOR = Color.WHITE;
-    final static Color BLINK_MSGBOX_BG_COLOR = new Color(0x55000000, true);
+    final static Color BLINK_MSGBOX_BG_COLOR = new Color(0, true);
     final static Font BLINK_MSGBOX_FONT = new Font("SansSerif", Font.PLAIN, 30);
 
     /**

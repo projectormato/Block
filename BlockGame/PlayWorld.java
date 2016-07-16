@@ -7,6 +7,7 @@ public class PlayWorld extends BaseWorld {
     private String stageName;
     private GreenfootSound bgm;
     private BlinkMessageBox click2startMsgbox;
+    private Overlay overlay; // click2startMsgboxの背景
 
     public PlayWorld() {
         worldStatus = PlayWorldStatus.WAITING;
@@ -32,13 +33,14 @@ public class PlayWorld extends BaseWorld {
         });
         addObject(msgbox, getWidth() / 2, getHeight() / 2);
 
+        overlay = new Overlay(getWidth(), getHeight(), Config.OVERLAY_COLOR);
         click2startMsgbox = new BlinkMessageBox("click-to-start",
                 Config.BLINK_MSGBOX_WIDTH, Config.BLINK_MSGBOX_HEIGHT);
         click2startMsgbox.setColor(Config.BLINK_MSGBOX_FONT_COLOR, Config.BLINK_MSGBOX_BG_COLOR);
         click2startMsgbox.setFont(Config.BLINK_MSGBOX_FONT);
         click2startMsgbox.createImageCache();
         // クリックしたらゲームスタート
-        click2startMsgbox.addListner(new EventListener() {
+        EventListener listener = new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
                 switch (getWorldStatus()) {
@@ -47,7 +49,9 @@ public class PlayWorld extends BaseWorld {
                         break;
                 }
             }
-        });
+        };
+        overlay.addListner(listener);
+        click2startMsgbox.addListner(listener);
     }
 
     private void prepare() {
@@ -106,10 +110,13 @@ public class PlayWorld extends BaseWorld {
                 }
                 break;
             case WAITING:
+                addObject(overlay, getWidth() / 2, getHeight() / 2);
                 addObject(click2startMsgbox, getWidth() / 2, getHeight() / 2);
                 break;
             case PLAYING:
+                removeObject(overlay);
                 removeObject(click2startMsgbox);
+                overlay = null;
                 click2startMsgbox = null;
                 break;
         }
