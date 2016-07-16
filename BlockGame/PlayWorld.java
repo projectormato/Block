@@ -1,7 +1,5 @@
 
 import greenfoot.*;
-import java.awt.Color;
-import java.awt.Font;
 
 public class PlayWorld extends BaseWorld {
 
@@ -34,9 +32,10 @@ public class PlayWorld extends BaseWorld {
         });
         addObject(msgbox, getWidth() / 2, getHeight() / 2);
 
-        click2startMsgbox = new BlinkMessageBox("click-to-start", getWidth(), getHeight());
-        click2startMsgbox.setColor(Color.WHITE, new Color(0x55000000, true));
-        click2startMsgbox.setFont(new Font("SansSerif", Font.PLAIN, 30));
+        click2startMsgbox = new BlinkMessageBox("click-to-start",
+                Config.BLINK_MSGBOX_WIDTH, Config.BLINK_MSGBOX_HEIGHT);
+        click2startMsgbox.setColor(Config.BLINK_MSGBOX_FONT_COLOR, Config.BLINK_MSGBOX_BG_COLOR);
+        click2startMsgbox.setFont(Config.BLINK_MSGBOX_FONT);
         click2startMsgbox.createImageCache();
         // クリックしたらゲームスタート
         click2startMsgbox.addListner(new EventListener() {

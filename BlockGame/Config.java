@@ -2,6 +2,8 @@
 import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import greenfoot.GreenfootSound;
+import java.awt.Color;
+import java.awt.Font;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
@@ -20,6 +22,12 @@ final public class Config {
 
     final static int WORLD_WIDTH = 1200;
     final static int WORLD_HEIGHT = 800;
+
+    final static int BLINK_MSGBOX_WIDTH = 30 * 11;
+    final static int BLINK_MSGBOX_HEIGHT = 50;
+    final static Color BLINK_MSGBOX_FONT_COLOR = Color.WHITE;
+    final static Color BLINK_MSGBOX_BG_COLOR = new Color(0x55000000, true);
+    final static Font BLINK_MSGBOX_FONT = new Font("SansSerif", Font.PLAIN, 30);
 
     /**
      * ステージの遷移先一覧 次に遷移するワールドを取得は以下のように行う Class nextWorld =
