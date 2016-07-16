@@ -77,7 +77,8 @@ final public class Config {
         {PlayWorld.class, "bgm", "bgm/battle.mp3"},
         {Button.class, "mouseIn", "se/button-onMouseIn.mp3"},
         {Button.class, "mouseClicked", "se/button-onMouseClicked.mp3"},
-        {Block.class, "broken", "se/block-broken.mp3"},};
+        {Block.class, "broken", "se/block-broken.mp3"},
+        {Goal.class, "broken", "se/core-destroyed.mp3"},};
 
     private final static String CONFIG_FILE_PATH = "config.properties";
 

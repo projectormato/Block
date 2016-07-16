@@ -15,8 +15,13 @@ public class Goal extends BaseActor {
         setImage(goalImage);
     }
 
-	@Override
-	public void onDied(){
-		(new GreenfootSound("se/core-destroyed.mp3")).play();
-	}
+    @Override
+    public void onDied() {
+        if (Config.getBoolean("enableSoundEffect")) {
+            GreenfootSound sound = Config.getSound(this.getClass(), "broken");
+            if (sound != null) {
+                sound.play();
+            }
+        }
+    }
 }
