@@ -6,6 +6,7 @@ public class PlayWorld extends BaseWorld {
     private PlayWorldStatus worldStatus;
     private String stageName;
     private GreenfootSound bgm;
+    private MessageBox msgbox;
     private BlinkMessageBox click2startMsgbox;
     private Overlay overlay; // click2startMsgboxの背景
 
@@ -23,7 +24,8 @@ public class PlayWorld extends BaseWorld {
         this.stageName = stageName;
         worldStatus = PlayWorldStatus.STAGE_START_MSG;
 
-        MessageBox msgbox = new MessageBox(stageName + "-start", getWidth(), getHeight() / 3);
+        //ステージ開始時のメッセージ
+        msgbox = new MessageBox(stageName + "-start", getWidth(), getHeight() / 3);
         msgbox.addListner(new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
@@ -33,17 +35,25 @@ public class PlayWorld extends BaseWorld {
         });
         addObject(msgbox, getWidth() / 2, getHeight() / 2);
 
+        // メッセージボックスとclick2startの背景
         overlay = new Overlay(getWidth(), getHeight(), Config.OVERLAY_COLOR);
+        addObject(overlay, getWidth() / 2, getHeight() / 2);
+
+        // ゲーム開始待機状態に表示させるメッセージ
         click2startMsgbox = new BlinkMessageBox("click-to-start",
                 Config.BLINK_MSGBOX_WIDTH, Config.BLINK_MSGBOX_HEIGHT);
         click2startMsgbox.setColor(Config.BLINK_MSGBOX_FONT_COLOR, Config.BLINK_MSGBOX_BG_COLOR);
         click2startMsgbox.setFont(Config.BLINK_MSGBOX_FONT);
         click2startMsgbox.createImageCache();
+
         // クリックしたらゲームスタート
         EventListener listener = new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
                 switch (getWorldStatus()) {
+                    case STAGE_START_MSG:
+                        setWorldStatus(PlayWorldStatus.WAITING);
+                        break;
                     case WAITING:
                         setWorldStatus(PlayWorldStatus.PLAYING);
                         break;
@@ -110,7 +120,8 @@ public class PlayWorld extends BaseWorld {
                 }
                 break;
             case WAITING:
-                addObject(overlay, getWidth() / 2, getHeight() / 2);
+                removeObject(msgbox);
+                // overlayはステージ開始時のメッセージの背景を流用
                 addObject(click2startMsgbox, getWidth() / 2, getHeight() / 2);
                 break;
             case PLAYING:
