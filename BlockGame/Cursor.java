@@ -35,5 +35,16 @@ public class Cursor extends BaseActor {
                 getX() + (int) (Math.cos(degree) * (width + barrierW)) / 2,
                 getY() + (int) (Math.sin(degree) * (height + barrierH)) / 2);
         barrier.setRotation(getRotation());
+
+        // ボールをバリアに追従させる
+        switch (((PlayWorld) getWorld()).getWorldStatus()) {
+            case STAGE_START_MSG:
+            case WAITING:
+                ball.setLocation(
+                        barrier.getX() + (int) (Math.cos(degree) * (barrierW + 10)) / 2,
+                        barrier.getY() + (int) (Math.sin(degree) * (barrierH + 10)) / 2);
+                ball.setRotation(getRotation());
+                break;
+        }
     }
 }
