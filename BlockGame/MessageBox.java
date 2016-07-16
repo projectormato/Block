@@ -20,6 +20,13 @@ public class MessageBox extends BaseActor {
     Font font = new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE);
     boolean isDrawn2center = true; //　中央に描かれるか
 
+    /**
+     * 指定したサイズで画面に覆いかぶさるようなメッセージボックスを作成する。
+     *
+     * @param msgConfigName
+     * @param width
+     * @param height
+     */
     public MessageBox(String msgConfigName, int width, int height) {
         // メッセージをファイルから読み込み
         String fileName = String.format("messages/%s.txt", msgConfigName);
