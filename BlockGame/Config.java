@@ -79,7 +79,7 @@ final public class Config {
         {Button.class, "mouseClicked", "se/button-onMouseClicked.mp3"},
         {Block.class, "broken", "se/block-broken.mp3"},};
 
-    private final static String CONFIG_FILE_PATH = "~/.config/BlockGame/config.ini";
+    private final static String CONFIG_FILE_PATH = "config.properties";
 
     private static boolean isLoaded = false;
     private static Properties prop = new Properties();
