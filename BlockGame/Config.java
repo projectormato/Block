@@ -52,8 +52,11 @@ final public class Config {
     /**
      * ステージの一覧。レベル順に並べること。
      */
-    private final static Object[] STAGES = {
-        Stage1.class,};
+    public final static Class[] STAGES = {
+        Stage1.class,
+        StageGH.class,
+        StageKK.class,
+        StageKK2.class,};
     /**
      * 背景画像の一覧。
      */
