@@ -41,9 +41,9 @@ public class Stage1 extends PlayWorld {
         cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]), barrier);
         GreenfootImage cursorImage = Config.getImage(cursor.getClass(), "bg");
         cursor.setImage(cursorImage);
-        cursor.addListner(new EventListener(){
+        cursor.addListner(new EventListener() {
             @Override
-            public void onDied(){
+            public void onDied() {
                 super.onDied();
                 lose();
             }
