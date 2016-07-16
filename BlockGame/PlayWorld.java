@@ -117,6 +117,9 @@ public class PlayWorld extends BaseWorld {
         onChangeStatus();
     }
 
+    /**
+     * ステータスを切り替えた直後に実行される。
+     */
     public void onChangeStatus() {
         switch (getWorldStatus()) {
             case STAGE_END_MSG:
