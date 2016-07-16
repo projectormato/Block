@@ -21,9 +21,22 @@ public class StageSelectWorld extends BaseWorld {
 
         int i = 0;
         int offsetY = Config.STAGE_BUTTON_HEIGHT / 2 + Config.STAGE_BUTTON_MARGIN;
-        for (Class stageCls : Config.STAGES) {
+        for (final Class stageCls : Config.STAGES) {
             String stageName = stageCls.getSimpleName();
             Button button = new Button(stageName, Config.STAGE_BUTTON_FONT, normalImage, pressingImage);
+            button.addListner(new EventListener() {
+                @Override
+                public void onMouseClicked(MouseInfo mouse) {
+                    // クリックしたら、指定したステージに切り替え
+                    try {
+                        BaseWorld nextWorld = (BaseWorld) stageCls.newInstance();
+                        Greenfoot.setWorld(nextWorld);
+                    } catch (Exception e) {
+                        e.printStackTrace(System.out);
+                        Greenfoot.stop();
+                    }
+                }
+            });
             addObject(button, getWidth() / 2,
                     offsetY + (Config.STAGE_BUTTON_HEIGHT + Config.STAGE_BUTTON_MARGIN) * i);
             i++;
