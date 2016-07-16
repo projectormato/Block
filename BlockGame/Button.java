@@ -1,5 +1,7 @@
 
 import greenfoot.*;
+import java.awt.Font;
+import java.awt.Graphics;
 
 public class Button extends BaseActor {
 
@@ -9,13 +11,36 @@ public class Button extends BaseActor {
     private GreenfootSound onMouseInSound;
     private GreenfootSound onMouseClickedSound;
 
+    private Button() {
+        onMouseInSound = Config.getSound(this.getClass(), "mouseIn");
+        onMouseClickedSound = Config.getSound(this.getClass(), "mouseClicked");
+    }
+
     public Button(GreenfootImage normal, GreenfootImage pressing) {
+        this();
         normalImg = normal;
         pressingImg = pressing;
         setImage(normalImg);
+    }
 
-        onMouseInSound = Config.getSound(this.getClass(), "mouseIn");
-        onMouseClickedSound = Config.getSound(this.getClass(), "mouseClicked");
+    public Button(String str, Font font, GreenfootImage normal, GreenfootImage pressing) {
+        this();
+
+        // 渡された画像を破壊しないよう、複製を作る
+        normalImg = new GreenfootImage(normal);
+        pressingImg = new GreenfootImage(pressing);
+
+        // 通常時の画像(デフォルト)
+        Graphics g;
+        g = normalImg.getAwtImage().createGraphics();
+        g.setFont(font);
+        Utils.drawStringToCenter(str, g, 0, 0, normalImg.getWidth(), normalImg.getHeight());
+        setImage(normalImg);
+
+        // 押された時の画像
+        g = pressingImg.getAwtImage().createGraphics();
+        g.setFont(font);
+        Utils.drawStringToCenter(str, g, 0, 0, pressingImg.getWidth(), pressingImg.getHeight());
     }
 
     @Override
