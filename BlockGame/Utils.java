@@ -3,10 +3,13 @@ import greenfoot.GreenfootImage;
 import java.awt.Graphics2D;
 
 /**
- *
- * @author yuuki
+ * 画像関連の便利なメソッド集
  */
-public class Utils {
+public final class Utils {
+
+    // Utilsクラスのインスタンスを作成できなくする
+    private Utils() {
+    }
 
     /**
      * Rotates an image. Actually rotates a new copy of the image.
