@@ -77,7 +77,7 @@ final public class Config {
         {Stage1.class, "bg", "bg/space.png", WORLD_WIDTH, WORLD_HEIGHT, 0},
         {Ball.class, "bg", "ball/r2.png", 40, 40, 0},
         {Block.class, "bg", "block/b.png", 20, 20, 0},
-        {CursorBarrier.class, "bg", "block/y.png", 150, 100, 90},
+        {CursorBarrier.class, "bg", "barrier.png", 71, 179, 0},
         {Cursor.class, "bg", "ufoShip.png", 70, 70, -90},};
     /**
      * サウンドの一覧。
