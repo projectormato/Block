@@ -40,9 +40,14 @@ public class Cursor extends BaseActor {
         switch (((PlayWorld) getWorld()).getWorldStatus()) {
             case STAGE_START_MSG:
             case WAITING:
+                // 角度0のときの、barrierの中心からのballの位置のオフセット
+                int dx = barrierW / 2 + ball.getImage().getWidth() / 2;
+                int dy = 0;
+
+                // barrierの中心の位置を原点として、回転移動した地点をballの位置とする
                 ball.setLocation(
-                        barrier.getX() + (int) (Math.cos(degree) * (barrierW + 10)) / 2,
-                        barrier.getY() + (int) (Math.sin(degree) * (barrierH + 10)) / 2);
+                        barrier.getX() + (int) (dx * Math.cos(degree)),
+                        barrier.getY() + (int) (dx * Math.sin(degree)));
                 ball.setRotation(getRotation());
                 break;
         }
