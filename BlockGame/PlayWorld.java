@@ -126,6 +126,14 @@ public class PlayWorld extends BaseWorld {
      * @return ステータスを切り替え可能ならtrue、切り替え不能ならfalse
      */
     public boolean preChangeStatus(PlayWorldStatus newStatus) {
+        if (getWorldStatus() == PlayWorldStatus.WAITING && newStatus == PlayWorldStatus.PLAYING) {
+            // カーソルとブロックが衝突している状態なら、プレイを開始しない
+            for (Object cursor : getObjects(Cursor.class)) {
+                if (((BaseActor) cursor).getIntersectingObjects(Block.class).size() > 0) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
