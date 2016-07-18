@@ -79,7 +79,8 @@ final public class Config {
         {Block.class, "bg", "block/b.png", 20, 20, 0},
         {Wall.class, "bg", "debris/deb4-1.png", 72, 50, 0},
         {CursorBarrier.class, "bg", "barrier.png", 71, 179, 0},
-        {Cursor.class, "bg", "ufoShip.png", 70, 70, -90},};
+        {Cursor.class, "bg", "ufoShip.png", 70, 70, -90},
+        {Goal.class, "bg", "goal/jupiter.png", 100, 100, 0},};
     /**
      * サウンドの一覧。
      */
