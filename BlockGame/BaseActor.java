@@ -35,6 +35,19 @@ public class BaseActor extends Actor implements EventHandler {
         hp = maxHp;
     }
 
+    @Override
+    protected void addedToWorld(World world) {
+        super.addedToWorld(world);
+
+        // FIXME: 画像ファイルが定義されていないActorでエラーが発生する問題への回避策。
+        // 全てのActorで対処が完了したら直す
+        try {
+            setImage(Config.getImage(this.getClass(), "bg"));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
     /**
      * 何もしない。このメソッドはオーバーライドできません。BaseWorldクラスから呼び出されるイベントハンドラ内で必要な動作を実装してください。
      */
