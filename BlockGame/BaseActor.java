@@ -42,7 +42,7 @@ public class BaseActor extends Actor implements EventHandler {
         // FIXME: 画像ファイルが定義されていないActorでエラーが発生する問題への回避策。
         // 全てのActorで対処が完了したら直す
         try {
-            setImage(Config.getImage(this.getClass(), "bg"));
+            setImage(Config.getImage(this, "bg"));
         } catch (IllegalArgumentException e) {
             e.printStackTrace(System.out);
         }

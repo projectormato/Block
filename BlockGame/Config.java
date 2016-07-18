@@ -71,16 +71,17 @@ final public class Config {
         // {World or Actor, type, file, width, height, rotateImage}
         // width, heightが共に0なら、リサイズを行いません
         // リサイズしてから回転を行う。
-        {StartWorld.class, "rogo", "rogo/title2.png", 0, 0, 0},
-        {StartWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
-        {StageSelectWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
-        {PlayWorld.class, "bg", "bg/space.jpg", 0, 0, 0},
-        {Ball.class, "bg", "ball/r2.png", 40, 40, 0},
-        {Block.class, "bg", "block/b.png", 20, 20, 0},
-        {Wall.class, "bg", "debris/deb4-1.png", 72, 50, 0},
-        {CursorBarrier.class, "bg", "barrier.png", 71, 179, 0},
-        {Cursor.class, "bg", "ufoShip.png", 70, 70, -90},
-        {Goal.class, "bg", "goal/jupiter.png", 100, 100, 0},};
+        {null, StartWorld.class, "rogo", "rogo/title2.png", 0, 0, 0},
+        {null, StartWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
+        {null, StageSelectWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
+        {null, PlayWorld.class, "bg", "bg/space.jpg", 0, 0, 0},
+        {BaseWorld.class, Ball.class, "bg", "ball/r2.png", 40, 40, 0},
+        {BaseWorld.class, Block.class, "bg", "block/b.png", 20, 20, 0},
+        {BaseWorld.class, Wall.class, "bg", "debris/deb4-1.png", 72, 50, 0},
+        {BaseWorld.class, CursorBarrier.class, "bg", "barrier.png", 71, 179, 0},
+        {BaseWorld.class, Cursor.class, "bg", "ufoShip.png", 70, 70, -90},
+        {BaseWorld.class, Goal.class, "bg", "goal/jupiter.png", 100, 100, 0},};
+
     /**
      * サウンドの一覧。
      */
@@ -217,30 +218,61 @@ final public class Config {
         prop.setProperty("score/" + playWorld.getSimpleName(), "" + score);
     }
 
-    public static GreenfootImage getImage(Class clazz, String key) {
-        return getOrigianlImage(clazz, key, true);
+    /**
+     * 指定したオブジェクトに対応する画像を返す
+     *
+     * @param obj
+     * @param key
+     * @return 画像
+     */
+    public static GreenfootImage getImage(Object obj, String key) {
+        return getOrigianlImage(obj, key, true);
+
     }
 
-    public static GreenfootImage getImage(Class clazz, String key, int width, int height) {
-        GreenfootImage img = getOrigianlImage(clazz, key, false);
+    /**
+     * 指定したオブジェクトに対応する、リサイズ済みの画像を返す
+     *
+     * @param obj
+     * @param key
+     * @param width 画像の幅
+     * @param height 画像の高さ
+     * @return リサイズ後の画像
+     */
+    public static GreenfootImage getImage(Object obj, String key, int width, int height) {
+        GreenfootImage img = getOrigianlImage(obj, key, false);
         img.scale(width, height);
         return img;
     }
 
-    private static GreenfootImage getOrigianlImage(Class clazz, String key, boolean isResize) {
+    private static GreenfootImage getOrigianlImage(Object obj, String key, boolean isResize) {
+        Class clazz = obj.getClass();
+        Class worldClazz = null;
+        if (obj instanceof BaseActor) {
+            worldClazz = ((BaseActor) obj).getWorld().getClass();
+        }
+
         for (Object[] tuple : IMAGES) {
-            if (tuple.length != 6) {
-                throw new IllegalStateException("IMAGES の要素は、長さ6以外の配列を含めてはいけない" + Arrays.deepToString(tuple));
+            if (tuple.length != 7) {
+                throw new IllegalStateException("IMAGES の要素は、長さ7以外の配列を含めてはいけない" + Arrays.deepToString(tuple));
             }
 
-            Class clazz2 = (Class) tuple[0];
-            String key2 = (String) tuple[1];
-            String filePath = (String) tuple[2];
-            int width = (int) tuple[3];
-            int height = (int) tuple[4];
-            int rotate = (int) tuple[5];
+            Class worldClass = (Class) tuple[0];
+            Class targetClass = (Class) tuple[1];
+            String key2 = (String) tuple[2];
+            String filePath = (String) tuple[3];
+            int width = (int) tuple[4];
+            int height = (int) tuple[5];
+            int rotate = (int) tuple[6];
 
-            if (clazz2.isAssignableFrom(clazz) && key2.equals(key)) {
+            if (obj instanceof BaseActor) {
+                // 異なるWorld用の設定なら無視
+                if (worldClass == null || !worldClass.isAssignableFrom(worldClazz)) {
+                    continue;
+                }
+            }
+
+            if (targetClass.isAssignableFrom(clazz) && key2.equals(key)) {
                 GreenfootImage img = new GreenfootImage(filePath);
                 if (isResize && width != 0 && height != 0) {
                     img.scale(width, height);

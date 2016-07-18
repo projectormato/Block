@@ -41,7 +41,7 @@ public class StartWorld extends BaseWorld {
      */
     private void prepare() {
         // 背景とロゴを描画
-        GreenfootImage rogo = Config.getImage(this.getClass(), "rogo");
+        GreenfootImage rogo = Config.getImage(this, "rogo");
         getBackground().drawImage(rogo, getWidth() / 2 - rogo.getWidth() / 2, 50);
 
         // ボタンを追加
