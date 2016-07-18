@@ -74,7 +74,7 @@ final public class Config {
         {StartWorld.class, "rogo", "rogo/title2.png", 0, 0, 0},
         {StartWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
         {StageSelectWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
-        {Stage1.class, "bg", "bg/space.png", WORLD_WIDTH, WORLD_HEIGHT, 0},
+        {PlayWorld.class, "bg", "bg/space.jpg", 0, 0, 0},
         {Ball.class, "bg", "ball/r2.png", 40, 40, 0},
         {Block.class, "bg", "block/b.png", 20, 20, 0},
         {Wall.class, "bg", "debris/deb4-1.png", 72, 50, 0},

@@ -30,18 +30,12 @@ public class StageKK extends PlayWorld {
         //relayout();
 
         ball = new Ball();
-        GreenfootImage ballImage = Config.getImage(ball.getClass(), "bg");
-        ball.setImage(ballImage);
         addDisabledObject(ball, 10, 10);
 
         barrier = new CursorBarrier(ball);
-        GreenfootImage barrierImage = Config.getImage(barrier.getClass(), "bg");
-        barrier.setImage(barrierImage);
         addDisabledObject(barrier, 0, 0);
 
         cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]), barrier);
-        GreenfootImage cursorImage = Config.getImage(cursor.getClass(), "bg");
-        cursor.setImage(cursorImage);
         cursor.addListner(new EventListener() {
             @Override
             public void onDied() {

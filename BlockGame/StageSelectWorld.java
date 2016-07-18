@@ -8,8 +8,6 @@ public class StageSelectWorld extends BaseWorld {
     }
 
     private void prepare() {
-        setBackground(Config.getImage(this.getClass(), "bg"));
-
         GreenfootImage normalImage = new GreenfootImage(
                 Config.STAGE_BUTTON_WIDTH, Config.STAGE_BUTTON_HEIGHT);
         normalImage.setColor(Config.STAGE_BUTTON_BG_COLOR);

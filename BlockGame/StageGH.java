@@ -20,11 +20,6 @@ public class StageGH extends PlayWorld {
     }
 
     private void prepare() {
-        // setBackground(Config.getImage(this.getClass, "bg"));
-        setBackground("bg/space.jpg");
-        
-        GreenfootImage blockImage = Config.getImage(Block.class, "bg");
-
         goal = new Goal();
         addDisabledObject(goal, getWidth() / 2, getHeight() / 2);
 
@@ -32,18 +27,12 @@ public class StageGH extends PlayWorld {
         radianOffsets = new ArrayList<>();
 
         ball = new Ball();
-        GreenfootImage ballImage = Config.getImage(Ball.class, "bg");
-        ball.setImage(ballImage);
         addDisabledObject(ball, 10, 10);
 
         barrier = new CursorBarrier(ball);
-        GreenfootImage barrierImage = Config.getImage(CursorBarrier.class, "bg");
-        barrier.setImage(barrierImage);
         addDisabledObject(barrier, 0, 0);
 
         cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]), barrier);
-        GreenfootImage cursorImage = Config.getImage(Cursor.class, "bg");
-        cursor.setImage(cursorImage);
         cursor.addListner(new EventListener(){
             @Override
             public void onDied(){
@@ -62,7 +51,6 @@ public class StageGH extends PlayWorld {
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block1 = new Block();
-                block1.setImage(blockImage);
                 blocks.add(block1);
                 addDisabledObject(block1, getWidth() / 2 - 50 - j * 15, 100 + i * 15);
             }
@@ -71,7 +59,6 @@ public class StageGH extends PlayWorld {
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block1 = new Block();
-                block1.setImage(blockImage);
                 blocks.add(block1);
                 addDisabledObject(block1, getWidth() / 2 - 50 - j * 15, getHeight()-100 - i * 15);
             }
@@ -80,7 +67,6 @@ public class StageGH extends PlayWorld {
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block2 = new Block();
-                block2.setImage(blockImage);
                 blocks.add(block2);
                 addDisabledObject(block2, getWidth()/2 +50+ j * 15, 100 + i * 15);
             }
@@ -88,7 +74,6 @@ public class StageGH extends PlayWorld {
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block2 = new Block();
-                block2.setImage(blockImage);
                 blocks.add(block2);
                 addDisabledObject(block2, getWidth() / 2 + 50 + j * 15, getHeight()-100 - i * 15);
             }
