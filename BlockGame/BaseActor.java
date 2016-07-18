@@ -77,8 +77,10 @@ public class BaseActor extends Actor implements EventHandler {
             listener.onDied();
         }
 
-        // 死んだら即座に削除
-        actorStatus = ActorStatus.REMOVED;
+        // AnimationActor以外は、死んだら即座に削除
+        if (this instanceof AnimationActor == false) {
+            actorStatus = ActorStatus.REMOVED;
+        }
     }
 
     @Override

@@ -3,6 +3,7 @@ import greenfoot.GreenfootImage;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.WritableRaster;
 
 /**
  * 画像関連の便利なメソッド集
@@ -141,4 +142,34 @@ public final class Utils {
         return drawnSpace;
     }
 
+    /**
+     * 画像を中央に描画する
+     *
+     * @param to 描画される側
+     * @param from 描画する画像 (非破壊)
+     */
+    public static void drawImageToCenter(GreenfootImage to, GreenfootImage from) {
+        to.drawImage(from,
+                (to.getWidth() - from.getWidth()) / 2,
+                (to.getHeight() - from.getHeight()) / 2);
+    }
+
+    /**
+     * 透過度の上限を変更する。
+     *
+     * @param img
+     * @param maxAlpha 透過度の上限 (0: 透明, 0xff: 不透明)
+     */
+    public static void updateMaxAlpha(GreenfootImage img, int maxAlpha) {
+        int w = img.getWidth();
+        int h = img.getHeight();
+        int[] rasterData = new int[w * h];
+        WritableRaster raster = img.getAwtImage().getAlphaRaster();
+
+        raster.getPixels(0, 0, w, h, rasterData);
+        for (int j = 0; j < rasterData.length; j++) {
+            rasterData[j] = Math.min(rasterData[j], maxAlpha);
+        }
+        raster.setPixels(0, 0, w, h, rasterData);
+    }
 }
