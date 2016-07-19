@@ -6,13 +6,12 @@ import java.util.ArrayList;
 public class StageGH extends PlayWorld {
 
     private Goal goal;
-    private ArrayList<Block> blocks;
+    private ArrayList<Block> blocks, blocks1;
     private Ball ball;
     private CursorBarrier barrier;
     private Cursor cursor;
-    private Block block1,block2;
-
-    private ArrayList<Double> radianOffsets;
+    private Block block1, block2, block3;
+    private int count;
 
     public StageGH() {
         super("Stage1");
@@ -24,7 +23,7 @@ public class StageGH extends PlayWorld {
         addDisabledObject(goal, getWidth() / 2, getHeight() / 2);
 
         blocks = new ArrayList<>();
-        radianOffsets = new ArrayList<>();
+        blocks1 = new ArrayList<>();
 
         ball = new Ball();
         addDisabledObject(ball, 10, 10);
@@ -33,9 +32,9 @@ public class StageGH extends PlayWorld {
         addDisabledObject(barrier, 0, 0);
 
         cursor = new Cursor(goal, ball, blocks.toArray(new Block[0]), barrier);
-        cursor.addListner(new EventListener(){
+        cursor.addListner(new EventListener() {
             @Override
-            public void onDied(){
+            public void onDied() {
                 super.onDied();
                 lose();
             }
@@ -55,40 +54,48 @@ public class StageGH extends PlayWorld {
                 addDisabledObject(block1, getWidth() / 2 - 50 - j * 15, 100 + i * 15);
             }
         }
-        
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block1 = new Block();
                 blocks.add(block1);
-                addDisabledObject(block1, getWidth() / 2 - 50 - j * 15, getHeight()-100 - i * 15);
-            }
-        }
-        
-        for (int i = 0; i * 15 < height; i++) {
-            for (int j = 0; j < i + 1; j++) {
-                block2 = new Block();
-                blocks.add(block2);
-                addDisabledObject(block2, getWidth()/2 +50+ j * 15, 100 + i * 15);
+                addDisabledObject(block1, getWidth() / 2 - 50 - j * 15, getHeight() - 100 - i * 15);
             }
         }
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block2 = new Block();
                 blocks.add(block2);
-                addDisabledObject(block2, getWidth() / 2 + 50 + j * 15, getHeight()-100 - i * 15);
+                addDisabledObject(block2, getWidth() / 2 + 50 + j * 15, 100 + i * 15);
             }
         }
-        
-    }
+        for (int i = 0; i * 15 < height; i++) {
+            for (int j = 0; j < i + 1; j++) {
+                block2 = new Block();
+                blocks.add(block2);
+                addDisabledObject(block2, getWidth() / 2 + 50 + j * 15, getHeight() - 100 - i * 15);
+            }
+        }
 
-    private void update() {
-
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        update();
+        for (int i = 0; i < 10; i++) {
+            block3 = new Block();
+            blocks1.add(block3);
+            addDisabledObject(block3, goal.getX() + 100 + 10 * i, goal.getY());
+        }
+        for (int i = 0; i < 10; i++) {
+            block3 = new Block();
+            blocks1.add(block3);
+            addDisabledObject(block3, goal.getX(), goal.getY() - 100 - 10 * i);
+        }
+        for (int i = 0; i < 10; i++) {
+            block3 = new Block();
+            blocks1.add(block3);
+            addDisabledObject(block3, goal.getX() - 100 - 10 * i, goal.getY());
+        }
+        for (int i = 0; i < 10; i++) {
+            block3 = new Block();
+            blocks1.add(block3);
+            addDisabledObject(block3, goal.getX(), goal.getY() + 100 + 10 * i);
+        }
     }
 
     @Override
@@ -115,7 +122,6 @@ public class StageGH extends PlayWorld {
         cursor.setActorStatus(ActorStatus.DISABLED);
     }
 
-    
     @Override
     public void onChangeStatus() {
         super.onChangeStatus();
@@ -127,5 +133,5 @@ public class StageGH extends PlayWorld {
                 break;
         }
     }
-    
+
 }

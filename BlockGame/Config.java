@@ -55,7 +55,9 @@ final public class Config {
         {StageKK.class, "replay", StageKK.class},
         {StageKK.class, "next", StageKK2.class},
         {StageKK2.class, "replay", StageKK2.class},
-        {StageKK2.class, "next", StartWorld.class},};
+        {StageKK2.class, "next", StageKK3.class},
+        {StageKK3.class, "replay", StageKK3.class},
+        {StageKK3.class, "next", StartWorld.class},};
     /**
      * ステージの一覧。レベル順に並べること。
      */
@@ -63,7 +65,8 @@ final public class Config {
         Stage1.class,
         StageGH.class,
         StageKK.class,
-        StageKK2.class,};
+        StageKK2.class,
+        StageKK3.class};
     /**
      * 背景画像の一覧。
      */
