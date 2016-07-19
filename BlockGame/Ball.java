@@ -40,7 +40,7 @@ public class Ball extends BaseActor {
         if (defender instanceof Goal) {
             System.out.println("--- GOAL ---");
             ((PlayWorld) getWorld()).win();
-        } else if (defender instanceof Block) {
+        } else {
             turn(180);
         }
     }
