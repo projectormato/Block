@@ -306,6 +306,14 @@ public class BaseActor extends Actor implements EventHandler {
         return maxHp;
     }
 
+    final public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+    }
+
+    final public void setHp(int hp) {
+        this.hp = hp;
+    }
+
     final public int getHp() {
         return hp;
     }
