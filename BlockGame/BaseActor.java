@@ -394,7 +394,15 @@ public class BaseActor extends Actor implements EventHandler {
 
     @Override
     public void setImage(GreenfootImage img) {
+        setImage(img, true);
+    }
+
+    public void setImage(GreenfootImage img, boolean isUpdateSilhoutte) {
         super.setImage(img);
+
+        if (!isUpdateSilhoutte) {
+            return;
+        }
 
         if (imageCache == img) {
             // キャッシュを利用

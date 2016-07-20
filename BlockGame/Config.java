@@ -83,7 +83,8 @@ final public class Config {
         {BaseWorld.class, Wall.class, "bg", "debris/deb4-1.png", 72, 50, 0},
         {BaseWorld.class, CursorBarrier.class, "bg", "barrier.png", 71, 179, 0},
         {BaseWorld.class, Cursor.class, "bg", "ufoShip.png", 70, 70, -90},
-        {BaseWorld.class, Goal.class, "bg", "goal/jupiter.png", 100, 100, 0},};
+        {BaseWorld.class, Goal.class, "bg", "goal/jupiter.png", 100, 100, 0},
+        {BaseWorld.class, Goal.class, "broken", "goal/bomb.png", 400, 400, 0},};
 
     /**
      * サウンドの一覧。
