@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Block extends BaseActor implements AnimationActor {
+public class Block extends BaseActor implements AnimationActor, NoWaitActor {
 
     private GreenfootSound onDiedSound;
 

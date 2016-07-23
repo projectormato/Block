@@ -10,6 +10,9 @@ public class PlayWorld extends BaseWorld {
     private BlinkMessageBox click2startMsgbox;
     private Overlay overlay; // click2startMsgboxの背景
 
+    private boolean isWin = false;
+    private PlayWorldStatus nextWorldStatus = null;
+
     public PlayWorld() {
         worldStatus = PlayWorldStatus.WAITING;
         if (Config.getBoolean("enableBGM")) {
@@ -67,45 +70,23 @@ public class PlayWorld extends BaseWorld {
     private void prepare() {
     }
 
-    public void win() {
-        setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
-
-        if (stageName != null) {
-            MessageBox msgbox = new MessageBox(stageName + "-win", getWidth(), getHeight() / 3);
-            EventListener listener = new EventListener() {
-                @Override
-                public void onMouseClicked(MouseInfo mouse) {
-                    changeWorld("next");
-                }
-            };
-            msgbox.addListner(listener);
-            overlay.addListner(listener);
-            addObject(msgbox, getWidth() / 2, getHeight() / 2);
-            addObject(overlay, getWidth() / 2, getHeight() / 2);
-        } else {
-            // TODO: 遷移先のステージをサブクラスから指定できるようにする
-            changeWorld("next");
+    @Override
+    public void tick() {
+        super.tick();
+        // 全てのアニメーションが終了していれば、次の状態に遷移
+        if (getWorldStatus() == PlayWorldStatus.ANIMATION_WAIT && isAnimationEnded()) {
+            changeNextWorldStatus();
         }
     }
 
-    public void lose() {
+    public void win() {
+        isWin = true;
         setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
+    }
 
-        if (stageName != null) {
-            MessageBox msgbox = new MessageBox(stageName + "-lose", getWidth(), getHeight() / 3);
-            EventListener listener = new EventListener() {
-                @Override
-                public void onMouseClicked(MouseInfo mouse) {
-                    changeWorld("replay");
-                }
-            };
-            msgbox.addListner(listener);
-            overlay.addListner(listener);
-            addObject(msgbox, getWidth() / 2, getHeight() / 2);
-            addObject(overlay, getWidth() / 2, getHeight() / 2);
-        } else {
-            changeWorld("title");
-        }
+    public void lose() {
+        isWin = false;
+        setWorldStatus(PlayWorldStatus.STAGE_END_MSG);
     }
 
     public PlayWorldStatus getWorldStatus() {
@@ -114,9 +95,21 @@ public class PlayWorld extends BaseWorld {
 
     public void setWorldStatus(PlayWorldStatus worldStatus) {
         if (preChangeStatus(worldStatus)) {
-            this.worldStatus = worldStatus;
+            // ANIMATION_WAITを経由して
+            this.worldStatus = PlayWorldStatus.ANIMATION_WAIT;
+            nextWorldStatus = worldStatus;
             onChangeStatus();
         }
+    }
+
+    /**
+     * ANIMATION_WAITから、次の状態へ遷移する
+     */
+    private void changeNextWorldStatus() {
+        assert worldStatus == PlayWorldStatus.ANIMATION_WAIT;
+        worldStatus = nextWorldStatus;
+        nextWorldStatus = null;
+        onChangeStatus();
     }
 
     /**
@@ -142,12 +135,6 @@ public class PlayWorld extends BaseWorld {
      */
     public void onChangeStatus() {
         switch (getWorldStatus()) {
-            case STAGE_END_MSG:
-                if (bgm != null) {
-                    bgm.stop();
-                    bgm = null;
-                }
-                break;
             case WAITING:
                 removeObject(msgbox);
                 // overlayはステージ開始時のメッセージの背景を流用
@@ -159,11 +146,53 @@ public class PlayWorld extends BaseWorld {
                 // overlayはステージ終了時にも使うので、残しておく
                 click2startMsgbox = null;
                 break;
+            case STAGE_END_MSG:
+                if (bgm != null) {
+                    bgm.stop();
+                    bgm = null;
+                }
+
+                String msgPrefix = isWin ? "-win" : "-lose";
+                String nextWorld = isWin ? "next" : "replay";
+                String defaultNextWorld = isWin ? "next" : "title";
+
+                // ステージ終了時のメッセージを表示
+                if (stageName != null) {
+                    msgbox = new MessageBox(stageName + msgPrefix, getWidth(), getHeight() / 3);
+                    EventListener listener = new EventListener() {
+                        @Override
+                        public void onMouseClicked(MouseInfo mouse) {
+                            changeWorld(nextWorld);
+                        }
+                    };
+                    msgbox.addListner(listener);
+                    overlay.addListner(listener);
+                    addObject(msgbox, getWidth() / 2, getHeight() / 2);
+                    addObject(overlay, getWidth() / 2, getHeight() / 2);
+                } else {
+                    changeWorld(nextWorld);
+                }
+                break;
         }
     }
 
     @Override
     public void addDisabledObject(Actor actor, int x, int y) {
         super.addDisabledObject(actor, x, y);
+    }
+
+    /**
+     * 全てのアニメーションが終了しているかを返す
+     *
+     * @return アニメーションが終了していたらtrue
+     */
+    private boolean isAnimationEnded() {
+        for (Object actor : getObjects(AnimationActor.class)) {
+            if (actor instanceof NoWaitActor == false) {
+                // アニメーションは終了していない
+                return false;
+            }
+        }
+        return true;
     }
 }

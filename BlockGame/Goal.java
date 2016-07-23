@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Goal extends BaseActor implements AnimationActor {
+public class Goal extends BaseActor implements AnimationActor, NoWaitActor {
 
     private GreenfootImage originalImg;
     private GreenfootImage brokenImg;
@@ -32,7 +32,7 @@ public class Goal extends BaseActor implements AnimationActor {
         getWorld().addObject(new GoalAnimate(originalImg, brokenImg),
                 getX(), getY());
         // 元のゴールは、透明にして見えなくする。ただし、当たり判定用のシルエットは更新する必要がない
-        GreenfootImage img=new GreenfootImage(originalImg);
+        GreenfootImage img = new GreenfootImage(originalImg);
         Utils.updateMaxAlpha(img, 0);
         setImage(img);
 

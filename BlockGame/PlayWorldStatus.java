@@ -16,4 +16,8 @@ public enum PlayWorldStatus {
      * ゲーム終了後のメッセージや結果表示
      */
     STAGE_END_MSG,
+    /**
+     * アニメーションの終了を待機中。次の状態に遷移するときは、必ずこの状態を経由して遷移する。
+     */
+    ANIMATION_WAIT,
 }
