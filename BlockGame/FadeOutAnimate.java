@@ -79,7 +79,7 @@ public class FadeOutAnimate extends BaseActor implements AnimationActor {
                 // 壊れた時の画像を破壊しながら更新
                 int brokenImageAlpha = (0xff / ANIME_STEP) * (ANIME_STEP - step);
                 Utils.updateMaxAlpha(brokenImg, brokenImageAlpha);
-                setImage(brokenImg);
+                setImage(brokenImg, false);
                 break;
             }
         }
