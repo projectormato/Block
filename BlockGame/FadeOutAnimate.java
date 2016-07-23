@@ -3,8 +3,13 @@ import greenfoot.GreenfootImage;
 import greenfoot.World;
 
 /**
+ * Actorが壊れたときのアニメーションをする。通常の画像から爆発した画像に切り替わり、その後フェードアウトしていくアニメーションが表示される。
+ * このアニメーションが終了するまで画面切り替えが行われない。また、Worldに追加するとすぐにアニメーションが開始される。
  *
- * @author yuuki
+ * 使用方法:
+ * BaseActor.onDied()からこのクラスのサブクラスをWorldに追加し、自身はWorldから削除、または透明にする。
+ *
+ * @author yuuki0xff
  */
 public class FadeOutAnimate extends BaseActor implements AnimationActor {
 
