@@ -54,9 +54,6 @@ public class BaseActor extends Actor implements EventHandler {
     final public void act() {
     }
 
-    protected void setImage() {
-    }
-
     public void setLogger(Logger logger) {
         this.logger = logger;
     }
