@@ -1,12 +1,14 @@
 
 import greenfoot.*;
 
-public class Cursor extends BaseActor {
+public class Cursor extends BaseActor implements AnimationActor, NoWaitActor {
 
     private Goal goal;
     private Ball ball;
     private Block[] blocks;
     private CursorBarrier barrier;
+
+    private boolean isDied = false;
 
     public Cursor() {
     }
@@ -20,6 +22,14 @@ public class Cursor extends BaseActor {
 
     @Override
     public void onMouseMoved(MouseInfo mouse) {
+        super.onMouseMoved(mouse);
+
+        // 死んでいたら何もしない
+        // 死んだ後はactorStatusはDISABLEDになるため、フラグでチェックをしている
+        if (isDied) {
+            return;
+        }
+
         setLocation(mouse.getX(), mouse.getY());
         turnTowards(goal.getX(), goal.getY());
 
@@ -51,5 +61,20 @@ public class Cursor extends BaseActor {
                 ball.setRotation(getRotation());
                 break;
         }
+    }
+
+    @Override
+    public void onDied() {
+        super.onDied();
+        isDied = true;
+        // カーソルが爆発するアニメーションを開始
+        CursorAnimate cursorAnimate = new CursorAnimate();
+        getWorld().addObject(cursorAnimate, getX(), getY());
+        cursorAnimate.setRotation(getRotation());
+
+        // カーソルを透明にする
+        GreenfootImage img = new GreenfootImage(getImage());
+        Utils.updateMaxAlpha(img, 0);
+        setImage(img);
     }
 }
