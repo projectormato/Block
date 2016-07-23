@@ -50,7 +50,7 @@ public class Stage1 extends PlayWorld {
         GreenfootImage blockImage = new GreenfootImage("block/b.png");
         blockImage.scale(20, 20);
 
-        int minRadius = goal.getImage().getWidth();
+        int minRadius = goal.getWidth();
         int maxRadius = minRadius + 200;
         int dRadius = (int) (20 * 1.44);
         int i = 0;

@@ -430,4 +430,22 @@ public class BaseActor extends Actor implements EventHandler {
     protected GreenfootImage getSilhouette() {
         return silhouette;
     }
+
+    /**
+     * Actorの回転角が0のときの、横幅を返す。横幅は当たり判定用のsilhouetteを元に算出している。
+     *
+     * @return 横幅
+     */
+    public int getWidth() {
+        return silhouette.getWidth();
+    }
+
+    /**
+     * Actorの回転角が0のときの、高さを返す。横幅は当たり判定用のsilhouetteを元に算出している。
+     *
+     * @return 高さ
+     */
+    public int getHeight() {
+        return silhouette.getHeight();
+    }
 }

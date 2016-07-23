@@ -35,10 +35,10 @@ public class Cursor extends BaseActor implements AnimationActor, NoWaitActor {
 
         double degree = Math.toRadians(getRotation());
         int width, height, barrierW, barrierH;
-        width = getImage().getWidth();
-        height = getImage().getHeight();
-        barrierW = barrier.getImage().getWidth();
-        barrierH = barrier.getImage().getHeight();
+        width = getWidth();
+        height = getHeight();
+        barrierW = barrier.getWidth();
+        barrierH = barrier.getHeight();
 
         // バリアをカーソルに追従させる
         barrier.setLocation(
@@ -51,7 +51,7 @@ public class Cursor extends BaseActor implements AnimationActor, NoWaitActor {
             case STAGE_START_MSG:
             case WAITING:
                 // 角度0のときの、barrierの中心からのballの位置のオフセット
-                int dx = barrierW / 2 + ball.getImage().getWidth() / 2;
+                int dx = barrierW / 2 + ball.getWidth() / 2;
                 int dy = 0;
 
                 // barrierの中心の位置を原点として、回転移動した地点をballの位置とする
