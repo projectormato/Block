@@ -10,13 +10,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Goal extends BaseActor implements AnimationActor, NoWaitActor {
 
     private GreenfootImage originalImg;
-    private GreenfootImage brokenImg;
 
     @Override
     public void addedToWorld(World world) {
         super.addedToWorld(world);
         originalImg = Config.getImage(this, "bg");
-        brokenImg = Config.getImage(this, "broken");
     }
 
     @Override
@@ -29,8 +27,7 @@ public class Goal extends BaseActor implements AnimationActor, NoWaitActor {
             }
         }
         // ゴールのアニメーションを開始する
-        getWorld().addObject(new GoalAnimate(originalImg, brokenImg),
-                getX(), getY());
+        getWorld().addObject(new GoalAnimate(), getX(), getY());
         // 元のゴールは、透明にして見えなくする。ただし、当たり判定用のシルエットは更新する必要がない
         GreenfootImage img = new GreenfootImage(originalImg);
         Utils.updateMaxAlpha(img, 0);
