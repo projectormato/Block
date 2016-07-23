@@ -46,7 +46,6 @@ public class FadeOutAnimate extends BaseActor implements AnimationActor {
                 // それぞれの画像の透過度
                 int normalImageAlpha = (0xff / ANIME_STEP) * (ANIME_STEP - step);
                 int brokenImageAlpha = (0xff / ANIME_STEP) * step;
-                System.out.println("Goal: " + step + "\t" + normalImageAlpha + "\t" + brokenImageAlpha);
 
                 // 通常時の画像は、元画像を破壊しながら更新
                 Utils.updateMaxAlpha(normalImg, normalImageAlpha);
