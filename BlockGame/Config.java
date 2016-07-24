@@ -88,7 +88,7 @@ final public class Config {
         {BaseWorld.class, CursorAnimate.class, "broken", "shipBroken.png", 70, 70, -90},
         {BaseWorld.class, Goal.class, "bg", "goal/jupiter.png", 100, 100, 0},
         {BaseWorld.class, GoalAnimate.class, "bg", "goal/jupiter.png", 100, 100, 0},
-        {BaseWorld.class, GoalAnimate.class, "broken", "goal/bomb.png", 400, 400, 0},};
+        {BaseWorld.class, GoalAnimate.class, "broken", "goal/bomb2.png", 400, 400, 0},};
 
     /**
      * サウンドの一覧。
