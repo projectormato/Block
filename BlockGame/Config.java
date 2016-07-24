@@ -82,6 +82,7 @@ final public class Config {
         {BaseWorld.class, Block.class, "bg", "block/b.png", 20, 20, 0},
         {BaseWorld.class, Wall.class, "bg", "debris/deb4-1.png", 72, 50, 0},
         {BaseWorld.class, CursorBarrier.class, "bg", "barrier.png", 71, 179, 0},
+        {BaseWorld.class, CursorBarrier.class, "effect", "barrier2.png", 71, 179, 0},
         {BaseWorld.class, Cursor.class, "bg", "ufoShip.png", 70, 70, -90},
         {BaseWorld.class, CursorAnimate.class, "bg", "ufoShip.png", 70, 70, -90},
         {BaseWorld.class, CursorAnimate.class, "broken", "shipBroken.png", 70, 70, -90},
