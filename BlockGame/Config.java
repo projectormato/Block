@@ -86,8 +86,16 @@ final public class Config {
         {BaseWorld.class, Cursor.class, "bg", "ufoShip.png", 70, 70, -90},
         {BaseWorld.class, CursorAnimate.class, "bg", "ufoShip.png", 70, 70, -90},
         {BaseWorld.class, CursorAnimate.class, "broken", "shipBroken.png", 70, 70, -90},
-        {BaseWorld.class, Goal.class, "bg", "goal/jupiter.png", 100, 100, 0},
-        {BaseWorld.class, GoalAnimate.class, "bg", "goal/jupiter.png", 100, 100, 0},
+        {Stage1.class, Goal.class, "bg", "goal/jupiter.png", 100, 100, 0},
+        {Stage1.class, GoalAnimate.class, "bg", "goal/jupiter.png", 100, 100, 0},
+        {Stage2.class, Goal.class, "bg", "goal/mars.png", 100, 100, 0},
+        {Stage2.class, GoalAnimate.class, "bg", "goal/mars.png", 100, 100, 0},
+        {Stage3.class, Goal.class, "bg", "goal/venus.png", 100, 100, 0},
+        {Stage3.class, GoalAnimate.class, "bg", "goal/venus.png", 100, 100, 0},
+        {Stage4.class, Goal.class, "bg", "goal/mercury.png", 100, 100, 0},
+        {Stage4.class, GoalAnimate.class, "bg", "goal/mercury.png", 100, 100, 0},
+        {Stage5.class, Goal.class, "bg", "goal/earth.png", 100, 100, 0},
+        {Stage5.class, GoalAnimate.class, "bg", "goal/earth.png", 100, 100, 0},
         {BaseWorld.class, GoalAnimate.class, "broken", "goal/bomb2.png", 400, 400, 0},};
 
     /**
