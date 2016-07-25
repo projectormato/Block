@@ -42,8 +42,8 @@ public class Cursor extends BaseActor implements AnimationActor, NoWaitActor {
 
         // バリアをカーソルに追従させる
         barrier.setLocation(
-                getX() + (int) (Math.cos(radian) * (width + barrierW)) / 2,
-                getY() + (int) (Math.sin(radian) * (height + barrierH)) / 2);
+                getX() + (int) (Math.cos(radian) * (width + barrierW) / 2),
+                getY() + (int) (Math.sin(radian) * (width + barrierW) / 2));
         barrier.setRotation(getRotation());
 
         // ボールをバリアに追従させる
