@@ -59,9 +59,4 @@ public class Block extends BaseActor implements AnimationActor, NoWaitActor {
             onDiedSound.play();
         }
     }
-
-    @Override
-    public void fight(Damage damage) {
-        super.fight(damage);
-    }
 }
