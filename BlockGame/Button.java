@@ -17,11 +17,24 @@ public class Button extends BaseActor {
         onMouseClickedSound = Config.getSound(this.getClass(), "mouseClicked");
     }
 
+    /**
+     * keyに対応する画像のボタンを作成する。
+     *
+     * @param key 画像を探す際のキー
+     */
     public Button(String key) {
         this();
         this.key = key;
     }
 
+    /**
+     * 指定した画像に指定したフォントで文字を描画したボタンを作成する。
+     *
+     * @param str ボタンに描画する文字列
+     * @param font 文字列のフォント
+     * @param normal 通常時の背景画像
+     * @param pressing ボタンが押された時の背景画像
+     */
     public Button(String str, Font font, GreenfootImage normal, GreenfootImage pressing) {
         this();
 
