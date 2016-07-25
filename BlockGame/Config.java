@@ -75,7 +75,7 @@ final public class Config {
         // width, heightが共に0なら、リサイズを行いません
         // リサイズしてから回転を行う。
         {null, StartWorld.class, "rogo", "rogo/title2.png", 0, 0, 0},
-        {null, StartWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
+        {null, StartWorld.class, "bg", "bg/titleBG4.png", WORLD_WIDTH, WORLD_HEIGHT, 0},
         {null, StageSelectWorld.class, "bg", "bg/titleBG4.jpg", WORLD_WIDTH, WORLD_HEIGHT, 0},
         {null, PlayWorld.class, "bg", "bg/space.jpg", 0, 0, 0},
         {BaseWorld.class, Ball.class, "bg", "ball/r2.png", 40, 40, 0},
