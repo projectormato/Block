@@ -134,7 +134,7 @@ public class StartWorld extends BaseWorld {
     }
 
     private Button addButton(String key, int x, int y) {
-        Button button = new Button(key);
+        Button button = new ImageButton(key);
         addObject(button, x, y);
         return button;
     }

@@ -21,7 +21,7 @@ public class StageSelectWorld extends BaseWorld {
         int offsetY = Config.STAGE_BUTTON_HEIGHT / 2 + Config.STAGE_BUTTON_MARGIN;
         for (final Class stageCls : Config.STAGES) {
             String stageName = stageCls.getSimpleName();
-            Button button = new Button(stageName, Config.STAGE_BUTTON_FONT, normalImage, pressingImage);
+            Button button = new StringButton(stageName, Config.STAGE_BUTTON_FONT, normalImage, pressingImage);
             button.addListner(new EventListener() {
                 @Override
                 public void onMouseClicked(MouseInfo mouse) {
