@@ -2,8 +2,9 @@
 import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class Stage1 extends PlayWorld {
+public class Stage3 extends PlayWorld {
 
     private Goal goal;
     private ArrayList<Block> blocks;
@@ -13,8 +14,8 @@ public class Stage1 extends PlayWorld {
 
     private ArrayList<Double> radianOffsets;
 
-    public Stage1() {
-        super("Stage1");
+    public Stage3() {
+        super("Stage3");
         prepare();
     }
 
@@ -26,6 +27,7 @@ public class Stage1 extends PlayWorld {
 
         blocks = new ArrayList<>();
         radianOffsets = new ArrayList<>();
+        //relayout();
 
         ball = new Ball();
         addDisabledObject(ball, 10, 10);
@@ -45,35 +47,21 @@ public class Stage1 extends PlayWorld {
         relayout();
     }
 
-    /**
-     * Blockが時計回りにGoalを公転するアニメーション行う。BlockはGoalに近いほど早く公転する。
-     */
     private void relayout() {
-        final int BLOCK_SPACE = (int) (70 * 1.44);
         GreenfootImage blockImage = new GreenfootImage("block/b.png");
         blockImage.scale(20, 20);
-        int[][] field
-                = {
-                    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,},
-                    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,},
-                    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,},
-                    {0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0,},
-                    {0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0,},
-                    {0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,},
-                    {0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0,},
-                    {0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0,},};
 
+        final int BLOCK_SPACE = (int) (70 * 1.44);
         Block[] blocks = new Block[200];
-        for (int y = 0; y < field.length; y++) {
-            for (int x = 0; x < field[y].length; x++) {
-                if (field[y][x] == 1) {
-                    Block block = new Block();
-                    blocks[x + y * field.length] = block;
-                    block.setImage(blockImage);
-                    addDisabledObject(block, x * 25 + BLOCK_SPACE, getHeight() - BLOCK_SPACE - field.length * 60 + y * 40);
-                }
-            }
+        Random r = new java.util.Random();
+        for (int i = 0; i < blocks.length; i++) {
+            int rx = r.nextInt(getWidth() - BLOCK_SPACE * 2) + BLOCK_SPACE;
+            int ry = r.nextInt(getHeight() - BLOCK_SPACE * 2) + BLOCK_SPACE;
+            blocks[i] = new Block();
+            blocks[i].setImage(blockImage);
+            addDisabledObject(blocks[i], rx, ry);
         }
+
     }
 
     @Override

@@ -3,7 +3,7 @@ import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import java.util.ArrayList;
 
-public class Stage1 extends PlayWorld {
+public class Stage2 extends PlayWorld {
 
     private Goal goal;
     private ArrayList<Block> blocks;
@@ -13,19 +13,18 @@ public class Stage1 extends PlayWorld {
 
     private ArrayList<Double> radianOffsets;
 
-    public Stage1() {
-        super("Stage1");
+    public Stage2() {
+        super("Stage2");
         prepare();
     }
 
     private void prepare() {
-        setBackground("bg/space.jpg");
-
         goal = new Goal();
         addDisabledObject(goal, getWidth() / 2, getHeight() / 2);
 
         blocks = new ArrayList<>();
         radianOffsets = new ArrayList<>();
+        relayout();
 
         ball = new Ball();
         addDisabledObject(ball, 10, 10);
@@ -42,37 +41,51 @@ public class Stage1 extends PlayWorld {
             }
         });
         addDisabledObject(cursor, 0, 0);
-        relayout();
     }
 
     /**
      * Blockが時計回りにGoalを公転するアニメーション行う。BlockはGoalに近いほど早く公転する。
      */
     private void relayout() {
-        final int BLOCK_SPACE = (int) (70 * 1.44);
         GreenfootImage blockImage = new GreenfootImage("block/b.png");
         blockImage.scale(20, 20);
-        int[][] field
-                = {
-                    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,},
-                    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,},
-                    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,},
-                    {0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0,},
-                    {0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0,},
-                    {0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,},
-                    {0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0,},
-                    {0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0,},};
 
-        Block[] blocks = new Block[200];
-        for (int y = 0; y < field.length; y++) {
-            for (int x = 0; x < field[y].length; x++) {
-                if (field[y][x] == 1) {
-                    Block block = new Block();
-                    blocks[x + y * field.length] = block;
-                    block.setImage(blockImage);
-                    addDisabledObject(block, x * 25 + BLOCK_SPACE, getHeight() - BLOCK_SPACE - field.length * 60 + y * 40);
-                }
+        int minRadius = goal.getWidth();
+        int maxRadius = minRadius + 200;
+        int dRadius = (int) (20 * 1.44);
+        int i = 0;
+        int j = 0;
+        for (int radius = minRadius; radius < maxRadius; radius += dRadius) {
+            double dRadian = (2 * Math.PI) / (2 * radius * Math.PI / blockImage.getWidth());
+            double radianOffset = 0;
+            try {
+                radianOffset = radianOffsets.get(j);
+            } catch (IndexOutOfBoundsException e) {
+                // 初回呼び出し時は、offsetの初期値をセット。
+                radianOffsets.add(0.0);
             }
+            for (double radian = 0; radian < 2 * Math.PI; radian += dRadian) {
+                int x = goal.getX() + (int) (Math.cos(radian + radianOffset) * radius);
+                int y = goal.getY() + (int) (Math.sin(radian + radianOffset) * radius);
+
+                Block block;
+                try {
+                    block = blocks.get(i);
+                    block.setLocation(x, y);
+                } catch (IndexOutOfBoundsException e) {
+                    // 初回呼び出し時は、Blockを新規作成する。
+                    // この時は、メッセージが表示されるはずなので、disabledにしておく。
+                    block = new Block();
+                    block.setImage(blockImage);
+                    blocks.add(block);
+                    addDisabledObject(block, x, y);
+                }
+                i++;
+            }
+
+            // offsetを更新
+            radianOffsets.set(j, radianOffset + Math.toRadians(10000.0 / (radius * radius)));
+            j++;
         }
     }
 
@@ -83,7 +96,7 @@ public class Stage1 extends PlayWorld {
             case STAGE_END_MSG:
                 break;
             default:
-                //relayout();
+                relayout();
                 break;
         }
     }
