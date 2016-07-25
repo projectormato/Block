@@ -11,38 +11,31 @@ import greenfoot.World;
  *
  * @author yuuki0xff
  */
-public class FadeOutAnimate extends BaseActor implements AnimationActor {
+public class FadeOutAnimate extends BaseAnimationActor {
 
     // 通常時の画像
     private GreenfootImage normalImg;
     // 壊れた時の画像
     private GreenfootImage brokenImg;
-    private int count = 0;
-    private final int ANIME_SPEED = 5;
-    private final int ANIME_STEP = 20;
 
     @Override
     public void addedToWorld(World world) {
         normalImg = Config.getImage(this, "bg");
         brokenImg = Config.getImage(this, "broken");
         setImage(normalImg);
+
+        // Disabledになることは無いので、追加した瞬間からアニメーションをスタートする
+        startAnimation();
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void animate(int step) {
+        super.animate(step);
 
-        int step = count / ANIME_SPEED;
         switch (getActorStatus()) {
             case ALIVE: {
-                count++;
-
-                if (count >= ANIME_SPEED * ANIME_STEP) {
+                if (step >= ANIME_STEP) {
                     setActorStatus(ActorStatus.DIED);
-                    return;
-                }
-
-                if (count % ANIME_SPEED != 0) {
                     return;
                 }
 
@@ -65,13 +58,8 @@ public class FadeOutAnimate extends BaseActor implements AnimationActor {
                 break;
             }
             case DIED: {
-                count++;
-                if (count >= ANIME_SPEED * ANIME_STEP) {
+                if (step >= ANIME_STEP) {
                     setActorStatus(ActorStatus.REMOVED);
-                    return;
-                }
-
-                if (count % ANIME_SPEED != 0) {
                     return;
                 }
 
@@ -89,7 +77,7 @@ public class FadeOutAnimate extends BaseActor implements AnimationActor {
     @Override
     public void onDied() {
         super.onDied();
-        // アニメーションの回数をリセットして、次のアニメーションをスタート
-        count = 0;
+        // アニメーションをリセットして、死んだ時のアニメーションをスタート
+        resetAnimation();
     }
 }

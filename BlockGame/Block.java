@@ -7,15 +7,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Block extends BaseActor implements AnimationActor, NoWaitActor {
+public class Block extends BaseAnimationActor implements NoWaitActor {
 
     private GreenfootSound onDiedSound;
 
-    private final int ANIME_SPEED = 5;
-    private final int ANIME_STEP = 10;
     private final int ANIME_MAX_SIZE = 3; // 元画像の何倍まで拡大するか
     private GreenfootImage originalImg;
-    private int count = 0;
 
     public Block() {
         onDiedSound = Config.getSound(this.getClass(), "broken");
@@ -31,13 +28,12 @@ public class Block extends BaseActor implements AnimationActor, NoWaitActor {
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void animate(int step) {
+        super.animate(step);
         if (getActorStatus() == ActorStatus.DIED) {
             // 壊れた時のアニメーション
             // 透明度を減らしながら、画像を拡大するアニメーションをする
-            int step = count / ANIME_SPEED;
-            if (count < ANIME_STEP * ANIME_SPEED) {
+            if (step < ANIME_STEP) {
                 int maxAlpha = (int) (0xff * (double) (ANIME_STEP - step) / ANIME_STEP);
                 int w = (int) (originalImg.getWidth() * (1.0 + (ANIME_MAX_SIZE - 1) * (0.0 + step) / ANIME_STEP));
                 int h = (int) (originalImg.getHeight() * (1.0 + (ANIME_MAX_SIZE - 1) * (0.0 + step) / ANIME_STEP));
@@ -51,9 +47,7 @@ public class Block extends BaseActor implements AnimationActor, NoWaitActor {
             } else {
                 // アニメーションが終わったら削除
                 setActorStatus(ActorStatus.REMOVED);
-                return;
             }
-            count++;
         }
     }
 
@@ -63,5 +57,6 @@ public class Block extends BaseActor implements AnimationActor, NoWaitActor {
         if (Config.getBoolean("enableSoundEffect") && onDiedSound != null) {
             onDiedSound.play();
         }
+        startAnimation();
     }
 }
