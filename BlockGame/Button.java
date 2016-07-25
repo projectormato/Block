@@ -37,6 +37,17 @@ public abstract class Button extends BaseAnimationActor {
         this.maxAlpha = maxAlpha;
     }
 
+    @Override
+    public void animate(int step) {
+        super.animate(step);
+        if (step > ANIME_STEP) {
+            stopAnimation();
+            return;
+        }
+        // animate()メソッドは迂闊に呼び出せないので、画像を描画するロジックをdraw()に分離した
+        draw(step);
+    }
+
     /**
      * 画像を描画する。
      *
