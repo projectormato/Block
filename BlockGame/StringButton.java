@@ -1,5 +1,7 @@
 
 import greenfoot.GreenfootImage;
+import greenfoot.World;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
@@ -10,29 +12,43 @@ import java.awt.Graphics;
  */
 public class StringButton extends Button {
 
+    Font font = Config.STAGE_BUTTON_FONT;
+    Color color = Color.WHITE;
+
     /**
      * 指定した画像に指定したフォントで文字を描画したボタンを作成する。
      *
      * @param str ボタンに描画する文字列
-     * @param font 文字列のフォント
-     * @param normal 通常時の背景画像
-     * @param pressing ボタンが押された時の背景画像
      */
-    public StringButton(String str, Font font, GreenfootImage normal, GreenfootImage pressing) {
-        // 渡された画像を破壊しないよう、複製を作る
-        normalImg = new GreenfootImage(normal);
-        pressingImg = new GreenfootImage(pressing);
-
-        // 通常時の画像(デフォルト)
+    public StringButton(String str) {
+        GreenfootImage img;
         Graphics g;
-        g = normalImg.getAwtImage().createGraphics();
-        g.setFont(font);
-        Utils.drawStringToCenter(str, g, 0, 0, normalImg.getWidth(), normalImg.getHeight());
-        setImage(normalImg);
 
-        // 押された時の画像
-        g = pressingImg.getAwtImage().createGraphics();
+        // 文字を描画するのに必要な最小のサイズを調べる
+        img = new GreenfootImage(1000, 100);
+        g = img.getAwtImage().getGraphics();
         g.setFont(font);
-        Utils.drawStringToCenter(str, g, 0, 0, pressingImg.getWidth(), pressingImg.getHeight());
+        int[] drawedSize = Utils.drawString(str, g, 0, 0, img.getWidth(), img.getHeight(), true);
+        int width, height;
+        // 文字列が描画できるよう、少し余裕を持たせておく
+        width = drawedSize[0] + 1;
+        height = drawedSize[1] + 1;
+
+        // 文字列を画像に変換
+        img = new GreenfootImage(width, height);
+        g = img.getAwtImage().getGraphics();
+        g.setColor(color);
+        g.setFont(font);
+        Utils.drawStringToCenter(str, g, 0, 0, width, height);
+        g.dispose();
+
+        normalImg = img;
+        setImage(normalImg);
+    }
+
+    @Override
+    public void addedToWorld(World world) {
+        super.addedToWorld(world);
+        draw();
     }
 }
