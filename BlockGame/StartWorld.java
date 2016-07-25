@@ -11,6 +11,11 @@ import java.util.logging.Logger;
 public class StartWorld extends BaseWorld {
 
     private GreenfootSound bgm;
+    private GreenfootImage blackBg, bg, rogo;
+
+    private int count = 0;
+    private final int ANIME_SPEED = 5;
+    private final int ANIME_STEP = 20;
 
     public StartWorld() {
         logger = Logger.getLogger("SampleLogging");
@@ -41,9 +46,14 @@ public class StartWorld extends BaseWorld {
      */
     private void prepare() {
         // 背景とロゴを描画
-        GreenfootImage rogo = Config.getImage(this, "rogo");
-        getBackground().drawImage(rogo, getWidth() / 2 - rogo.getWidth() / 2, 0);
-        
+        rogo = Config.getImage(this, "rogo");
+        bg = getBackground();
+        // 背景を真っ黒にする
+        blackBg = new GreenfootImage(getWidth(), getHeight());
+        blackBg.setColor(Color.BLACK);
+        blackBg.fill();
+        setBackground(blackBg);
+
         Button startButton = addButton("Game Start", 900, 450);
         Button stageButton = addButton("Select Stage", 975, 550);
         Button settingsButton = addButton("Settings", 1050, 650);
@@ -71,6 +81,41 @@ public class StartWorld extends BaseWorld {
                 changeWorld("settings");
             }
         });
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        count++;
+        if (count % ANIME_SPEED != 0) {
+            return;
+        }
+
+        int step = count / ANIME_SPEED;
+        if (step <= ANIME_STEP) {
+            // ロゴが光って登場するアニメーションをする
+            // ロゴのalpha値の上限を上げていくことで実現している。
+            int alpha = 0xff * step / ANIME_STEP;
+            GreenfootImage newRogo = new GreenfootImage(rogo);
+            GreenfootImage newBg = new GreenfootImage(blackBg);
+
+            // 調整したロゴを描画する
+            Utils.updateMaxAlpha(newRogo, alpha);
+            newBg.drawImage(newRogo, getWidth() / 2 - rogo.getWidth() / 2, 0);
+            setBackground(newBg);
+        } else if (step < 2 * ANIME_STEP) {
+            // 背景とロゴを一瞬光らせるアニメーションをする
+            // 背景のalpha値の上限を上げていくことで実現している。
+            int alpha = 0xff * (step - ANIME_STEP) / ANIME_STEP;
+            GreenfootImage newBg = new GreenfootImage(bg);
+
+            // 調整した背景にロゴを描画する
+            Utils.updateMaxAlpha(newBg, alpha);
+            newBg.drawImage(rogo, getWidth() / 2 - rogo.getWidth() / 2, 0);
+            setBackground(newBg);
+        } else if (step == 3 * ANIME_STEP) {
+            // ボタンを追加する
+        }
     }
 
     /**
