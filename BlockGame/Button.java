@@ -22,13 +22,6 @@ public class Button extends BaseActor {
         this.key = key;
     }
 
-    public Button(GreenfootImage normal, GreenfootImage pressing) {
-        this();
-        normalImg = normal;
-        pressingImg = pressing;
-        setImage(normalImg);
-    }
-
     public Button(String str, Font font, GreenfootImage normal, GreenfootImage pressing) {
         this();
 
