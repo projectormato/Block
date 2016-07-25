@@ -22,14 +22,17 @@ public class Block extends BaseActor implements AnimationActor, NoWaitActor {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-
+    public void addedToWorld(World world) {
+        super.addedToWorld(world);
         // アニメーションのために、加工の画像が必要だから、事前に取得しておく
         if (originalImg == null) {
             originalImg = getImage();
         }
+    }
 
+    @Override
+    public void tick() {
+        super.tick();
         if (getActorStatus() == ActorStatus.DIED) {
             // 壊れた時のアニメーション
             // 透明度を減らしながら、画像を拡大するアニメーションをする
