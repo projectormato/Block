@@ -1,7 +1,7 @@
 
 import greenfoot.*;
 
-abstract public class Button extends BaseActor {
+public abstract class Button extends BaseActor {
 
     GreenfootImage normalImg, pressingImg;
     int bgcolor = 0;
