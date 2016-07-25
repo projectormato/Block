@@ -10,10 +10,16 @@ public class Button extends BaseActor {
     int color = 0;
     private GreenfootSound onMouseInSound;
     private GreenfootSound onMouseClickedSound;
+    private String key;
 
     private Button() {
         onMouseInSound = Config.getSound(this.getClass(), "mouseIn");
         onMouseClickedSound = Config.getSound(this.getClass(), "mouseClicked");
+    }
+
+    public Button(String key) {
+        this();
+        this.key = key;
     }
 
     public Button(GreenfootImage normal, GreenfootImage pressing) {
@@ -41,6 +47,19 @@ public class Button extends BaseActor {
         g = pressingImg.getAwtImage().createGraphics();
         g.setFont(font);
         Utils.drawStringToCenter(str, g, 0, 0, pressingImg.getWidth(), pressingImg.getHeight());
+    }
+
+    @Override
+    public void addedToWorld(World world) {
+        // コンストラクタでnormalImgが設定されていたら、Configから画像を取得しない
+        if (normalImg != null) {
+            return;
+        }
+
+        normalImg = Config.getImage(this, key);
+        setImage(normalImg);
+        pressingImg = new GreenfootImage(normalImg);
+        // TODO: ボタンが押された時の画像を生成する処理を入れる
     }
 
     @Override
