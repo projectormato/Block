@@ -1,9 +1,6 @@
 
 import greenfoot.*;
 import java.awt.Color;
-import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
 
 /**
  * スタート画面を表示する。
