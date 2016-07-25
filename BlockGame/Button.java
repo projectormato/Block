@@ -71,11 +71,10 @@ public class Button extends BaseActor {
 
     @Override
     public void onMouseIn(MouseInfo mouse) {
+        super.onMouseIn(mouse);
         if (getActorStatus() != ActorStatus.ALIVE) {
             return;
         }
-
-        super.onMouseIn(mouse);
         if (Config.getBoolean("enableSoundEffect") && onMouseInSound != null) {
             onMouseInSound.play();
         }
@@ -83,31 +82,31 @@ public class Button extends BaseActor {
 
     @Override
     public void onMouseDown(MouseInfo mouse) {
+        super.onMouseDown(mouse);
         if (getActorStatus() != ActorStatus.ALIVE) {
             return;
         }
 
-        super.onMouseDown(mouse);
         setImage(pressingImg);
     }
 
     @Override
     public void onMouseUp(MouseInfo mouse) {
+        super.onMouseUp(mouse);
         if (getActorStatus() != ActorStatus.ALIVE) {
             return;
         }
 
-        super.onMouseUp(mouse);
         setImage(normalImg);
     }
 
     @Override
     public void onMouseClicked(MouseInfo mouse) {
+        super.onMouseClicked(mouse);
         if (getActorStatus() != ActorStatus.ALIVE) {
             return;
         }
 
-        super.onMouseClicked(mouse);
         if (Config.getBoolean("enableSoundEffect") && onMouseClickedSound != null) {
             onMouseClickedSound.play();
         }
