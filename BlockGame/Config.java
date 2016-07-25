@@ -49,24 +49,24 @@ final public class Config {
         {StartWorld.class, "settings", SettingsWorld.class},
         {PlayWorld.class, "title", StartWorld.class},
         {Stage1.class, "replay", Stage1.class},
-        {Stage1.class, "next", StageGH.class},
-        {StageGH.class, "replay", StageGH.class},
-        {StageGH.class, "next", StageKK.class},
-        {StageKK.class, "replay", StageKK.class},
-        {StageKK.class, "next", StageKK2.class},
-        {StageKK2.class, "replay", StageKK2.class},
-        {StageKK2.class, "next", StageKK3.class},
-        {StageKK3.class, "replay", StageKK3.class},
-        {StageKK3.class, "next", StartWorld.class},};
+        {Stage1.class, "next", Stage2.class},
+        {Stage2.class, "replay", Stage2.class},
+        {Stage2.class, "next", Stage3.class},
+        {Stage3.class, "replay", Stage3.class},
+        {Stage3.class, "next", Stage4.class},
+        {Stage4.class, "replay", Stage4.class},
+        {Stage4.class, "next", Stage5.class},
+        {Stage5.class, "replay", Stage5.class},
+        {Stage5.class, "next", StartWorld.class},};
     /**
      * ステージの一覧。レベル順に並べること。
      */
     public final static Class[] STAGES = {
         Stage1.class,
-        StageGH.class,
-        StageKK.class,
-        StageKK2.class,
-        StageKK3.class};
+        Stage2.class,
+        Stage3.class,
+        Stage4.class,
+        Stage5.class};
     /**
      * 背景画像の一覧。
      */
