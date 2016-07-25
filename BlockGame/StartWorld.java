@@ -23,19 +23,6 @@ public class StartWorld extends BaseWorld {
     private final int ANIME_STEP = 20;
 
     public StartWorld() {
-        logger = Logger.getLogger("SampleLogging");
-        if (ENABLE_LOGGING) {
-            try {
-                FileHandler fh = new FileHandler(LOG_FILE, true);
-                fh.setFormatter(new java.util.logging.SimpleFormatter());
-                logger.addHandler(fh);
-            } catch (IOException e) {
-                e.printStackTrace(System.out);
-                // とにかく実行を中断
-                throw new AssertionError();
-            }
-        }
-
         Config.load();
 
         if (Config.getBoolean("enableBGM")) {
@@ -113,7 +100,6 @@ public class StartWorld extends BaseWorld {
         startButton.addListner(new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
-                System.out.println("Game Start");
                 changeWorld("start");
             }
         });
@@ -121,7 +107,6 @@ public class StartWorld extends BaseWorld {
         stageButton.addListner(new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
-                System.out.println("Select Stage");
                 changeWorld("stage-select");
             }
         });
@@ -130,7 +115,6 @@ public class StartWorld extends BaseWorld {
         settingsButton.addListner(new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
-                System.out.println("Settings");
                 changeWorld("settings");
             }
         });

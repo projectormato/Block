@@ -4,17 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * 全てのWorldクラスの親クラス
  */
 public abstract class BaseWorld extends World implements EventHandler {
 
-    final static boolean ENABLE_LOGGING = false;
-    final static String LOG_FILE = "../blockGame.log";
-
-    protected Logger logger;
     private List<String> listenKeys = new ArrayList<>();
     private Map<String, Boolean> lastKeyStatusMap = new HashMap<>();
     private int mouseStatus;
@@ -109,10 +104,8 @@ public abstract class BaseWorld extends World implements EventHandler {
 
             // onMouseIn, onMouseOut
             if (isHovering && !isHovered) {
-                System.out.println(handler + ": mouse in");
                 handler.onMouseIn(mouse);
             } else if (!isHovering && isHovered) {
-                System.out.println(handler + ": mouse out");
                 handler.onMouseOut(mouse);
             }
             handler.setLastMouseStatus(EventHandler.MOUSE_HOVERED, isHovering);
@@ -132,17 +125,13 @@ public abstract class BaseWorld extends World implements EventHandler {
 
             // onMouseDown, onMouseHolding, onMouseUp, onMouseClicked
             if (isPressing && !isPressed) {
-                System.out.println(handler + ": mouse down");
                 handler.onMouseDown(mouse);
             } else if (isPressing && isPressed) {
-                System.out.println(handler + ": mouse holding");
                 handler.onMouseHolding(mouse);
             } else if (!isPressing && isPressed) {
-                System.out.println(handler + ": mouse up");
                 handler.onMouseUp(mouse);
 
                 if (Greenfoot.mouseClicked(handler) && !Greenfoot.mouseDragEnded(handler)) {
-                    System.out.println(handler + ": mouse clicked");
                     handler.onMouseClicked(mouse);
                 }
             }
@@ -158,12 +147,9 @@ public abstract class BaseWorld extends World implements EventHandler {
 
             // onMouseDragging, onMouseDragged
             if (isDragging && !isDragged) {
-                System.out.println(handler + ": mouse drag started");
             } else if (isDragging && isDragged) {
-                System.out.println(handler + ": mouse dragging");
                 handler.onMouseDragging(mouse);
             } else if (!isDragging && isDragged) {
-                System.out.println(handler + ": mouse drag ended");
                 handler.onMouseDragged(mouse);
             }
             handler.setLastMouseStatus(EventHandler.MOUSE_DRAGGED, isDragging);
@@ -215,20 +201,14 @@ public abstract class BaseWorld extends World implements EventHandler {
     @Override
     public void addObject(Actor actor, int x, int y) {
         assert actor != null;
-        assert logger != null;
         assert actor instanceof BaseActor;
 
-        ((BaseActor) actor).setLogger(logger);
         super.addObject(actor, x, y);
     }
 
     public void addDisabledObject(Actor actor, int x, int y) {
         ((BaseActor) actor).setActorStatus(ActorStatus.DISABLED);
         addObject(actor, x, y);
-    }
-
-    public void setLogger(Logger logger) {
-        this.logger = logger;
     }
 
     /**
@@ -241,7 +221,7 @@ public abstract class BaseWorld extends World implements EventHandler {
             World nextWorld = (World) Config.getNextWorld(this.getClass(), key).newInstance();
             Greenfoot.setWorld(nextWorld);
         } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace(System.out);
+            // e.printStackTrace(System.out);
             Greenfoot.stop();
         }
     }

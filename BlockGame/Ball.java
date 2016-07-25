@@ -70,7 +70,6 @@ public class Ball extends BaseActor {
         // Ballは常に攻撃側
         BaseActor defender = (BaseActor) damage.getDefender();
         if (defender instanceof Goal) {
-            System.out.println("--- GOAL ---");
             ((PlayWorld) getWorld()).win();
         } else {
             if (!isActorsListInitialized) {
@@ -113,8 +112,6 @@ public class Ball extends BaseActor {
                 // ballから曲率円の中心へのオフセット
                 dx = (defender.getX() + curvatureDx) - getX();
                 dy = (defender.getY() + curvatureDy) - getY();
-                System.out.println("x, y: " + getX() + "\t" + getY());
-                System.out.println("dx, dy: " + dx + "\t" + dy);
             } else {
                 dx = defender.getX() - getX();
                 dy = defender.getY() - getY();
@@ -148,13 +145,6 @@ public class Ball extends BaseActor {
             vectorRx = vectorFx + 2 * a * vectorNx;
             vectorRy = vectorFy + 2 * a * vectorNy;
 
-            System.out.println("Ball: " + damage.getDefender() + "\n\t"
-                    + "reflection angle: " + Math.toDegrees(Math.atan2(vectorRy, vectorRx)) + "\n\t"
-                    + "vectorF: " + vectorFx + "\t" + vectorFy + "\n\t"
-                    + "vectorN: " + vectorNx + "\t" + vectorNy + "\n\t"
-                    + "vectorR: " + vectorRx + "\t" + vectorRy + "\n\t"
-                    + "a: " + a
-            );
             nextTurnVectorX += vectorRx;
             nextTurnVectorY += vectorRy;
         }

@@ -104,14 +104,12 @@ public class Stage5 extends PlayWorld {
     @Override
     public void win() {
         super.win();
-        System.out.println("--- STAGE COMPLETE ---");
         disableAllActors();
     }
 
     @Override
     public void lose() {
         super.lose();
-        System.out.println("--- GAME OVER ---");
         disableAllActors();
     }
 

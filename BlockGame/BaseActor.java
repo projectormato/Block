@@ -44,7 +44,7 @@ public abstract class BaseActor extends Actor implements EventHandler {
         try {
             setImage(Config.getImage(this, "bg"));
         } catch (IllegalArgumentException e) {
-            e.printStackTrace(System.out);
+            // e.printStackTrace(System.out);
         }
     }
 

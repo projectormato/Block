@@ -129,7 +129,6 @@ public final class Utils {
 
                 // 画像に描画して、次の行の描画領域を設定
                 if (!isDryRun) {
-                    System.out.println("draw: " + targetStr.substring(0, i));
                     graphics.drawString(targetStr.substring(0, i), x, y + (int) strHeight);
                 }
                 y += strHeight;

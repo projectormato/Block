@@ -30,7 +30,7 @@ public class StageSelectWorld extends BaseWorld {
                         BaseWorld nextWorld = (BaseWorld) stageCls.newInstance();
                         Greenfoot.setWorld(nextWorld);
                     } catch (Exception e) {
-                        e.printStackTrace(System.out);
+                        // e.printStackTrace(System.out);
                         Greenfoot.stop();
                     }
                 }

@@ -137,7 +137,7 @@ final public class Config {
         } catch (FileNotFoundException e) {
             isLoaded = true;
         } catch (IOException e) {
-            e.printStackTrace(System.out);
+            // e.printStackTrace(System.out);
             Greenfoot.stop();
         }
     }
@@ -150,7 +150,7 @@ final public class Config {
         try (OutputStreamWriter configFile = new OutputStreamWriter(new FileOutputStream(Paths.get(filePaht).toFile()), StandardCharsets.UTF_8)) {
             prop.store(configFile, "BlockGame config file");
         } catch (IOException e) {
-            e.printStackTrace(System.out);
+            // e.printStackTrace(System.out);
             Greenfoot.stop();
         }
     }

@@ -34,7 +34,6 @@ public class MessageBox extends BaseActor {
                     Files.readAllBytes(Paths.get(fileName)),
                     StandardCharsets.UTF_8);
         } catch (Exception e) {
-            System.out.println(String.format("cannot access \"%s\".", fileName));
             Greenfoot.stop();
         }
 

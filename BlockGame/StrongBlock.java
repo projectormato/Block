@@ -26,6 +26,5 @@ public class StrongBlock extends Block {
     @Override
     public void fight(Damage damage) {
         super.fight(damage);
-        System.out.println("StrongBlock: fight(): damage: " + damage);
     }
 }
