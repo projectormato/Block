@@ -34,7 +34,7 @@ public class FadeOutAnimate extends BaseAnimationActor {
 
         switch (getActorStatus()) {
             case ALIVE: {
-                if (step >= ANIME_STEP) {
+                if (step >= animeStep) {
                     setActorStatus(ActorStatus.DIED);
                     return;
                 }
@@ -42,8 +42,8 @@ public class FadeOutAnimate extends BaseAnimationActor {
                 int w = Math.max(normalImg.getWidth(), brokenImg.getHeight());
                 int h = Math.max(normalImg.getHeight(), brokenImg.getHeight());
                 // それぞれの画像の透過度
-                int normalImageAlpha = (0xff / ANIME_STEP) * (ANIME_STEP - step);
-                int brokenImageAlpha = (0xff / ANIME_STEP) * step;
+                int normalImageAlpha = (0xff / animeStep) * (animeStep - step);
+                int brokenImageAlpha = (0xff / animeStep) * step;
 
                 // 通常時の画像は、元画像を破壊しながら更新
                 Utils.updateMaxAlpha(normalImg, normalImageAlpha);
@@ -58,14 +58,14 @@ public class FadeOutAnimate extends BaseAnimationActor {
                 break;
             }
             case DIED: {
-                if (step >= ANIME_STEP) {
+                if (step >= animeStep) {
                     setActorStatus(ActorStatus.REMOVED);
                     return;
                 }
 
                 // 壊れた時の画像がフェードアウトしていくアニメーション
                 // 壊れた時の画像を破壊しながら更新
-                int brokenImageAlpha = (0xff / ANIME_STEP) * (ANIME_STEP - step);
+                int brokenImageAlpha = (0xff / animeStep) * (animeStep - step);
                 Utils.updateMaxAlpha(brokenImg, brokenImageAlpha);
                 setImage(brokenImg, false);
                 break;

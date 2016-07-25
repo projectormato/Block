@@ -9,8 +9,8 @@
 public abstract class BaseAnimationActor extends BaseActor implements AnimationActor {
 
     private int count = -1;
-    protected final int ANIME_SPEED = 5;
-    protected final int ANIME_STEP = 20;
+    protected int animeSpeed = 5;
+    protected int animeStep = 20;
 
     @Override
     public void tick() {
@@ -21,10 +21,10 @@ public abstract class BaseAnimationActor extends BaseActor implements AnimationA
             return;
         }
 
-        int step = count / ANIME_SPEED;
+        int step = count / animeSpeed;
         count++;
         // フレームを間引きするべきとき
-        if (count % ANIME_SPEED != 0) {
+        if (count % animeSpeed != 0) {
             return;
         }
 

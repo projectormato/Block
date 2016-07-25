@@ -33,10 +33,10 @@ public class Block extends BaseAnimationActor implements NoWaitActor {
         if (getActorStatus() == ActorStatus.DIED) {
             // 壊れた時のアニメーション
             // 透明度を減らしながら、画像を拡大するアニメーションをする
-            if (step < ANIME_STEP) {
-                int maxAlpha = (int) (0xff * (double) (ANIME_STEP - step) / ANIME_STEP);
-                int w = (int) (originalImg.getWidth() * (1.0 + (ANIME_MAX_SIZE - 1) * (0.0 + step) / ANIME_STEP));
-                int h = (int) (originalImg.getHeight() * (1.0 + (ANIME_MAX_SIZE - 1) * (0.0 + step) / ANIME_STEP));
+            if (step < animeStep) {
+                int maxAlpha = (int) (0xff * (double) (animeStep - step) / animeStep);
+                int w = (int) (originalImg.getWidth() * (1.0 + (ANIME_MAX_SIZE - 1) * (0.0 + step) / animeStep));
+                int h = (int) (originalImg.getHeight() * (1.0 + (ANIME_MAX_SIZE - 1) * (0.0 + step) / animeStep));
                 GreenfootImage img = new GreenfootImage(originalImg);
 
                 // サイズと透過度を変更

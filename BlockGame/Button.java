@@ -40,7 +40,7 @@ public abstract class Button extends BaseAnimationActor {
     @Override
     public void animate(int step) {
         super.animate(step);
-        if (step > ANIME_STEP) {
+        if (step > animeStep) {
             stopAnimation();
             return;
         }
@@ -90,18 +90,18 @@ public abstract class Button extends BaseAnimationActor {
         int r, g, b;
         if (isMouseHovering) {
             // normal -> hovering
-            r = normalColor.getRed() * (ANIME_STEP - step) + hoveringColor.getRed() * step;
-            g = normalColor.getGreen() * (ANIME_STEP - step) + hoveringColor.getGreen() * step;
-            b = normalColor.getBlue() * (ANIME_STEP - step) + hoveringColor.getBlue() * step;
+            r = normalColor.getRed() * (animeStep - step) + hoveringColor.getRed() * step;
+            g = normalColor.getGreen() * (animeStep - step) + hoveringColor.getGreen() * step;
+            b = normalColor.getBlue() * (animeStep - step) + hoveringColor.getBlue() * step;
         } else {
             // hovering -> normal
-            r = normalColor.getRed() * step + hoveringColor.getRed() * (ANIME_STEP - step);
-            g = normalColor.getGreen() * step + hoveringColor.getGreen() * (ANIME_STEP - step);
-            b = normalColor.getBlue() * step + hoveringColor.getBlue() * (ANIME_STEP - step);
+            r = normalColor.getRed() * step + hoveringColor.getRed() * (animeStep - step);
+            g = normalColor.getGreen() * step + hoveringColor.getGreen() * (animeStep - step);
+            b = normalColor.getBlue() * step + hoveringColor.getBlue() * (animeStep - step);
         }
-        r /= ANIME_STEP;
-        g /= ANIME_STEP;
-        b /= ANIME_STEP;
+        r /= animeStep;
+        g /= animeStep;
+        b /= animeStep;
         return new Color(r, g, b);
     }
 
