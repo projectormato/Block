@@ -1,7 +1,12 @@
 
 import greenfoot.*;
 
-public abstract class Button extends BaseActor {
+/**
+ * アニメーションをするボタン。
+ *
+ * @author yuuki0xff
+ */
+public abstract class Button extends BaseAnimationActor {
 
     GreenfootImage normalImg, pressingImg;
     int bgcolor = 0;
@@ -9,10 +14,20 @@ public abstract class Button extends BaseActor {
     private GreenfootSound onMouseInSound;
     private GreenfootSound onMouseClickedSound;
     protected String key;
+    protected int maxAlpha = 0xff;
 
     public Button() {
         onMouseInSound = Config.getSound(this.getClass(), "mouseIn");
         onMouseClickedSound = Config.getSound(this.getClass(), "mouseClicked");
+    }
+
+    /**
+     * このActorの透過度を変更します。この値が考慮されるのは、アニメーションを行っている最中だけです。
+     *
+     * @param maxAlpha
+     */
+    public void setMaxAlpha(int maxAlpha) {
+        this.maxAlpha = maxAlpha;
     }
 
     @Override
