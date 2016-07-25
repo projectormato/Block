@@ -300,6 +300,13 @@ final public class Config {
         throw new IllegalArgumentException("このクラスに対応する画像がConfigクラスで指定されていない");
     }
 
+    /**
+     * 指定したクラスとキーに対応するサウンドを返す。
+     *
+     * @param clazz
+     * @param key
+     * @return GreenfootSoundオブジェクト
+     */
     public static GreenfootSound getSound(Class clazz, String key) {
         for (Object[] tuple : SOUNDS) {
             if (tuple.length != 3) {
