@@ -26,6 +26,8 @@ public abstract class Button extends BaseAnimationActor {
     public Button() {
         onMouseInSound = Config.getSound(this.getClass(), "mouseIn");
         onMouseClickedSound = Config.getSound(this.getClass(), "mouseClicked");
+        // アニメーションの速度を早くする
+        animeStep = 5;
     }
 
     /**
