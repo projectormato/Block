@@ -126,26 +126,6 @@ public abstract class Button extends BaseAnimationActor {
     }
 
     @Override
-    public void onMouseDown(MouseInfo mouse) {
-        super.onMouseDown(mouse);
-        if (getActorStatus() != ActorStatus.ALIVE) {
-            return;
-        }
-
-        // setImage(pressingImg);
-    }
-
-    @Override
-    public void onMouseUp(MouseInfo mouse) {
-        super.onMouseUp(mouse);
-        if (getActorStatus() != ActorStatus.ALIVE) {
-            return;
-        }
-
-        // setImage(normalImg);
-    }
-
-    @Override
     public void onMouseClicked(MouseInfo mouse) {
         super.onMouseClicked(mouse);
         if (getActorStatus() != ActorStatus.ALIVE) {
