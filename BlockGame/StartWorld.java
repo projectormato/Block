@@ -15,7 +15,8 @@ public class StartWorld extends BaseWorld {
     private boolean isButtonsAdded = false;
     private Button startButton;
     private Button stageButton;
-    private Button settingsButton;
+    // settingsWorldの実装が間に合わなかったため、このボタンは無くした
+    // private Button settingsButton;
 
     private int count = 0;
     private final int ANIME_SPEED = 5;
@@ -98,7 +99,7 @@ public class StartWorld extends BaseWorld {
 
             startButton.setMaxAlpha(alpha);
             stageButton.setMaxAlpha(alpha);
-            settingsButton.setMaxAlpha(alpha);
+            // settingsButton.setMaxAlpha(alpha);
         } else if (step == 3 * ANIME_STEP) {
             // ボタンを追加する
         }
@@ -107,7 +108,7 @@ public class StartWorld extends BaseWorld {
     private void addButtons() {
         startButton = addButton("Game Start", 900, 450);
         stageButton = addButton("Select Stage", 975, 550);
-        settingsButton = addButton("Settings", 1050, 650);
+        // settingsButton = addButton("Settings", 1050, 650);
 
         startButton.addListner(new EventListener() {
             @Override
@@ -125,6 +126,7 @@ public class StartWorld extends BaseWorld {
             }
         });
 
+        /*
         settingsButton.addListner(new EventListener() {
             @Override
             public void onMouseClicked(MouseInfo mouse) {
@@ -132,6 +134,7 @@ public class StartWorld extends BaseWorld {
                 changeWorld("settings");
             }
         });
+         */
     }
 
     /**
