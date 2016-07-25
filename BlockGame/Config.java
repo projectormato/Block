@@ -44,6 +44,7 @@ final public class Config {
      */
     private final static Object[][] WORLD_TRANSITION_PATTERN = {
         // {from, key, to}
+        {BootWorld.class, "next", StartWorld.class},
         {StartWorld.class, "start", Stage1.class},
         {StartWorld.class, "stage-select", StageSelectWorld.class},
         {StartWorld.class, "settings", SettingsWorld.class},

@@ -20,8 +20,6 @@ public class StartWorld extends BaseWorld {
     private final int ANIME_STEP = 20;
 
     public StartWorld() {
-        Config.load();
-
         if (Config.getBoolean("enableBGM")) {
             bgm = Config.getSound(this.getClass(), "bgm");
             bgm.playLoop();
