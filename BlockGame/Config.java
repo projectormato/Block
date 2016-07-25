@@ -96,7 +96,10 @@ final public class Config {
         {Stage4.class, GoalAnimate.class, "bg", "goal/mercury.png", 100, 100, 0},
         {Stage5.class, Goal.class, "bg", "goal/earth.png", 100, 100, 0},
         {Stage5.class, GoalAnimate.class, "bg", "goal/earth.png", 100, 100, 0},
-        {BaseWorld.class, GoalAnimate.class, "broken", "goal/bomb2.png", 400, 400, 0},};
+        {BaseWorld.class, GoalAnimate.class, "broken", "goal/bomb2.png", 400, 400, 0},
+        {StartWorld.class, Button.class, "Game Start", "button/gamestart.png", 200, 50, 0},
+        {StartWorld.class, Button.class, "Select Stage", "button/selectStage.png", 200, 50, 0},
+        {StartWorld.class, Button.class, "Settings", "button/setting.png", 133, 50, 0},};
 
     /**
      * サウンドの一覧。
