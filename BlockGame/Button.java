@@ -57,6 +57,7 @@ public class Button extends BaseActor {
 
     @Override
     public void addedToWorld(World world) {
+        super.addedToWorld(world);
         // コンストラクタでnormalImgが設定されていたら、Configから画像を取得しない
         if (normalImg != null) {
             return;
