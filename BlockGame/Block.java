@@ -23,6 +23,8 @@ public class Block extends BaseActor implements AnimationActor, NoWaitActor {
 
     @Override
     public void tick() {
+        super.tick();
+
         // アニメーションのために、加工の画像が必要だから、事前に取得しておく
         if (originalImg == null) {
             originalImg = getImage();
