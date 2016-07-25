@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * 全てのWorldクラスの親クラス
  */
-public class BaseWorld extends World implements EventHandler {
+public abstract class BaseWorld extends World implements EventHandler {
 
     final static boolean ENABLE_LOGGING = false;
     final static String LOG_FILE = "../blockGame.log";

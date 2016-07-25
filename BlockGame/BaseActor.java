@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 /**
  * 全てのActorの親クラス
  */
-public class BaseActor extends Actor implements EventHandler {
+public abstract class BaseActor extends Actor implements EventHandler {
 
     final private static int ATTACK_ABILITY = 100;
     final private static int DEFENSIVE_ABILITY = 0;
