@@ -300,7 +300,7 @@ final public class Config {
         throw new IllegalArgumentException("このクラスに対応する画像がConfigクラスで指定されていない");
     }
 
-    public static GreenfootSound getSound(Class playWorld, String key) {
+    public static GreenfootSound getSound(Class clazz, String key) {
         for (Object[] tuple : SOUNDS) {
             if (tuple.length != 3) {
                 throw new IllegalStateException("SOUNDS の要素に、長さ3以外の配列を含めてはいけない: " + tuple);
@@ -310,7 +310,7 @@ final public class Config {
             String key2 = (String) tuple[1];
             String soundFilePath = (String) tuple[2];
 
-            if (world.isAssignableFrom(playWorld) && key2.equals(key)) {
+            if (world.isAssignableFrom(clazz) && key2.equals(key)) {
                 return new GreenfootSound(soundFilePath);
             }
         }
