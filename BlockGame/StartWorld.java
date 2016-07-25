@@ -42,12 +42,11 @@ public class StartWorld extends BaseWorld {
     private void prepare() {
         // 背景とロゴを描画
         GreenfootImage rogo = Config.getImage(this, "rogo");
-        getBackground().drawImage(rogo, getWidth() / 2 - rogo.getWidth() / 2, 50);
-
-        // ボタンを追加
-        Button startButton = addButton("Game Start", getWidth() / 2, 400);
-        Button stageButton = addButton("Select Stage", getWidth() / 2, 470);
-        Button settingsButton = addButton("Settings", getWidth() / 2, 540);
+        getBackground().drawImage(rogo, getWidth() / 2 - rogo.getWidth() / 2, 0);
+        
+        Button startButton = addButton("Game Start", 900, 450);
+        Button stageButton = addButton("Select Stage", 975, 550);
+        Button settingsButton = addButton("Settings", 1050, 650);
 
         startButton.addListner(new EventListener() {
             @Override
