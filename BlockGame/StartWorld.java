@@ -106,8 +106,8 @@ public class StartWorld extends BaseWorld {
     }
 
     private void addButtons() {
-        startButton = addButton("Game Start", 900, 450);
-        stageButton = addButton("Select Stage", 975, 550);
+        startButton = addButton("Game Start", getWidth() / 2, 450);
+        stageButton = addButton("Select Stage", getWidth() / 2, 550);
         // settingsButton = addButton("Settings", 1050, 650);
 
         startButton.addListner(new EventListener() {
