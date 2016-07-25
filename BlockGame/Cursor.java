@@ -33,7 +33,7 @@ public class Cursor extends BaseActor implements AnimationActor, NoWaitActor {
         setLocation(mouse.getX(), mouse.getY());
         turnTowards(goal.getX(), goal.getY());
 
-        double degree = Math.toRadians(getRotation());
+        double radian = Math.toRadians(getRotation());
         int width, height, barrierW, barrierH;
         width = getWidth();
         height = getHeight();
@@ -42,8 +42,8 @@ public class Cursor extends BaseActor implements AnimationActor, NoWaitActor {
 
         // バリアをカーソルに追従させる
         barrier.setLocation(
-                getX() + (int) (Math.cos(degree) * (width + barrierW)) / 2,
-                getY() + (int) (Math.sin(degree) * (height + barrierH)) / 2);
+                getX() + (int) (Math.cos(radian) * (width + barrierW)) / 2,
+                getY() + (int) (Math.sin(radian) * (height + barrierH)) / 2);
         barrier.setRotation(getRotation());
 
         // ボールをバリアに追従させる
@@ -55,9 +55,8 @@ public class Cursor extends BaseActor implements AnimationActor, NoWaitActor {
                 int dy = 0;
 
                 // barrierの中心の位置を原点として、回転移動した地点をballの位置とする
-                ball.setLocation(
-                        barrier.getX() + (int) (dx * Math.cos(degree)),
-                        barrier.getY() + (int) (dx * Math.sin(degree)));
+                ball.setLocation(barrier.getX() + (int) (dx * Math.cos(radian)),
+                        barrier.getY() + (int) (dx * Math.sin(radian)));
                 ball.setRotation(getRotation());
                 break;
         }
