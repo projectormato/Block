@@ -50,13 +50,8 @@ public class Stage1 extends PlayWorld {
             }
         });
         addDisabledObject(cursor, 0, 0);
-        relayout();
-    }
 
-    /**
-     * Blockが時計回りにGoalを公転するアニメーション行う。BlockはGoalに近いほど早く公転する。
-     */
-    private void relayout() {
+        // ブロックをPLACEMENT_MAPに従って配置
         for (int y = 0; y < PLACEMENT_MAP.length; y++) {
             for (int x = 0; x < PLACEMENT_MAP[y].length; x++) {
                 if (PLACEMENT_MAP[y][x] == 1) {
