@@ -48,17 +48,14 @@ public class Stage3 extends PlayWorld {
     }
 
     private void relayout() {
-        GreenfootImage blockImage = new GreenfootImage("block/b.png");
-        blockImage.scale(20, 20);
-
         final int BLOCK_SPACE = (int) (70 * 1.44);
         Block[] blocks = new Block[200];
         Random r = new java.util.Random();
+
         for (int i = 0; i < blocks.length; i++) {
             int rx = r.nextInt(getWidth() - BLOCK_SPACE * 2) + BLOCK_SPACE;
             int ry = r.nextInt(getHeight() - BLOCK_SPACE * 2) + BLOCK_SPACE;
             blocks[i] = new Block();
-            blocks[i].setImage(blockImage);
             addDisabledObject(blocks[i], rx, ry);
         }
 

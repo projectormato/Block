@@ -47,8 +47,6 @@ public class Stage1 extends PlayWorld {
      */
     private void relayout() {
         final int BLOCK_SPACE = (int) (70 * 1.44);
-        GreenfootImage blockImage = new GreenfootImage("block/b.png");
-        blockImage.scale(20, 20);
         int[][] field
                 = {
                     {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,},
@@ -66,7 +64,6 @@ public class Stage1 extends PlayWorld {
                 if (field[y][x] == 1) {
                     Block block = new Block();
                     blocks[x + y * field.length] = block;
-                    block.setImage(blockImage);
                     addDisabledObject(block, x * 25 + BLOCK_SPACE, getHeight() - BLOCK_SPACE - field.length * 60 + y * 40);
                 }
             }
