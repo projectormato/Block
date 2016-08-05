@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Stage4 extends PlayWorld {
 
     private Goal goal;
-    private ArrayList<Block> blocks, blocks1;
+    private ArrayList<Block> blocks;
     private Ball ball;
     private CursorBarrier barrier;
     private Cursor cursor;
@@ -21,7 +21,6 @@ public class Stage4 extends PlayWorld {
         addDisabledObject(goal, getWidth() / 2, getHeight() / 2);
 
         blocks = new ArrayList<>();
-        blocks1 = new ArrayList<>();
 
         ball = new Ball();
         addDisabledObject(ball, 10, 10);
@@ -81,25 +80,25 @@ public class Stage4 extends PlayWorld {
         // 右
         for (int i = 0; i < 10; i++) {
             block = new Block();
-            blocks1.add(block);
+            blocks.add(block);
             addDisabledObject(block, goal.getX() + 100 + 10 * i, goal.getY());
         }
         // 上
         for (int i = 0; i < 10; i++) {
             block = new Block();
-            blocks1.add(block);
+            blocks.add(block);
             addDisabledObject(block, goal.getX(), goal.getY() - 100 - 10 * i);
         }
         // 左
         for (int i = 0; i < 10; i++) {
             block = new Block();
-            blocks1.add(block);
+            blocks.add(block);
             addDisabledObject(block, goal.getX() - 100 - 10 * i, goal.getY());
         }
         // 下
         for (int i = 0; i < 10; i++) {
             block = new Block();
-            blocks1.add(block);
+            blocks.add(block);
             addDisabledObject(block, goal.getX(), goal.getY() + 100 + 10 * i);
         }
     }
