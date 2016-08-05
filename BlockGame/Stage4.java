@@ -11,7 +11,6 @@ public class Stage4 extends PlayWorld {
     private CursorBarrier barrier;
     private Cursor cursor;
     private Block block1, block2, block3;
-    private int count;
 
     public Stage4() {
         super("Stage4");
