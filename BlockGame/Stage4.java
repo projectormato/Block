@@ -39,7 +39,6 @@ public class Stage4 extends PlayWorld {
         addDisabledObject(cursor, 0, 0);
 
         Block block;
-        int width = getWidth() / 2 - 25 - 300;
         int height = getHeight() / 2 - 25 - 100;
 
         // ゴールの近くに三角形上にブロックを配置する
