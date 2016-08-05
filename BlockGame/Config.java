@@ -246,7 +246,7 @@ final public class Config {
      * @return 画像
      */
     public static GreenfootImage getImage(Object obj, String key) {
-        return getOrigianlImage(obj, key, true);
+        return getOriginalImage(obj, key, true);
 
     }
 
@@ -260,12 +260,12 @@ final public class Config {
      * @return リサイズ後の画像
      */
     public static GreenfootImage getImage(Object obj, String key, int width, int height) {
-        GreenfootImage img = getOrigianlImage(obj, key, false);
+        GreenfootImage img = getOriginalImage(obj, key, false);
         img.scale(width, height);
         return img;
     }
 
-    private static GreenfootImage getOrigianlImage(Object obj, String key, boolean isResize) {
+    private static GreenfootImage getOriginalImage(Object obj, String key, boolean isResize) {
         Class clazz = obj.getClass();
         Class worldClazz = null;
         if (obj instanceof BaseActor) {
