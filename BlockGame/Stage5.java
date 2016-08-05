@@ -2,6 +2,12 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * ランダムに配置した大量のブロックが動きながらゴールを保護するステージ。ブロックの進行方向は時々変わる。
+ *
+ * @author Kishida
+ * @author Hirano
+ */
 public class Stage5 extends PlayWorld {
 
     final private int MAX_NEXT_TURN_TIME = 400;

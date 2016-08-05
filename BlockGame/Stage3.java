@@ -2,6 +2,12 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * ブロックをランダムな位置に200個配置するステージ。ブロックの配置は毎回異なる。
+ *
+ * @author Kishida
+ * @author Hirano
+ */
 public class Stage3 extends PlayWorld {
 
     private final static int BLOCK_SPACE = (int) (70 * 1.44);

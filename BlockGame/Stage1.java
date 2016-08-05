@@ -1,6 +1,12 @@
 
 import java.util.ArrayList;
 
+/**
+ * "BLOCK"という文字の形状になるように、ブロックを配置したステージ。 アニメーションは無い。
+ *
+ * @author Kishida
+ * @author Hirano
+ */
 public class Stage1 extends PlayWorld {
 
     private final static int BLOCK_SPACE = (int) (70 * 1.44);

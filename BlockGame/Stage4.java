@@ -1,6 +1,12 @@
 
 import java.util.ArrayList;
 
+/**
+ * ゴールの周りが、4つの三角形が取り囲んでいるステージ。アニメーションはない。
+ *
+ * @author Hayashi
+ * @author Hirano
+ */
 public class Stage4 extends PlayWorld {
 
     private Goal goal;

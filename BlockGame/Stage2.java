@@ -2,6 +2,11 @@
 import greenfoot.GreenfootImage;
 import java.util.ArrayList;
 
+/**
+ * ゴールの周りを大量のブロックを円形に配置したステージ。 ゴールの周りをブロックが公転するアニメーション有り。
+ *
+ * @author Hirano
+ */
 public class Stage2 extends PlayWorld {
 
     private Goal goal;
