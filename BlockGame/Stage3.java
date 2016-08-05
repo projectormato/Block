@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Stage3 extends PlayWorld {
     private final static int BLOCK_SPACE = (int) (70 * 1.44);
+    private final static int NUM_OF_BLOCKS = 200;
 
     private Goal goal;
     private ArrayList<Block> blocks;
@@ -45,16 +46,15 @@ public class Stage3 extends PlayWorld {
     }
 
     private void relayout() {
-        Block[] blocks = new Block[200];
         Random r = new java.util.Random();
 
-        for (int i = 0; i < blocks.length; i++) {
+        for (int i = 0; i < NUM_OF_BLOCKS; i++) {
             int rx = r.nextInt(getWidth() - BLOCK_SPACE * 2) + BLOCK_SPACE;
             int ry = r.nextInt(getHeight() - BLOCK_SPACE * 2) + BLOCK_SPACE;
-            blocks[i] = new Block();
-            addDisabledObject(blocks[i], rx, ry);
+            Block block = new Block();
+            blocks.add(block);
+            addDisabledObject(block, rx, ry);
         }
-
     }
 
     @Override
