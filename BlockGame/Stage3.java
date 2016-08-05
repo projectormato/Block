@@ -1,6 +1,4 @@
 
-import greenfoot.Greenfoot;
-import greenfoot.GreenfootImage;
 import java.util.ArrayList;
 import java.util.Random;
 

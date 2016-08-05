@@ -1,6 +1,4 @@
 
-import greenfoot.Greenfoot;
-import greenfoot.GreenfootImage;
 import java.util.ArrayList;
 
 public class Stage4 extends PlayWorld {
