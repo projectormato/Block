@@ -42,6 +42,9 @@ public class Stage4 extends PlayWorld {
         Block block;
         int width = getWidth() / 2 - 25 - 300;
         int height = getHeight() / 2 - 25 - 100;
+
+        // ゴールの近くに三角形上にブロックを配置する
+        // 左上
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block = new Block();
@@ -49,6 +52,7 @@ public class Stage4 extends PlayWorld {
                 addDisabledObject(block, getWidth() / 2 - 50 - j * 15, 100 + i * 15);
             }
         }
+        // 左下
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block = new Block();
@@ -56,6 +60,7 @@ public class Stage4 extends PlayWorld {
                 addDisabledObject(block, getWidth() / 2 - 50 - j * 15, getHeight() - 100 - i * 15);
             }
         }
+        // 右上
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block = new Block();
@@ -63,6 +68,7 @@ public class Stage4 extends PlayWorld {
                 addDisabledObject(block, getWidth() / 2 + 50 + j * 15, 100 + i * 15);
             }
         }
+        // 右下
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
                 block = new Block();
@@ -71,21 +77,26 @@ public class Stage4 extends PlayWorld {
             }
         }
 
+        // ゴールを取り囲む4つの三角形の領域の隙間に、ブロックを置く
+        // 右
         for (int i = 0; i < 10; i++) {
             block = new Block();
             blocks1.add(block);
             addDisabledObject(block, goal.getX() + 100 + 10 * i, goal.getY());
         }
+        // 上
         for (int i = 0; i < 10; i++) {
             block = new Block();
             blocks1.add(block);
             addDisabledObject(block, goal.getX(), goal.getY() - 100 - 10 * i);
         }
+        // 左
         for (int i = 0; i < 10; i++) {
             block = new Block();
             blocks1.add(block);
             addDisabledObject(block, goal.getX() - 100 - 10 * i, goal.getY());
         }
+        // 下
         for (int i = 0; i < 10; i++) {
             block = new Block();
             blocks1.add(block);
