@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Stage3 extends PlayWorld {
+
     private final static int BLOCK_SPACE = (int) (70 * 1.44);
     private final static int NUM_OF_BLOCKS = 200;
 
@@ -42,12 +43,9 @@ public class Stage3 extends PlayWorld {
             }
         });
         addDisabledObject(cursor, 0, 0);
-        relayout();
-    }
 
-    private void relayout() {
+        // ブロックをランダムな位置に配置
         Random r = new java.util.Random();
-
         for (int i = 0; i < NUM_OF_BLOCKS; i++) {
             int rx = r.nextInt(getWidth() - BLOCK_SPACE * 2) + BLOCK_SPACE;
             int ry = r.nextInt(getHeight() - BLOCK_SPACE * 2) + BLOCK_SPACE;
