@@ -11,8 +11,6 @@ public class Stage1 extends PlayWorld {
     private CursorBarrier barrier;
     private Cursor cursor;
 
-    private ArrayList<Double> radianOffsets;
-
     public Stage1() {
         super("Stage1");
         prepare();
@@ -25,7 +23,6 @@ public class Stage1 extends PlayWorld {
         addDisabledObject(goal, getWidth() / 2, getHeight() / 2);
 
         blocks = new ArrayList<>();
-        radianOffsets = new ArrayList<>();
 
         ball = new Ball();
         addDisabledObject(ball, 10, 10);
