@@ -10,7 +10,6 @@ public class Stage4 extends PlayWorld {
     private Ball ball;
     private CursorBarrier barrier;
     private Cursor cursor;
-    private Block block1, block2, block3;
 
     public Stage4() {
         super("Stage4");
@@ -40,60 +39,57 @@ public class Stage4 extends PlayWorld {
         });
         addDisabledObject(cursor, 0, 0);
 
-//        block = new Block();
-//        block.setImage(blockImage);
-//        blocks.add(block);
-//        addDisabledObject(block, 100, 100);
+        Block block;
         int width = getWidth() / 2 - 25 - 300;
         int height = getHeight() / 2 - 25 - 100;
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
-                block1 = new Block();
-                blocks.add(block1);
-                addDisabledObject(block1, getWidth() / 2 - 50 - j * 15, 100 + i * 15);
+                block = new Block();
+                blocks.add(block);
+                addDisabledObject(block, getWidth() / 2 - 50 - j * 15, 100 + i * 15);
             }
         }
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
-                block1 = new Block();
-                blocks.add(block1);
-                addDisabledObject(block1, getWidth() / 2 - 50 - j * 15, getHeight() - 100 - i * 15);
+                block = new Block();
+                blocks.add(block);
+                addDisabledObject(block, getWidth() / 2 - 50 - j * 15, getHeight() - 100 - i * 15);
             }
         }
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
-                block2 = new Block();
-                blocks.add(block2);
-                addDisabledObject(block2, getWidth() / 2 + 50 + j * 15, 100 + i * 15);
+                block = new Block();
+                blocks.add(block);
+                addDisabledObject(block, getWidth() / 2 + 50 + j * 15, 100 + i * 15);
             }
         }
         for (int i = 0; i * 15 < height; i++) {
             for (int j = 0; j < i + 1; j++) {
-                block2 = new Block();
-                blocks.add(block2);
-                addDisabledObject(block2, getWidth() / 2 + 50 + j * 15, getHeight() - 100 - i * 15);
+                block = new Block();
+                blocks.add(block);
+                addDisabledObject(block, getWidth() / 2 + 50 + j * 15, getHeight() - 100 - i * 15);
             }
         }
 
         for (int i = 0; i < 10; i++) {
-            block3 = new Block();
-            blocks1.add(block3);
-            addDisabledObject(block3, goal.getX() + 100 + 10 * i, goal.getY());
+            block = new Block();
+            blocks1.add(block);
+            addDisabledObject(block, goal.getX() + 100 + 10 * i, goal.getY());
         }
         for (int i = 0; i < 10; i++) {
-            block3 = new Block();
-            blocks1.add(block3);
-            addDisabledObject(block3, goal.getX(), goal.getY() - 100 - 10 * i);
+            block = new Block();
+            blocks1.add(block);
+            addDisabledObject(block, goal.getX(), goal.getY() - 100 - 10 * i);
         }
         for (int i = 0; i < 10; i++) {
-            block3 = new Block();
-            blocks1.add(block3);
-            addDisabledObject(block3, goal.getX() - 100 - 10 * i, goal.getY());
+            block = new Block();
+            blocks1.add(block);
+            addDisabledObject(block, goal.getX() - 100 - 10 * i, goal.getY());
         }
         for (int i = 0; i < 10; i++) {
-            block3 = new Block();
-            blocks1.add(block3);
-            addDisabledObject(block3, goal.getX(), goal.getY() + 100 + 10 * i);
+            block = new Block();
+            blocks1.add(block);
+            addDisabledObject(block, goal.getX(), goal.getY() + 100 + 10 * i);
         }
     }
 
