@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Stage3 extends PlayWorld {
+    private final static int BLOCK_SPACE = (int) (70 * 1.44);
 
     private Goal goal;
     private ArrayList<Block> blocks;
@@ -44,7 +45,6 @@ public class Stage3 extends PlayWorld {
     }
 
     private void relayout() {
-        final int BLOCK_SPACE = (int) (70 * 1.44);
         Block[] blocks = new Block[200];
         Random r = new java.util.Random();
 
