@@ -51,6 +51,7 @@ public abstract class BaseActor extends Actor implements EventHandler {
     /**
      * 何もしない。このメソッドはオーバーライドできません。BaseWorldクラスから呼び出されるイベントハンドラ内で必要な動作を実装してください。
      */
+    @Override
     final public void act() {
     }
 
@@ -236,6 +237,7 @@ public abstract class BaseActor extends Actor implements EventHandler {
      * @param cls
      * @return
      */
+    @Override
     protected List getIntersectingObjects(java.lang.Class cls) {
         List objs = super.getIntersectingObjects(cls);
         if (objs == null) {
