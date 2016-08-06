@@ -16,7 +16,7 @@ public abstract class BaseWorld extends World implements EventHandler {
     private EventListener listener;
 
     public BaseWorld() {
-        // Create a new world with 1200x800 cells with a cell size of 1x1 pixels.
+        // Create a new world.
         super(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, 1);
         setPaintOrder(MessageBox.class, Overlay.class, BaseActor.class);
         try {
