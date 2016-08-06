@@ -3,10 +3,11 @@ import greenfoot.GreenfootImage;
 import java.awt.Color;
 
 /**
+ * <p>
  * Greenfootでこのゲームを開始した時に、真っ先に表示されるWorld。
- * Greenfootのスタートボタンを押す前から音楽が再生されてしまう問題を回避するために使用。
- *
- * ゲームのスタート画面を押すか、直ちに他のWorldに切り替える。
+ * Greenfootのスタートボタンを押す前から音楽が再生されてしまう問題を回避するために使用。</p>
+ * <p>
+ * ゲームのスタート画面を押すか、直ちに他のWorldに切り替える。</p>
  *
  * @author yuuki0xff
  */

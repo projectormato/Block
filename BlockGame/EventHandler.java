@@ -2,6 +2,14 @@
 import greenfoot.*;
 import java.util.List;
 
+/**
+ * <p>
+ * BaseWorld, BaseActorとそれらのサブクラスが実装していなければならない、最低限のメソッド。</p>
+ * <p>
+ * このメソッドをオーバライドして、クラス単位でイベントハンドラを定義できる。</p>
+ *
+ * @author yuuki0xff
+ */
 interface EventHandler{
     void addListner(EventListener listener);
 

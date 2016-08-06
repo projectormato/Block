@@ -1,6 +1,21 @@
 
 import greenfoot.MouseInfo;
 
+/**
+ * <p>EventHandlerを実装したクラスに対して、オブジェクト単位でイベントハンドラを追加するためのクラス。</p>
+ *
+ * 使用方法:<pre>
+ * cursor.addListner(new EventListener() {
+ *     &#064;Override
+ *     public void tick() {
+ *         super.tick();
+ *         // write to here.
+ *     }
+ * });
+ * </pre>
+ *
+ * @author yuuki0xff
+ */
 public class EventListener{
     public void tick(){}
     public void onAlived(){}
