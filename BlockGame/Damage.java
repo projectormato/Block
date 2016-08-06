@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Actorにダメージを与える。
+ *
+ * @author yuuki0xff
+ */
 final public class Damage {
 
     private BaseActor attacker, defender;

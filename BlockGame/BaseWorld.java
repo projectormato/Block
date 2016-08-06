@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 全てのWorldクラスの親クラス
+ * GreenfootのWorldにイベントハンドラ等を実装したクラス。全てのWorldはこのクラスのサブクラスにすること。
+ * イベントハンドラの呼び出し、及び背景画像の変更などを行う。
+ *
+ * @author yuuki0xff
  */
 public abstract class BaseWorld extends World implements EventHandler {
 

@@ -9,7 +9,9 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- * 全てのActorの親クラス
+ * GreenfootのActorにイベントハンドラ等を実装したクラス。全てのActorはこのクラスのサブクラスにすること。
+ *
+ * @author yuuki0xff
  */
 public abstract class BaseActor extends Actor implements EventHandler {
 

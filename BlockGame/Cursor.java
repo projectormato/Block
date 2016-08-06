@@ -1,6 +1,12 @@
 
 import greenfoot.*;
 
+/**
+ * 宇宙船。マウスの動きに連動して動き、この宇宙船を保護するバリア(CursorBarrier)を宇宙船に追従させる機能を持つ。
+ * これが破壊されるとゲームオーバー。
+ *
+ * @author yuuki0xff
+ */
 public class Cursor extends BaseActor implements AnimationActor, NoWaitActor {
 
     private Goal goal;

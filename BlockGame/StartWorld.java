@@ -4,6 +4,8 @@ import java.awt.Color;
 
 /**
  * スタート画面を表示する。
+ *
+ * @author yuuki0xff
  */
 public class StartWorld extends BaseWorld {
 

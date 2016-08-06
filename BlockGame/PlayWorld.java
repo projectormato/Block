@@ -1,6 +1,11 @@
 
 import greenfoot.*;
 
+/**
+ * 全てのステージの親クラス。ステージの開始前や勝敗が決まった後の動作など、全ステージに共通する処理を実装している。
+ *
+ * @author yuuki0xff
+ */
 public class PlayWorld extends BaseWorld {
 
     private PlayWorldStatus worldStatus;
@@ -13,6 +18,9 @@ public class PlayWorld extends BaseWorld {
     private boolean isWin = false;
     private PlayWorldStatus nextWorldStatus = null;
 
+    /**
+     * ステージ名を指定しないパターン。ステージ開始前・勝敗が決まった後のメッセージが表示されない。
+     */
     public PlayWorld() {
         worldStatus = PlayWorldStatus.WAITING;
         if (Config.getBoolean("enableBGM")) {
@@ -22,6 +30,11 @@ public class PlayWorld extends BaseWorld {
         prepare();
     }
 
+    /**
+     * ステージ名に対応したメッセージが、ゲーム開始前・勝敗が決まった後に表示される。
+     *
+     * @param stageName
+     */
     public PlayWorld(String stageName) {
         this();
         this.stageName = stageName;

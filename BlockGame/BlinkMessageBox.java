@@ -3,8 +3,9 @@ import greenfoot.*;
 import java.awt.Color;
 
 /**
+ * 指定された文字列を点滅させるメッセージボックス。背景色は透明。
  *
- * @author yuuki
+ * @author yuuki0xff
  */
 public class BlinkMessageBox extends MessageBox {
 

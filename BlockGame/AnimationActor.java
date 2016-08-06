@@ -2,7 +2,7 @@
 /**
  * アニメーションをするActorはこのインターフェースを継承しなければならない。
  *
- * @author yuuki
+ * @author yuuki0xff
  */
 public interface AnimationActor {
 }

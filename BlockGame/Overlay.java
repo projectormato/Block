@@ -4,6 +4,8 @@ import greenfoot.GreenfootImage;
 
 /**
  * メッセージボックスの半透明の背景
+ *
+ * @author yuuki0xff
  */
 public class Overlay extends BaseActor {
 

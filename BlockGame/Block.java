@@ -2,10 +2,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Block here.
+ * ゴールなどを保護するブロック。エネルギー弾(Ball)を1回衝突させると破壊できる。
+ * このブロックに宇宙船(Cursor)がぶつかると、宇宙船が破壊される。
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author yuuki0xff
  */
 public class Block extends BaseAnimationActor implements NoWaitActor {
 

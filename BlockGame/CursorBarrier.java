@@ -2,6 +2,11 @@
 import greenfoot.GreenfootImage;
 import greenfoot.World;
 
+/**
+ * 宇宙船を保護するバリア。ボールを跳ね返すことが出来、跳ね返したときはアニメーションを行う。
+ *
+ * @author yuuki0xff
+ */
 public class CursorBarrier extends BaseActor {
 
     // 反射角を決める際の係数

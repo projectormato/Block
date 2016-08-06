@@ -2,7 +2,7 @@
 /**
  * 耐久性の高いBlock。通常のボールを何度も当てないと消滅しない。
  *
- * @author yuuki
+ * @author yuuki0xff
  */
 public class StrongBlock extends Block {
 

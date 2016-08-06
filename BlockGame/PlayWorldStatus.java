@@ -1,4 +1,9 @@
 
+/**
+ * PlayWorldのステータス
+ *
+ * @author yuuki0xff
+ */
 public enum PlayWorldStatus {
     /**
      * ステージの概要をMessageBoxで表示している状態

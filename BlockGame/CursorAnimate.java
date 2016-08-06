@@ -1,7 +1,8 @@
 
 /**
+ * カーソルが破壊され、消滅するときのアニメーション
  *
- * @author yuuki
+ * @author yuuki0xff
  */
 public class CursorAnimate extends FadeOutAnimate {
 }

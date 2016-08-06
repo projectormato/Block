@@ -8,6 +8,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * 画面にオーバーレイする形でメッセージを表示する。 クリックしたときのアクションは、EventListenerで登録しないと動作しない。
+ *
+ * 表示するメッセージ内容は、指定されたテキストファイルから読み込む。
+ *
+ * @author yuuki0xff
+ */
 public class MessageBox extends BaseActor {
 
     final static int DEFAULT_FONT_SIZE = 20;

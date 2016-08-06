@@ -4,10 +4,9 @@ import java.util.LinkedList;
 import java.util.Set;
 
 /**
- * Write a description of class Ball here.
+ * エネルギー弾。通常は直進するが、他の物体と衝突すると進行方向を変える。速度は常に一定。
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author yuuki0xff
  */
 public class Ball extends BaseActor {
 

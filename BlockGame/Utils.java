@@ -7,6 +7,8 @@ import java.awt.image.WritableRaster;
 
 /**
  * 画像関連の便利なメソッド集
+ *
+ * @author yuuki0xff
  */
 public final class Utils {
 

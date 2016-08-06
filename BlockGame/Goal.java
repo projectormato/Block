@@ -2,10 +2,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Goal here.
+ * 惑星。これを破壊するとゲームクリア。 破壊されるときは、アニメーションを再生する。
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author yuuki0xff
  */
 public class Goal extends BaseActor implements AnimationActor, NoWaitActor {
 

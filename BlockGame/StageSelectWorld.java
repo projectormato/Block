@@ -1,6 +1,11 @@
 
 import greenfoot.*;
 
+/**
+ * ステージ選択画面。 ボタンを縦に配置し、プレイしたいステージのボタンをクリックすると、対応するステージに遷移する。
+ *
+ * @author yuuki0xff
+ */
 public class StageSelectWorld extends BaseWorld {
 
     public StageSelectWorld() {
