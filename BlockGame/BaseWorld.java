@@ -246,7 +246,6 @@ public abstract class BaseWorld extends World implements EventHandler {
     public void onAlived() {
         if (listener != null) {
             listener.onAlived();
-
         }
     }
 
@@ -254,7 +253,6 @@ public abstract class BaseWorld extends World implements EventHandler {
     public void onDisabled() {
         if (listener != null) {
             listener.onDisabled();
-
         }
     }
 
@@ -262,7 +260,6 @@ public abstract class BaseWorld extends World implements EventHandler {
     public void onDied() {
         if (listener != null) {
             listener.onDied();
-
         }
     }
 
@@ -270,7 +267,6 @@ public abstract class BaseWorld extends World implements EventHandler {
     public void onRemoved() {
         if (listener != null) {
             listener.onRemoved();
-
         }
     }
 
