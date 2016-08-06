@@ -20,9 +20,9 @@ public class CursorBarrier extends BaseActor {
 
     @Override
     public void addedToWorld(World world) {
+        super.addedToWorld(world);
         normalImg = Config.getImage(this, "bg");
         effectImg = Config.getImage(this, "effect");
-        setImage(normalImg);
     }
 
     @Override
