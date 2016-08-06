@@ -282,7 +282,7 @@ public abstract class BaseActor extends Actor implements EventHandler {
         }
 
         offsetX = (other.getX() - otherImg.getWidth() / 2) - (getX() - img.getWidth() / 2);
-        offsetY = (other.getY() - otherImg.getWidth() / 2) - (getY() - img.getWidth() / 2);
+        offsetY = (other.getY() - otherImg.getHeight() / 2) - (getY() - img.getHeight() / 2);
 
         x1 = Math.max(0, offsetX);
         y1 = Math.max(0, offsetY);
