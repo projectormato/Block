@@ -57,6 +57,7 @@ public class Ball extends BaseActor {
 
     @Override
     public int getAttackAbility(BaseActor defender) {
+        // CursorBarrierは攻撃しない
         if (defender instanceof CursorBarrier) {
             return 0;
         }
