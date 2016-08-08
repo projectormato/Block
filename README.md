@@ -1,12 +1,11 @@
 
 # Block
+Blockは、[Greenfoot](http://www.greenfoot.org/) で作成したブロック崩しゲームです。
+マウスカーソルを操作して、画面中央にある惑星を破壊するとステージクリアです。
 
-## 動き
-* スタートはカーソルから必ずコアに向かってボールを発射
-* ゴールにボールを当てればクリア
-* ブロックにボールが当たったら跳ね返ると同時にブロックが消える
-* カーソルとボールが当たったら、衝突する位置に応じて反射する角度が変化する
-* 壁に当たるか、フレームアウトしたらライフ減少
+スタート画面  
+![スタート画面の画像](https://raw.githubusercontent.com/projectormato/Block/master/images/start.png)
 
-## ステージ
-* ステージ１は、コアを一定の厚さのブロックで囲むようにブロックを配置する。
+ゲーム画面  
+![ゲーム画面の画像](https://raw.githubusercontent.com/projectormato/Block/master/images/stage4.png)
+
